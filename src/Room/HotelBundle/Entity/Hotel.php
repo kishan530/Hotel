@@ -121,9 +121,13 @@ class Hotel
      * @ORM\OneToMany(targetEntity="Room\HotelBundle\Entity\HotelAmenities", mappedBy="hotel", cascade={"persist"})
      */
     protected $amenities;
+    /**
+     * 
+     */
     public function __construct() {
     	$this->images = new ArrayCollection();
     	$this->amenities = new ArrayCollection();
+    	
     }
 	
 	/**
@@ -431,7 +435,6 @@ class Hotel
 		$this->priority = $priority;
 		return $this;
 	}
-	
 	
 	
 	

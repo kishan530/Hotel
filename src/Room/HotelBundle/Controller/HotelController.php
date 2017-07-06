@@ -9,7 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Room\HotelBundle\Form\HotelDetailType;
 use Room\HotelBundle\Entity\Hotel;
 use Room\HotelBundle\Entity\HotelAddress;
+use Room\HotelBundle\Entity\HotelImage;
 use Room\HotelBundle\DTO\HotelDto;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class HotelController extends Controller
 {
@@ -27,6 +29,9 @@ class HotelController extends Controller
     	
     	$em = $this->getDoctrine()->getManager();
     	$hotelDetail = new HotelDto();
+    	$hotelImage = new HotelImage();
+    	$hotelImageList = $hotelDetail->getImageList();
+    	$hotelImageList->add($hotelImage);
     	$catalogueService = $this->container->get( 'catalogue.service' );
     	$form = $this->createForm(new HotelDetailType($catalogueService),$hotelDetail);
     	$form->add('submit','submit', array('label' => 'Add'));
@@ -34,7 +39,7 @@ class HotelController extends Controller
     		
     	if($form->isValid()) {
     	
-    					$hotelObj = new Hotel();
+    		$hotelObj = new Hotel();
 	
 			$hotelAddressObj = new HotelAddress();
 			
@@ -70,6 +75,25 @@ class HotelController extends Controller
 			$hotelAddressObj->setHotel($hotelObj);
 			//$hotelObj->setImages($hotelDetail->getImages());
 			//$hotelObj->setAmenities($hotelDetail->getAmenities());
+			
+			
+			
+			$hotelImageList = $hotelDetail->getImageList();
+			$hotelImages =$hotelObj->getImages();
+			foreach($hotelImageList as $hotelImage){
+				$uploadedfile = $hotelImage->getImagePath ();
+				if (!is_null($uploadedfile)) {
+					$file_name = $uploadedfile->getClientOriginalName ();
+					$dir = 'img/Hotels/';
+					$uploadedfile->move ( $dir, $file_name );
+					$hotelImage->setImagePath ($file_name );
+					$hotelImage->setActive (1);
+					$hotelImage->setHotel($hotelObj);
+					$hotelImages->add($hotelImage);
+			
+				}
+			
+			}
 	
 			$em->persist($hotelObj);
 			
@@ -127,7 +151,9 @@ class HotelController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$hotelObj = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
 		$hotelDetail = new HotelDto();
-		
+		$hotelImage = new HotelImage();
+		$hotelImageList = $hotelDetail->getImageList();
+		$hotelImageList->add($hotelImage);
 		$catalogueService = $this->container->get( 'catalogue.service' );
 		
 		
@@ -154,7 +180,7 @@ class HotelController extends Controller
 		
 		 
 		$form = $this->createForm(new HotelDetailType($catalogueService),$hotelDetail);
-		$form->add('submit','submit', array('label' => 'Add'));
+		$form->add('submit','submit', array('label' => 'Update'));
 		$form ->handleRequest($request);
 		 
 		if($form->isValid()) {
@@ -191,6 +217,27 @@ class HotelController extends Controller
 			$hotelAddressObj->setHotel($hotelObj);
 			//$hotelObj->setImages($hotelDetail->getImages());
 			//$hotelObj->setAmenities($hotelDetail->getAmenities());
+			
+			
+			
+			$hotelImageList = $hotelDetail->getImageList();
+			$hotelImages = new ArrayCollection();
+			foreach($hotelImageList as $hotelImage){
+				$uploadedfile = $hotelImage->getImagePath ();
+				if (!is_null($uploadedfile)) {
+					$file_name = $uploadedfile->getClientOriginalName ();
+					$dir = 'img/Hotels/';
+					$uploadedfile->move ( $dir, $file_name );
+					$hotelImage->setImagePath ($file_name );
+					$hotelImage->setActive (1);
+					$hotelImage->setHotel($hotelObj);
+					$hotelImages->add($hotelImage);
+						
+				}
+					
+			}
+			$hotelObj->setImages($hotelImages);
+			
 	
 			$em->merge($hotelObj);
 	

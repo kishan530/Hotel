@@ -56,7 +56,11 @@ $(document).ready(function() {
             </div>
            <div class="col-md-3">
             	 <h5 class="hotel-price"> <i class="fa fa-inr"></i> {{ hotel.price }}</h5>
+            	 {% if hotel.soldOut or hotel.numRooms<1 %}
+                        	<label class="btn btn-book-now">Sold Out</label>
+                        {% else %}
             	 <a class="btn-book-now" href="{{ path('room_booking_engine_confrim',{ 'id' : hotel.id }) }}"> Book Now </a>
+            	 {% endif %}
             </div>
             <div class="room-wrapper negative-margin">
              <div class="room-content col-md-9">

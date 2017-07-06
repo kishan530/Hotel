@@ -287,6 +287,11 @@ class BookingController extends Controller
     		$booking->setCouponApplyed(0);
     		$em->persist($booking);
     		$em->flush();
+    		
+    		$selectedService->setNumRooms($selectedService->getNumRooms()-1);
+    		$em->merge($selectedService);
+    		$em->flush();
+    		
     		$session->set('bookingObj',$booking);
     		$session->set('amountToPay',$amountToPay);
     		$paymentLink = $this->getPaymentLink($amountToPay);

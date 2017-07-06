@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Event\DataEvent;
+use Room\HotelBundle\Form\HotelImageType;
 
 
 class HotelDetailType extends AbstractType
@@ -124,6 +125,18 @@ class HotelDetailType extends AbstractType
 //             ))
             ->add('location')
             ->add('pincode')
+            
+            ->add('imageList', 'collection', array(
+            		// each entry in the array will be an "PackageItinerary" field
+            		'type'   => new HotelImageType(),
+            		'allow_add'    => true,
+            		'prototype'=>true,
+            		'required'    => false,
+            		// these options are passed to each "PackageItinerary" type
+            		//'entry_options'  => array(
+            		//   'attr'      => array('class' => '')
+            		//),
+            ))
            
             
         ;
