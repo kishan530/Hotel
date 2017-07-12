@@ -360,6 +360,7 @@ text-transform: capitalize;
                                            <div class="col-md-4 col-sm-4 col-xs-12 text-center">
                                            <form action="{{ path('room_booking_engine_booking') }}">
                                            <input type="hidden" name="id" value="{{ hotel.id }}">
+                                            <input type="hidden" name="room" value="{{ room }}">
                                                 <button type="submit" class="btn btn-primary btn-block btn-sm btn-continue"> Continue</button>
                                                 </form>
                                             </div>

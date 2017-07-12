@@ -30,6 +30,15 @@ $(document).ready(function() {
     });  
   });
 </script>
+<script> 
+
+$("button").click(function() {
+    $('html,body').animate({
+        scrollTop: $(".middle").offset().top},
+        'slow');
+});
+
+</script>
 {% endblock %}
 
 
@@ -46,7 +55,7 @@ $(document).ready(function() {
 
   <section id="room">
     <div class="container">
-      <div class="row">
+      <div class="row" id="bookroom">
         <div class="col-md-12">
           
             <div class="col-md-9">
@@ -56,10 +65,11 @@ $(document).ready(function() {
             </div>
            <div class="col-md-3">
             	 <h5 class="hotel-price"> <i class="fa fa-inr"></i> {{ hotel.price }}</h5>
-            	 <a class="btn-book-now" href="{{ path('room_booking_engine_confrim',{ 'id' : hotel.id }) }}"> Book Now </a>
+{#             	 <a class="btn-book-now topbody" href=""> Choose Room </a>#}
+            	 <div ><button type="button" class="btn-book-now topbody" >Choose room!</button></div>
             </div>
             <div class="room-wrapper negative-margin">
-             <div class="room-content col-md-9">
+             <div class="room-content col-md-9"> {# div 9close#}
               <div class="room-general">
               
               {% if hotel.images|length>0 %}			    
@@ -76,7 +86,27 @@ $(document).ready(function() {
 			    	 
 			    	 {% endif %}
                
+              </div> </div>
+              
+              <div class="sidebar col-md-3">             
+              <div class="sidebar-widget book-now">
+               <h4 class="widget-title">Help Me</h4>
+                <div class="widget-content">
+                  <ul class="contact-list custom-list">
+                    <li><i class="fa fa-phone"></i><span>+ 91 98801 12360</span></li>
+                    <li><i class="fa fa-phone"></i><span>+ 91 9900032872 / 73</span></li>
+                    <li><i class="fa fa-envelope-o"></i><span>reservation@sterlingsuites.in</span></li>
+                    <br>
+                     <li><i class="fa fa-clock-o"></i> <label>Check-In:</label> <span>{{ hotel.checkIn }}</span></li>
+                     <li><i class="fa fa-clock-o"></i> <label>Check-Out:</label> <span>{{ hotel.checkOut }}</span></li>
+                  </ul>
+                </div>
               </div>
+             
+            </div>
+              
+              <div class="room-content col-md-12">
+              
                <div class="room-tabs">
                <div id="amenities">
                <h5 class="room-title">Amenities</h5>
@@ -112,6 +142,95 @@ $(document).ready(function() {
                  <span class="room-title-border"></span>
                 <p>{{ hotel.overview }}</p>
               </div>
+               <div class="room-about"></div>
+
+<div class="row ">
+<div class="col-sm-12">
+	<div class="col-sm-4">ROOM TYPES</div>
+	<div class="col-sm-4">INCLUSIONS & AMENITIES</div>
+	<div class="col-sm-4">PRICE FOR 4 NIGHTS</div>
+	</div>			
+</div>
+               
+                <div class="room-about"></div>
+              
+              
+             	<div class="room-about">
+               <div class="listing-room-list">
+               {% for hotelRoom in hotel.hotelRooms %}
+               <div class="row">
+               <div class="col-sm-2">
+{#             <div class="thumbnail">#}
+				 
+				 <h5 class="titleroom">{{ hotelRoom.roomType }} </h5>
+            <img src="{{ asset('img/Hotels/'~hotel.images.first.imagePath) }}" alt="" class="img-responsive hotelroom" height="30%">
+             </div>
+             <div class="col-sm-2">
+             </br>
+             
+             <small><em>Max Adult:{{ hotelRoom.maxAdult }}</em></small></br>
+               <small><em>Max child:{{ hotelRoom.maxChild }}</em></small>
+              </div>
+              
+{#             </div>#}
+		<div class="col-sm-8">
+            <div class="listing-room-content">
+              {#}<div class="row"> {#}
+                <div class="col-md-12">
+               
+                  <header>
+                  <div class="row">
+                    <div class="pull-left">
+                      <h5 class="title">
+{#                         <a href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">{{ hotel.name }}</a>#}
+					Inclusion
+                      </h5>
+                      <ul class="tags custom-list list-inline pull-left">
+{#                       {% set address = hotel.address %}#}
+{#                         <li class="location"><i class="fa fa-map-marker"></i> {{ address.location }}, {{ address.city }}</li></br>#}
+                        <li><i class="fa fa-wifi"></i><span>  Free WiFi</span>	</li> </br>
+                        <li><i class="fa fa-female"></i><span> Room service</span></li></br>
+                        
+                       
+                      </ul>
+                      
+                    </div>
+                    
+                    <div class="pull-right">
+                    
+                      <span class="price priceday" >
+                        <i class="fa fa-inr"></i> {{  hotelRoom.price  }}
+                      </span>
+                                             
+                    </div>
+                    <div class="pull-right">
+                    <a class="btn btn-book-now bookroom middle"  href="{{ path('room_booking_engine_confrim',{ 'id' : hotel.id,'room':hotelRoom.id }) }}">
+                          
+                          Book now
+                        </a>
+                    </div>
+                    </div>
+                  </header>
+                  
+                  <div class="room-about"></div>
+{#                   <div class="listing-facitilities">#}
+                    
+{#                   </div>#}
+{#                 </div>#}
+              </div>
+            </div>
+            
+            
+            </div>
+            
+            </div>
+            {% endfor %}
+          </div>
+            </div>  
+              
+              
+              
+              
              
               <div class="room-about">
                 <h5 class="room-title">Hotel Policies</h5>
@@ -254,24 +373,24 @@ hotel(s) directly for more information on the same.</p>
                   </div>
                 </div>
               </div>
-            </div>
+            </div> {# div 9close#}
             
-             <div class="sidebar col-md-3">             
-              <div class="sidebar-widget book-now">
-               <h4 class="widget-title">Help Me</h4>
-                <div class="widget-content">
-                  <ul class="contact-list custom-list">
-                    <li><i class="fa fa-phone"></i><span>+ 91 98801 12360</span></li>
-                    <li><i class="fa fa-phone"></i><span>+ 91 9900032872 / 73</span></li>
-                    <li><i class="fa fa-envelope-o"></i><span>reservation@sterlingsuites.in</span></li>
-                    <br>
-                     <li><i class="fa fa-clock-o"></i> <label>Check-In:</label> <span>{{ hotel.checkIn }}</span></li>
-                     <li><i class="fa fa-clock-o"></i> <label>Check-Out:</label> <span>{{ hotel.checkOut }}</span></li>
-                  </ul>
-                </div>
-              </div>
+{#              <div class="sidebar col-md-3">             #}
+{#               <div class="sidebar-widget book-now">#}
+{#                <h4 class="widget-title">Help Me</h4>#}
+{#                 <div class="widget-content">#}
+{#                   <ul class="contact-list custom-list">#}
+{#                     <li><i class="fa fa-phone"></i><span>+ 91 98801 12360</span></li>#}
+{#                     <li><i class="fa fa-phone"></i><span>+ 91 9900032872 / 73</span></li>#}
+{#                     <li><i class="fa fa-envelope-o"></i><span>reservation@sterlingsuites.in</span></li>#}
+{#                     <br>#}
+{#                      <li><i class="fa fa-clock-o"></i> <label>Check-In:</label> <span>{{ hotel.checkIn }}</span></li>#}
+{#                      <li><i class="fa fa-clock-o"></i> <label>Check-Out:</label> <span>{{ hotel.checkOut }}</span></li>#}
+{#                   </ul>#}
+{#                 </div>#}
+{#               </div>#}
              
-            </div>
+{#             </div>#}
             
             
           </div>
@@ -280,5 +399,6 @@ hotel(s) directly for more information on the same.</p>
     </div>
   </section>
   <!-- End Room -->
+  
 
 {% endblock %}

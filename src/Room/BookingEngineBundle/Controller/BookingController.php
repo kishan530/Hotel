@@ -146,6 +146,8 @@ class BookingController extends Controller
     	$form   = $this->createSearchForm($search);
     	$em = $this->getDoctrine()->getManager();
     	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
+    	$catalogueService = $this->container->get( 'catalogue.service' );
+    	$hotel = $catalogueService->getMinPrice($hotel);
     	return $this->render('RoomBookingEngineBundle:Default:view-more.html.twig', array(
     			'form'   => $form->createView(),
     			'hotel'=> $hotel
@@ -175,12 +177,15 @@ class BookingController extends Controller
     {
     	 
     	$id = $request->get('id');
+    	$room = $request->get('room');
     	$session = $request->getSession();
     	$search = $session->get('search');
     	$customer = new Customer();
     	$form   = $this->createBookingForm($customer);
     	$em = $this->getDoctrine()->getManager();
     	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
+    	$catalogueService = $this->container->get( 'catalogue.service' );
+    	$hotel = $catalogueService->getMinPrice($hotel);
     	$booking = new Booking();
     	$price = $hotel->getPrice();
     	$tax = $price*0.14;
@@ -191,6 +196,7 @@ class BookingController extends Controller
     			'form'   => $form->createView(),
     			'customer'=> $customer,
     			'hotel'=> $hotel,
+    			'room'=>$room,
     			'booking'=> $booking,
     			'search'=>$search,
     			'step'=> 'review'
@@ -204,13 +210,16 @@ class BookingController extends Controller
     {
     	
     	$id = $request->get('id');
+    	$room = $request->get('room');
     	$session = $request->getSession();
     	$search = $session->get('search');
     	$customer = new Customer();
     	$form   = $this->createBookingForm($customer);
     	$em = $this->getDoctrine()->getManager();
     	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
+    	$selectedRoom = $catalogueService->getSelectedRoom($hotel,$room);
     	$session->set('selected',$hotel);
+    	$session->set('selectedRoom',$selectedRoom);
     	$booking = new Booking();
     	$price = $hotel->getPrice();
     	$tax = $price*0.14;
@@ -234,6 +243,7 @@ class BookingController extends Controller
     	$resultSet = $session->get('resultSet');
     	$searchFilter = $session->get('search');
     	$selectedService = $session->get('selected');
+    	$selectedRoom = $session->get('selectedRoom');
     
     
     	$customer = new Customer();
@@ -266,6 +276,7 @@ class BookingController extends Controller
     		
     		$address = $selectedService->getAddress();
     		$booking->setHotelId($selectedService->getId());
+    		//$booking->setRoomId($selectedRoom->getId());
     		$booking->setHotelName($selectedService->getName());
     		$booking->setLocation($address->getLocation());
     		$booking->setNumRooms(0);

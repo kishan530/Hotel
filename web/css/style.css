@@ -7997,3 +7997,34 @@ padding: 6px 12px;
     text-align: center;
   }
 }
+.hotelroom{
+	    margin-left: -40px;
+max-width: 140%;
+}
+.boxed1 {
+  border: 1px  ;
+  background-color:#FF6347;
+  text-color:white;
+  margin-left: -40px;
+}
+.boxedbestvalue{
+	border: 1px  ;
+  background-color:#FF6347;
+  text-color:white;
+ 
+  margin-right: 30px;
+	    
+}
+.priceday  {
+  margin-right: 200px;
+    font-size: 29px
+}
+.bookroom{
+	margin-left: 176px;
+    margin-top: -30px;
+}
+.titleroom{
+	        margin-left: -35px;
+}
+.topbody{    padding-bottom: 4px;}
+.middle{}

@@ -54,9 +54,68 @@ class CatalogueService
     	return $locations;
     }
     public function getHotelsByCity($city){
-    	$locations = $this->em->getRepository('RoomHotelBundle:Hotel')->findByCityId($city);
-    	return $locations;
+    	$hotels = $this->em->getRepository('RoomHotelBundle:Hotel')->findByCityId($city);
+    	
+    	$tempHotels = array();
+    	foreach($hotels as $hotel){
+    		$rooms = $hotel->getHotelRooms();
+    		//echo $location;
+    		$price = 0;
+    		foreach($rooms as $room){    			
+    			$roomPrice = $room->getPrice();
+    			
+    			if($price==0)
+    				$price = $roomPrice;
+    			//	echo $slectedLocation;
+    			if ($price>$roomPrice)
+    				$price = $roomPrice;
+    		}
+    		
+    		$hotel->setPrice($price);
+    		$tempHotels[] = $hotel;
+    	}
+    	return $tempHotels;
     }
+    /**
+     * 
+     * @param unknown $hotel
+     * @return unknown
+     */
+    public function getMinPrice($hotel){
+    	$rooms = $hotel->getHotelRooms();
+    	//echo $location;
+    	$price = 0;
+    	foreach($rooms as $room){
+    		$roomPrice = $room->getPrice();
+    		 
+    		if($price==0)
+    			$price = $roomPrice;
+    		//	echo $slectedLocation;
+    		if ($price>$roomPrice)
+    			$price = $roomPrice;
+    	}
+    	
+    	$hotel->setPrice($price);
+    	
+    	return $hotel;
+    }
+    
+    /**
+     * 
+     * @param unknown $hotel
+     * @param unknown $roomId
+     * @return Ambigous <NULL, unknown>
+     */
+    public function getSelectedRoom($hotel,$roomId){
+    	$rooms = $hotel->getHotelRooms();
+    	$selectedRoom = null;
+    	foreach($rooms as $room){    		 
+    		if($room->getId()==$roomId)
+    			$selectedRoom = $room;    	
+    	}
+    	return $selectedRoom;
+    }
+    
     public function getBookingsBySearch($bookingSearch){
     	$locations = $this->em->getRepository('RoomBookingEngineBundle:Booking')->findAll();
     	return $locations;

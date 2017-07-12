@@ -139,9 +139,16 @@ class HotelDto
      */
     protected $amenities;
     
+    /**
+     * @var Collection
+     *
+     */
+    protected $hotelRoom;
+    
     public function __construct() {
     	$this->images = new ArrayCollection();
     	$this->amenities = new ArrayCollection();
+    	$this->hotelRoom = new ArrayCollection();
     }
 	
 	/**
