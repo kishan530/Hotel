@@ -133,26 +133,29 @@ class HotelDto
      * 
      */
     protected $images;
+    
+    /**
+     * @var Collection
+     *
+     */
+    private $imageList;
     /**
      * @var Collection
      * 
      */
     protected $amenities;
-    
     /**
      * @var Collection
-<<<<<<< HEAD
      *
      */
-    protected $hotelRoom;
+  	protected $hotelRooms;
+  	/**
+  	 * @var Collection
+  	 *
+  	 */
+  	protected $roomList;
     
-    public function __construct() {
-    	$this->images = new ArrayCollection();
-    	$this->amenities = new ArrayCollection();
-    	$this->hotelRoom = new ArrayCollection();
-=======
-     */
-    private $imageList;
+    
     /**
      * 
      */
@@ -160,8 +163,12 @@ class HotelDto
     	$this->images = new ArrayCollection();
     	$this->amenities = new ArrayCollection();
     	$this->imageList = new ArrayCollection();
->>>>>>> ab96143dc7247d8f270b70270cfdab4211ab8904
+    	$this->hotelRooms = new ArrayCollection();
+    	$this->roomList = new ArrayCollection();
     }
+    
+    
+  
 	
 	/**
 	 *
@@ -541,6 +548,43 @@ class HotelDto
 		$this->imageList = $imageList;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the Collection
+	 */
+	public function getHotelRooms() {
+		return $this->hotelRooms;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$hotelRooms
+	 */
+	public function setHotelRooms($hotelRooms) {
+		$this->hotelRooms = $hotelRooms;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the Collection
+	 */
+	public function getRoomList() {
+		return $this->roomList;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$roomList
+	 */
+	public function setRoomList($roomList) {
+		$this->roomList = $roomList;
+		return $this;
+	}
+	
 	
 	
 	

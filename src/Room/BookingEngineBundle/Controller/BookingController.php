@@ -217,6 +217,7 @@ class BookingController extends Controller
     	$form   = $this->createBookingForm($customer);
     	$em = $this->getDoctrine()->getManager();
     	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
+    	$catalogueService = $this->container->get( 'catalogue.service' );
     	$selectedRoom = $catalogueService->getSelectedRoom($hotel,$room);
     	$session->set('selected',$hotel);
     	$session->set('selectedRoom',$selectedRoom);
@@ -276,7 +277,7 @@ class BookingController extends Controller
     		
     		$address = $selectedService->getAddress();
     		$booking->setHotelId($selectedService->getId());
-    		//$booking->setRoomId($selectedRoom->getId());
+    		$booking->setRoomId($selectedRoom->getId());
     		$booking->setHotelName($selectedService->getName());
     		$booking->setLocation($address->getLocation());
     		$booking->setNumRooms(0);
@@ -298,11 +299,6 @@ class BookingController extends Controller
     		$booking->setCouponApplyed(0);
     		$em->persist($booking);
     		$em->flush();
-    		
-    		$selectedService->setNumRooms($selectedService->getNumRooms()-1);
-    		$em->merge($selectedService);
-    		$em->flush();
-    		
     		$session->set('bookingObj',$booking);
     		$session->set('amountToPay',$amountToPay);
     		$paymentLink = $this->getPaymentLink($amountToPay);

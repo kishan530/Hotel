@@ -136,6 +136,13 @@ class Booking
      * @ORM\Column(name="hotel_id", type="integer")
      */
     private $hotelId;
+    
+    /**
+     * @var integer
+     * @ORM\Column(name="room_id", type="integer")
+     */
+    private $roomId;
+    
     /**
      * @var string
      * @ORM\Column(name="hotel_name", type="string", length=100)
@@ -595,6 +602,25 @@ class Booking
 		$this->location = $location;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the integer
+	 */
+	public function getRoomId() {
+		return $this->roomId;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$roomId
+	 */
+	public function setRoomId($roomId) {
+		$this->roomId = $roomId;
+		return $this;
+	}
+	
 	
     
     
