@@ -445,9 +445,13 @@ $('#guests').click(function(e){
                        {#} <a class="btn btn-transparent-gray" href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">
                           More Details
                         </a> {#}
+                        {% if hotel.soldOut or hotel.numRooms<1 %}
+                        	<label class="btn btn-book-now">Sold Out</label>
+                        {% else %}
                         <a class="btn btn-book-now" href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">
                           Book now
                         </a>
+                        {% endif %}
                        
                       </div>
                     </div>

@@ -7,6 +7,37 @@
             <li><a href="{{ path('room_site_management_about_us') }}">Add Hotel</a></li>
 {% endblock %}
 
+{% block javascripts %}
+<script type="text/javascript">
+
+//keep track of how many city fields have been rendered
+var imageCount = '{{ form.imageList|length }}';
+
+$('#add-another-image').click(function(e) {
+        e.preventDefault();
+        /*if(itemCount>4){
+            alert('Max 5 only');
+            exit();
+        }*/
+
+        var imageList = $('#image-list');
+
+        // grab the prototype template
+        var newWidget = imageList.attr('data-prototype');
+        // replace the "__name__" used in the id and name of the prototype
+        // with a number that's unique to your city
+        newWidget = newWidget.replace(/__name__/g, imageCount);
+        imageCount++;
+
+        // create a new list element and add it to the list
+        var newLi = $('<div></div>').html(newWidget);
+        newLi.appendTo(imageList);
+    });
+
+</script>
+
+{% endblock %}
+
 {% block body %}
 
 <div class="container">
@@ -15,9 +46,147 @@
 
 	<div class="row">
 		<div class="col-lg-6">
-			{{ form_widget(form) }}
+			 <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.name) }}
+                                {{ form_widget(form.name) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.overview) }}
+                                {{ form_widget(form.overview) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.propertyType) }}
+                                {{ form_widget(form.propertyType) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.category) }}
+                                {{ form_widget(form.category) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.checkIn) }}
+                                {{ form_widget(form.checkIn) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.checkOut) }}
+                                {{ form_widget(form.checkOut) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.price) }}
+                                {{ form_widget(form.price) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.numRooms) }}
+                                {{ form_widget(form.numRooms) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.priority) }}
+                                {{ form_widget(form.priority) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.soldOut) }}
+                                {{ form_widget(form.soldOut) }}
+                            </div> 
+                                                    
+                    </div>
+                    
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.active) }}
+                                {{ form_widget(form.active) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.addressLine1) }}
+                                {{ form_widget(form.addressLine1) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.addressLine2) }}
+                                {{ form_widget(form.addressLine2) }}
+                            </div> 
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.city) }}
+                                {{ form_widget(form.city) }}
+                            </div> 
+                                                    
+                    </div>
+                      <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.location) }}
+                                {{ form_widget(form.location) }}
+                            </div> 
+                                                    
+                    </div>
+                      <div class="row form-group">
+                            <div class="col-lg-12">
+                            	{{ form_label(form.pincode) }}
+                                {{ form_widget(form.pincode) }}
+                            </div> 
+                                                    
+                    </div>
+		
+			
 		</div>
 	</div>
+	
+	<h4>Images</h4>
+                     
+                     {% macro image_prototype(i) %}
+                     		<div class="row form-group">
+	                            <div class="col-lg-6">
+	                                {{ form_label(i.imagePath) }}
+	                            </div> 
+	                                                    
+	                            <div class="col-lg-6">
+	                            	
+	                                {{ form_widget(i.imagePath) }}
+	                            </div> 
+                                                    
+                        	</div>
+                     {% endmacro %}
+                     <div id="image-list"
+                                                data-prototype="{{ _self.image_prototype(form.imageList.vars.prototype)|e }}">
+                            {% for i in form.imageList %}
+                            	{{ _self.image_prototype(i) }}
+                            {% endfor %}
+                        </div>
+                    <a href="#" id="add-another-image">Add another Image</a>
+	
 {{ form_end(form) }}
 </div>
 {% endblock %}

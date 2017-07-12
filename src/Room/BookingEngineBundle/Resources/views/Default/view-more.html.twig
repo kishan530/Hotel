@@ -65,8 +65,16 @@ $("button").click(function() {
             </div>
            <div class="col-md-3">
             	 <h5 class="hotel-price"> <i class="fa fa-inr"></i> {{ hotel.price }}</h5>
+<<<<<<< HEAD
 {#             	 <a class="btn-book-now topbody" href=""> Choose Room </a>#}
             	 <div ><button type="button" class="btn-book-now topbody" >Choose room!</button></div>
+=======
+            	 {% if hotel.soldOut or hotel.numRooms<1 %}
+                        	<label class="btn btn-book-now">Sold Out</label>
+                        {% else %}
+            	 <a class="btn-book-now" href="{{ path('room_booking_engine_confrim',{ 'id' : hotel.id }) }}"> Book Now </a>
+            	 {% endif %}
+>>>>>>> ab96143dc7247d8f270b70270cfdab4211ab8904
             </div>
             <div class="room-wrapper negative-margin">
              <div class="room-content col-md-9"> {# div 9close#}
