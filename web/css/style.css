@@ -8041,3 +8041,9 @@ max-width: 140%;
 }
 .topbody{    padding-bottom: 4px;}
 .middle{}
+.borderhotelbox{
+	background-color: #f2f2f2;
+	border: 1px solid black;
+	padding: 10px;
+	
+}

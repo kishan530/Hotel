@@ -35,6 +35,33 @@ $('#add-another-image').click(function(e) {
     });
 
 </script>
+<script type="text/javascript">
+
+//keep track of how many city fields have been rendered
+var roomCount = '{{ form.roomList|length }}';
+
+$('#add-another-room').click(function(e) {
+        e.preventDefault();
+        /*if(itemCount>4){
+            alert('Max 5 only');
+            exit();
+        }*/
+
+        var roomList = $('#room-list');
+
+        // grab the prototype template
+        var newWidget = roomList.attr('data-prototype1');
+        // replace the "__name__" used in the id and name of the prototype
+        // with a number that's unique to your city
+        newWidget = newWidget.replace(/__name__/g, roomCount);
+        roomCount++;
+
+        // create a new list element and add it to the list
+        var newLi = $('<div></div>').html(newWidget);
+        newLi.appendTo(roomList);
+    });
+
+</script>
 
 {% endblock %}
 
@@ -167,7 +194,7 @@ $('#add-another-image').click(function(e) {
 	<h4>Images</h4>
                      
                      {% macro image_prototype(i) %}
-                     		<div class="row form-group">
+                     		<div class="row form-group ">
 	                            <div class="col-lg-6">
 	                                {{ form_label(i.imagePath) }}
 	                            </div> 
@@ -186,6 +213,99 @@ $('#add-another-image').click(function(e) {
                             {% endfor %}
                         </div>
                     <a href="#" id="add-another-image">Add another Image</a>
+	
+	<h4>Room Detail</h4>
+                     
+                     {% macro room_prototype(i) %}
+                    <div class="borderhotelbox">
+                     <div class="row ">
+	                    
+	                    <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+							{{ form_label(i.name) }}
+                               {{ form_widget(i.name) }}
+                                {{ form_widget(i.id) }}
+                           		 </div> 
+                         </div>
+                        </div>
+                        <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+                            	{{ form_label(i.roomType) }}
+                                {{ form_widget(i.roomType) }}
+                           		 </div> 
+                         </div>
+                        </div>
+                        <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+								{{ form_label(i.capacity) }}
+                                {{ form_widget(i.capacity) }}
+                           		 </div> 
+                         </div>
+                        </div>
+                        <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+							{{ form_label(i.price) }}
+                               {{ form_widget(i.price) }}
+                           		 </div> 
+                         </div>
+                        </div>
+                        <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+							{{ form_label(i.maxAdult) }}
+                               {{ form_widget(i.maxAdult) }}
+                           		 </div> 
+                         </div>
+                        </div>
+                         <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+							{{ form_label(i.maxChild) }}
+                               {{ form_widget(i.maxChild) }}
+                           		 </div> 
+                         </div>
+                        </div>
+                        <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+							{{ form_label(i.description) }}
+                               {{ form_widget(i.description) }}
+                           		 </div> 
+                         </div>
+                        </div>
+                                                
+                         <div class="col-lg-6">
+                    		<div class="row form-group">
+	                            <div class="col-lg-6">
+	                                {{ form_label(i.imagePath) }}
+	                            </div> 
+	                                                    
+	                       <div class="col-lg-6"> 
+	                            	
+	                                {{ form_widget(i.imagePath) }}
+	                           </div>
+                                                    
+                       	</div>
+                        </div>
+                        
+                                                
+                     </div>
+                 	</div>  
+                       
+                     {% endmacro %}
+                     <div id="room-list"
+                                                data-prototype1="{{ _self.room_prototype(form.roomList.vars.prototype)|e }}">
+                            {% for i in form.roomList %}
+                            	{{ _self.room_prototype(i) }}
+                            {% endfor %}
+                        </div>
+                    <a href="#" id="add-another-room">Add another Room</a>
+	
+	
 	
 {{ form_end(form) }}
 </div>

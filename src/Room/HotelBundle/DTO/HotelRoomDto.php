@@ -60,6 +60,27 @@ class HotelRoomDto
      */
     private $maxChild;
     
+    /**
+     * @var string
+     *
+     *
+     */
+    private $description;
+    
+    /**
+     * @var string
+     *
+     *
+     */
+    private $name;
+    
+     /**
+     * @var string
+     *
+     * 
+     */
+    protected $hotel;
+    
     public function __construct() {
     	$this->images = new ArrayCollection();
     	$this->amenities = new ArrayCollection();
@@ -191,6 +212,62 @@ class HotelRoomDto
 		$this->maxChild = $maxChild;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getHotel() {
+		return $this->hotel;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$hotel
+	 */
+	public function setHotel($hotel) {
+		$this->hotel = $hotel;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$description
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getName() {
+		return $this->name;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$name
+	 */
+	public function setName($name) {
+		$this->name = $name;
+		return $this;
+	}
+	
+	
 	
 
     

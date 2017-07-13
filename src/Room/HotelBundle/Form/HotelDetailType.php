@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Event\DataEvent;
 use Room\HotelBundle\Form\HotelImageType;
+use Room\HotelBundle\Form\HotelRoomType;
 
 
 class HotelDetailType extends AbstractType
@@ -138,6 +139,17 @@ class HotelDetailType extends AbstractType
             		//),
             ))
            
+            ->add('roomList', 'collection', array(
+            		// each entry in the array will be an "PackageItinerary" field
+            		'type'   => new HotelRoomType(),
+            		'allow_add'    => true,
+            		'prototype'=>true,
+            		'required'    => false,
+            		// these options are passed to each "PackageItinerary" type
+            		//'entry_options'  => array(
+            		//   'attr'      => array('class' => '')
+            		//),
+            ))
             
         ;
     }

@@ -123,7 +123,7 @@ class Hotel
     protected $amenities;
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Room\HotelBundle\Entity\HotelRoom", mappedBy="hotel", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Room\HotelBundle\Entity\HotelRoom", mappedBy="hotel", cascade={"all"})
      */
     protected $hotelRooms;
     
