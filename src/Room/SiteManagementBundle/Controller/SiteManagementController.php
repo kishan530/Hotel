@@ -73,14 +73,24 @@ class SiteManagementController extends Controller
     		return $this->redirect ( $this->generateUrl ('room_security_user_login') );
     	
     	}
+    	
+    	//$bookingIdDetails = array(); 
+    	
     	$bookings = array();
     	$bookingSearch = new BookingSearch();
+    	
+    	//$bookingId = new BookingSearch();
+    	
     	$form   = $this->createBookingSearchForm($bookingSearch);
     	$form->handleRequest($request);
     	if ($form->isValid()) {
     		
     		$catalogueService = $this->container->get( 'catalogue.service' ); 
     		$bookings = $catalogueService->getBookingsBySearch($bookingSearch);
+    		
+    		//$bookingIdDetails = $catalogueService->getBookingsByBookingId($bookingId);
+    		
+    		
     		$customers = $catalogueService->getCustomers();
     		$customers = $catalogueService->getById($customers);
     		//$hotels = $catalogueService->getHotels();
@@ -90,12 +100,16 @@ class SiteManagementController extends Controller
     				'form'   => $form->createView(),
     				'bookings'=>$bookings,
     				'customers'=>$customers,
+    				
+    			//'bookingIdDetails'=>$bookingIdDetails,
     				//'hotels'=>$hotels
     		));
     	}
     	return $this->render('RoomSiteManagementBundle:Default:booking-search.html.twig', array(
     			'form'   => $form->createView(),
     			'bookings'=>$bookings
+    			
+    			//'bookingIdDetails'=>$bookingIdDetails
     	));
     }
     /**

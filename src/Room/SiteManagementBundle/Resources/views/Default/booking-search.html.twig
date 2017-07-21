@@ -70,6 +70,18 @@ $('.calendar').datepicker({
                              </div>
                             </div>
             </div>
+            
+            <div class="col-lg-3 col-sm-3">
+			<div class="row form-group {% if form.from.vars.errors|length %}has-error{% endif %}">
+                    <div class="col-lg-5">
+                            {{ form_label(form.bookingId) }}
+                        </div>
+                        <div class="col-lg-7">
+                        	
+                            {{ form_widget(form.bookingId) }}
+                        </div>
+                       </div>
+                      </div>
                             
                           
 				<div class="col-lg-2 col-sm-2">

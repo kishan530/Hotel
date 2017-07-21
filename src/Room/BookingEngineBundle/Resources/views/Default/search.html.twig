@@ -417,8 +417,9 @@ $('#guests').click(function(e){
                       </ul>
                     </div>
                     <div class="pull-right">
+                    {% set price=search.numRooms * hotel.price%}
                       <span class="price">
-                        <i class="fa fa-inr"></i> {{ hotel.price }}
+                        <i class="fa fa-inr"></i> {{ price }}
                       </span>
                     </div>
                   </header>
@@ -449,7 +450,7 @@ $('#guests').click(function(e){
                         	<label class="btn btn-book-now">Sold Out</label>
                         {% else %}
                         <a class="btn btn-book-now" href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">
-                          Book now
+                          Select Room
                         </a>
                         {% endif %}
                        

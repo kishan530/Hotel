@@ -7,3 +7,11 @@ room_hotel_edit_hotel:
 room_hotel_search_hotel:
     path:     /search-hotel
     defaults: { _controller: "RoomHotelBundle:Hotel:searchHotel" }
+
+room_hotel_delete_hotel:
+    path:     /delete/{id}/hotel
+    defaults: { _controller: "RoomHotelBundle:Hotel:deleteHotel" }
+
+room_hotel_delete_hotelRoom:
+    path:     /{id}/delete-hotelroom
+    defaults: { _controller: "RoomHotelBundle:Hotel:deleteHotelRoom" }

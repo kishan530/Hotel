@@ -35,6 +35,15 @@ class BookingSearchType extends AbstractType
             						'data'  => date('d/m/Y'),
             						'attr'=>array('class'=>'hasDatepicker calendar')
             				))
+            				
+            ->add('bookingId', null ,array(
+            				
+            						'required'    => false,
+            						'label' => '',
+            						'attr'   =>  array(
+            								'placeholder'=>'search BookingId'
+            						),
+            				))
         ;
                     
     }

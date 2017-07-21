@@ -153,7 +153,7 @@ class HotelController extends Controller
 				}
 				
 				
-		
+				
 				$em->persist($hotelObj);
 				
 	    		$em->flush();
@@ -168,6 +168,7 @@ class HotelController extends Controller
 	    	
 	    	return $this->render('RoomHotelBundle:Default:add-hotel.html.twig',array(
 	
+	    			'hotel'=> $hotelDetail,
 		 		'form' => $form->createView(),
 		 ));
 	    
@@ -305,6 +306,7 @@ class HotelController extends Controller
 			
 			$hotelImageList = $hotelDetail->getImageList();
 			$hotelImages = new ArrayCollection();
+			
 			foreach($hotelImageList as $hotelImage){
 				$uploadedfile = $hotelImage->getImagePath ();
 				if (!is_null($uploadedfile)) {
@@ -335,7 +337,7 @@ class HotelController extends Controller
 				//echo var_dump($hotelRoom->getId());
 				$hotelRoomObj  =new HotelRoom();
 				if(!is_null($hotelRoom->getId()))
-					$hotelRoomObj = $oldHotelRooms[$hotelRoom->getId()];
+				$hotelRoomObj = $oldHotelRooms[$hotelRoom->getId()];
 				$hotelRoomObj->setRoomType ($roomType );
 				$hotelRoomObj->setCapacity ($capacity );
 				$hotelRoomObj->setPrice ($price );
@@ -376,10 +378,38 @@ class HotelController extends Controller
 		}
 		 
 		return $this->render('RoomHotelBundle:Default:add-hotel.html.twig',array(
-	
+				
+				'hotel' => $hotelObj,
 				'form' => $form->createView(),
 		));
 	
+	}
+	
+	
+	public function deleteHotelAction($id)
+	{
+		$hotel = $this->getDoctrine()
+		->getRepository('RoomHotelBundle:Hotel')
+		->find($id);
+	
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($hotel);
+		$em->flush();
+		return $this->redirect($this->generateUrl('room_hotel_search_hotel'));
+	}
+	
+	public function deleteHotelRoomAction($id)
+	{
+		$hotelRoom = $this->getDoctrine()
+		->getRepository('RoomHotelBundle:HotelRoom')
+		->find($id);
+	
+		$em = $this->getDoctrine()->getManager();
+		//$hotelRoom->$repository->findOneBy(array('id' => 'id'));
+		$em->remove($hotelRoom);
+		$em->flush();
+		return new Response('true');
+		//	return $this->redirect($this->generateUrl('room_hotel_search_hotel'));
 	}
 
 

@@ -20,6 +20,11 @@ class BookingSearch
 	private $to;
 	
 	/**
+	 * @var string
+	 */
+	private $bookingId;
+	
+	/**
 	 *
 	 * @return the date
 	 */
@@ -54,6 +59,25 @@ class BookingSearch
 		$this->to = $to;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getBookingId() {
+		return $this->bookingId;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$bookingId
+	 */
+	public function setBookingId($bookingId) {
+		$this->bookingId = $bookingId;
+		return $this;
+	}
+	
 	
 	
 	

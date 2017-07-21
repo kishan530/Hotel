@@ -21,10 +21,10 @@ class HotelRoomType extends AbstractType
             				'multiple' => false,
             				'label' => 'RoomType',
             				'choices' => array(
-            						'Deluxe Room Double'=>'Deluxe Room Double',
-            						'Premium Room Double'=>'Premium Room Double',
-            						'Executive Double'=>'Executive Double',
-            						'Signature Room Double'=>'Signature Room Double',
+            						'1 Bhk Service Apartment'=>'1 Bhk Service Apartment',
+            						'2 Bhk Service Apartment'=>'2 Bhk Service Apartment',
+            						'3 Bhk Service Apartment'=>'3 Bhk Service Apartment',
+            						
             						
             				),
             				'required'    => true,))

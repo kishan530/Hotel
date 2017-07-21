@@ -77,6 +77,7 @@ class BookingController extends Controller
     	$search = new Search();    	
     	$form   = $this->createSearchForm($search);
     	$form->handleRequest($request);
+    	
     	$catalogueService = $this->container->get( 'catalogue.service' );
     	$hotels = $catalogueService->getHotelsByCity($search->getCity());
     	$amenities = $catalogueService->getAmenities();
@@ -142,15 +143,23 @@ class BookingController extends Controller
      */
     public function viewMoreAction(Request $request,$id)
     {
-    	$search = new Search();
+    	$session = $request->getSession();
+    	$search = $session->get('search');
+    	$numRoom=$search->getNumRooms();
+    //	$search = new Search();
+    	
     	$form   = $this->createSearchForm($search);
     	$em = $this->getDoctrine()->getManager();
     	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
     	$catalogueService = $this->container->get( 'catalogue.service' );
     	$hotel = $catalogueService->getMinPrice($hotel);
+    	$roomPrice=$hotel->getPrice();
+    	$hotel->setPrice($roomPrice*$numRoom);
     	return $this->render('RoomBookingEngineBundle:Default:view-more.html.twig', array(
     			'form'   => $form->createView(),
-    			'hotel'=> $hotel
+    			'hotel'=> $hotel,
+    			
+    			
     	));
     }
     
@@ -223,6 +232,7 @@ class BookingController extends Controller
     	$session->set('selectedRoom',$selectedRoom);
     	$booking = new Booking();
     	$price = $hotel->getPrice();
+    	
     	$tax = $price*0.14;
     	$booking->setTotalPrice($price);
     	$booking->setServiceTax($tax);
@@ -299,6 +309,12 @@ class BookingController extends Controller
     		$booking->setCouponApplyed(0);
     		$em->persist($booking);
     		$em->flush();
+    		
+
+    		$selectedService->setNumRooms($selectedService->getNumRooms()-1);
+    		$em->merge($selectedService);
+    		$em->flush();
+    		
     		$session->set('bookingObj',$booking);
     		$session->set('amountToPay',$amountToPay);
     		$paymentLink = $this->getPaymentLink($amountToPay);

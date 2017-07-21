@@ -117,9 +117,48 @@ class CatalogueService
     }
     
     public function getBookingsBySearch($bookingSearch){
-    	$locations = $this->em->getRepository('RoomBookingEngineBundle:Booking')->findAll();
-    	return $locations;
+    	
+    	
+    	
+    	$bookings = array();
+    	$from = $bookingSearch->getFrom();
+    	$to   = $bookingSearch->getTo();
+    	$bookingId = $bookingSearch->getBookingId();
+    	
+    	
+    	if(!is_null($from)){
+    		$bookings = $em->getRepository ( 'RoomBookingEngineBundle:Booking' )->findBy(array('bookingId'=>$bookingId));
+    	}else{
+    		
+	    	if(!is_null($from)){
+	    		$from = new \DateTime($from->format("Y-m-d")." 00:00:00");
+	    	
+	    			
+	    		$to = new \DateTime($to->format("Y-m-d")." 23:59:59");
+	    			
+	    	
+	    	
+	    		$qb = $em->getRepository ( 'RoomBookingEngineBundle:Booking' )->createQueryBuilder("Booking");
+	    	
+	    		$qb ->andWhere('Booking.date BETWEEN :from AND :to ') ->setParameter('from', $from )->setParameter('to', $to) ;
+	    	
+	    		$bookings = $qb->getQuery()->getResult();
+	    	}else{
+	    		$bookings = $em->getRepository ( 'RoomBookingEngineBundle:Booking' )->findAll();
+	    	}
+    	}
+    		
+    	return $bookings;
     }
+    
+    
+    
+    /* public function getBookingsByBookingId($bookingId){
+    	$locations = $this->em->getRepository('RoomBookingEngineBundle:Booking')->findById($bookingId);
+    	return $locations;
+    } */
+    
+    
     
     public function getAmenitiesById($amenitiesMstr){
     	$amenities = array();
