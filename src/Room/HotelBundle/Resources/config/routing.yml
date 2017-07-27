@@ -15,3 +15,16 @@ room_hotel_delete_hotel:
 room_hotel_delete_hotelRoom:
     path:     /{id}/delete-hotelroom
     defaults: { _controller: "RoomHotelBundle:Hotel:deleteHotelRoom" }
+    
+room_hotel_add_coupon_code:
+    path:     /add-coupon-code
+    defaults: { _controller: "RoomHotelBundle:Coupon:addCoupon" }
+room_hotel_list_coupon_code:
+    path:     /coupon-code-list
+    defaults: { _controller: "RoomHotelBundle:Coupon:couponList" }
+room_hotel_edit_coupon_code:
+    path:     /{id}/coupon-code-edit
+    defaults: { _controller: "RoomHotelBundle:Coupon:couponEdit" }
+room_hotel_delete_coupon_code:
+    path:     /{id}/coupon-code-delete
+    defaults: { _controller: "RoomHotelBundle:Coupon:couponDelete" }

@@ -22,3 +22,6 @@ room_booking_engine_booking_submit:
 room_booking_engine_success:
     path:     /booking-success
     defaults: { _controller: RoomBookingEngineBundle:Booking:success }
+room_booking_engine_apply_coupon:
+    path:     /apply-coupon
+    defaults: { _controller: RoomBookingEngineBundle:Booking:applyCoupon }

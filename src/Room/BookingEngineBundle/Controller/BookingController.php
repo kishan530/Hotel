@@ -237,6 +237,8 @@ class BookingController extends Controller
     	$booking->setTotalPrice($price);
     	$booking->setServiceTax($tax);
     	$booking->setFinalPrice($tax+$price+150);
+    	
+    	$session->set ('booking',$booking);
     	return $this->render('RoomBookingEngineBundle:Default:booking.html.twig', array(
     			'form'   => $form->createView(),
     			'customer'=> $customer,
@@ -361,6 +363,55 @@ class BookingController extends Controller
     		$bookingId .= $characters[rand(0,strlen($characters)-1)];
     	}
     	return $bookingId;
+    }
+    
+    
+    
+    
+    public function applyCouponAction() 
+    
+    {
+    	$request = $this->container->get ( 'request' );
+    	$session = $request->getSession ();
+    	$booking = $session->get('booking');
+    	
+    	
+    	$newcoupon = $request->get ( "coupon" );
+    //	$newcoupon='DWR1k00';
+    	$searchcoupon = $this->getDoctrine()
+    	 ->getRepository('RoomHotelBundle:CouponCode')
+    	 ->findBy( array('couponCode' => $newcoupon));
+    	
+    $response = array();
+    $bookingDetails = array();
+    $response['success'] = 'false';
+    $response['message'] = '';
+	  if(count($searchcoupon)>0)
+	  {
+	  	
+	  	$response['success'] = 'true';
+    	foreach ($searchcoupon as $coupan)
+    	{
+    	$discount=$coupan->getAmount();
+    	}
+    	$oldDiscount = $booking->getDiscount();
+    	$finalPrice = $booking->getFinalPrice()+$oldDiscount-$discount;
+    	$booking->setFinalPrice($finalPrice);
+    	$booking->setDiscount($discount);
+    	$bookingDetails['finalPrice'] = $finalPrice;
+    	$bookingDetails['discount'] = $discount;
+	  }
+	  else 
+	  {
+	  	$response['message'] = 'coupon code '.$newcoupon.' doesnt exist ';
+	  
+	  }
+	  	  
+	  $response['bookingDetails'] = $bookingDetails;
+	  		
+	  return new Response (json_encode($response));
+    	
+    
     }
     
 }

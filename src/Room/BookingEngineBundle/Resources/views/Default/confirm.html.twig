@@ -7,6 +7,52 @@
             <li><a href="#">Booking</a></li>
 {% endblock %}
 
+
+{% block javascripts %}
+<script>
+$('#apply').click(function(e){		
+	e.preventDefault(); //STOP default action 		 		 	
+	 var optionSelected = $("#room_bookingenginebundle_customer_couponCode").val();		
+	 $.ajax({
+	      url: "{{ path('room_booking_engine_apply_coupon') }}",
+	      type: "GET",
+	       data: { "coupon" : optionSelected },
+	      success: function(data) {	
+
+		      var response = JSON.parse(data);	
+		     // alert(data);
+		    //  alert(response);		     			        	  		        	
+			     if(response.success=='false')
+			     {
+			    	 $('#coupon-error').html(response.message);
+			    	 $('#coupon-error').show();
+				  }
+			     else
+			     {
+			    	 $('#coupon-error').html('');
+			    	 $('#coupon-error').hide();
+					 var price = response.bookingDetails.finalPrice;
+					 var discount = response.bookingDetails.discount;
+					 //alert(price);
+					   //  alert(discount);
+				     $('#price').html(price);
+				 //    $('#fee').show();
+				     $('#discount').html(discount);
+				    // $('#discount').show();
+				     //$('#equals').show();	
+			     }			     
+			     
+	      },
+
+	      error: function(XMLHttpRequest, textStatus, errorThrown)
+	      {
+	        alert('Error: ' +  errorThrown);
+	      }
+	   });						 		   			   							
+});
+</script>
+{% endblock %}
+
 {% block stylesheets %}
 <style>
 .nav-justified>li {
