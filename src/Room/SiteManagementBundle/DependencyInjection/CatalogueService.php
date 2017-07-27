@@ -126,8 +126,8 @@ class CatalogueService
     	$bookingId = $bookingSearch->getBookingId();
     	
     	
-    	if(!is_null($from)){
-    		$bookings = $em->getRepository( 'RoomBookingEngineBundle:Booking' )->findBy(array('bookingId'=>$bookingId));
+    	if(!is_null($bookingId)){
+    		$bookings = $this->em->getRepository( 'RoomBookingEngineBundle:Booking' )->findBy(array('bookingId'=>$bookingId));
     	}else{
     		
 	    	if(!is_null($from)){
@@ -138,14 +138,14 @@ class CatalogueService
 	    			
 	    	
 	    	
-	    		$qb = $em->getRepository ( 'RoomBookingEngineBundle:Booking' )->createQueryBuilder("Booking");
+	    		$qb = $this->em->getRepository ( 'RoomBookingEngineBundle:Booking' )->createQueryBuilder("Booking");
 	    	
-	    		$qb ->andWhere('Booking.date BETWEEN :from AND :to ') ->setParameter('from', $from )->setParameter('to', $to) ;
+	    		$qb ->andWhere('Booking.bookedOn BETWEEN :from AND :to ') ->setParameter('from', $from )->setParameter('to', $to) ;
 	    	
 	    		$bookings = $qb->getQuery()->getResult();
 	    	}
 	    	else{
-	    		$bookings = $em->getRepository ( 'RoomBookingEngineBundle:Booking' )->findAll();
+	    		$bookings = $this->em->getRepository ( 'RoomBookingEngineBundle:Booking' )->findAll();
 	    	}
     	}
     		

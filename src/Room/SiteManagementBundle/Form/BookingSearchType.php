@@ -23,17 +23,21 @@ class BookingSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('from',null,array(
+            ->add('from','date',array(
             						'required'    => false,
             						'label' => 'From Date',
-            						'data'  => date('d/m/Y'),
-            						'attr'=>array('class'=>'hasDatepicker calendar')
+									'widget'=> 'single_text',
+									'format'=>'d/M/y',
+            						//'data'  =>new \Date(),
+            						'attr'=>array('class'=>'calendar')
             				))
-            ->add('to',null,array(
+            ->add('to','date',array(
             						'required'    => false,
             						'label' => 'To Date',
-            						'data'  => date('d/m/Y'),
-            						'attr'=>array('class'=>'hasDatepicker calendar')
+									'widget'=> 'single_text',
+									'format'=>'d/M/y',
+            						//'data'  =>new \Date(),
+            						'attr'=>array('class'=>'calendar')
             				))
             				
             ->add('bookingId', null ,array(
@@ -41,7 +45,7 @@ class BookingSearchType extends AbstractType
             						'required'    => false,
             						'label' => '',
             						'attr'   =>  array(
-            								'placeholder'=>'search BookingId'
+            								'placeholder'=>'Booking Id'
             						),
             				))
         ;

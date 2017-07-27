@@ -96,10 +96,10 @@
 		<td style="padding-left: 325px;" colspan="4"rowspan="1">
 		<span style="font-weight: bold;">Billing Details:</span></address><br>
 		
-		Hotel Charges:<br>{{ booking.totalPrice }}
-		GST:<br>{{ booking.serviceTax }}
-		Total Price:<br>{{ booking.finalPrice-booking.discount }}
-		Discount(-):<br>{{ booking.discount }}
+		Hotel Charges: {{ booking.totalPrice }} <br>
+		GST: {{ booking.serviceTax }} <br>
+		Total Price: {{ booking.finalPrice-booking.discount }} <br>
+		Discount(-): {{ booking.discount }} <br>
 		Total Amount:{{ booking.finalPrice }}
 		
          </td>

@@ -47,6 +47,9 @@ class BookingController extends Controller
 	 */
 	public function indexAction()
 	{
+			//$mailService = $this->container->get( 'mail.services' );
+    		
+    		//$mailService->mail('kishan.kish530@gmail.com','kishan test','this is kishan test');
 		$search = new Search();
 		$search->setNumAdult(2);
 		$search->setNumRooms(1);
@@ -334,10 +337,12 @@ class BookingController extends Controller
     						 
     				)
     		);
-    		$subject = "Booking Confirmed";
+    		$subject = "Booking Confirmed -".$booking->getBookingId();
+			$adminSubject = "New Booking From Sterling-".$booking->getBookingId();
     		$mailService = $this->container->get( 'mail.services' );
     		$email=$customer->getEmail();
     		$mailService->mail($email,$subject,$mailer);
+			//$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer);
     		
     		
     		return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
