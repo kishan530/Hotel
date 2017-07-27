@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>Reservation At Hotel Sterlin</title>
+  </head>
+  <body>
+    <table style="width: 611px; background-color: ;" "="" border="1">
+      <tbody>
+        <tr align="center">
+          <td colspan="4" rowspan="1">
+            <h3>Hotel Booking Confirmation</h3>
+          </td>
+        </tr>
+        <tr>
+		<td>
+		<span align="center" style="font-weight: bold;">The
+                    Hotel Salmon Red</span></address>
+         </td>
+        </tr >
+		<tr>
+		<td colspan="4"rowspan="1">
+		<span style="font-weight: bold;">Guest Details </span></address>
+         </td>
+        </tr>
+        <tr>
+          <td>Guest Name&nbsp;&nbsp;&nbsp; </td>
+          <td style="width: 144.75px;"> {{ customer.name }}
+            </td>
+          <td style="width: 163.084px;">Email ID<br>
+          </td>
+          <td style="width: 159.367px;"> {{ customer.email }}          </td>
+        </tr>
+        <tr>
+          <td style="width: 140.433px;">Mobile Number<br>
+          </td>
+          <td> {{ customer.mobile }}<br>
+          </td>
+          <td> Address </td>
+          <td>{{ customer.address }}<br>
+          </td>
+        </tr>
+		<tr>
+		<td colspan="4"rowspan="1">
+		<span style="font-weight: bold;">Booking Details </span></address>
+         </td>
+        </tr>
+		<tr>
+          <td style="width: 140.433px;">Hotel Name:<br>
+          </td>
+          <td> Sterlin Hotel<br>
+          </td>
+          <td> Hotel Address </td>
+          <td> 30/32, Varthur Road, Silver Springs Layout
+          Marathahalli, Bangalore<br>
+          </td>
+        </tr>
+		<tr>
+          <td style="width: 140.433px;">Booked On<br>
+          </td>
+          <td>{{ booking.bookedOn.format('d/m/y') }}<br>
+          </td>
+          <td> Number of Rooms </td>
+          <td>{{ booking.numRooms }}<br>
+          </td>
+        </tr>
+        <tr>
+          <td> Booking ID </td>
+          <td style="width: 144.75px;">{{ booking.bookingId }}
+            </td>
+          <td style="width: 163.084px;"> Room Type<br>
+          </td>
+          <td style="width: 159.367px;"> <br>{{ selectedRoom.roomType }}
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 140.433px;">Check In<br>
+          </td>
+          <td> {{ booking.chekIn.format('d/m/y') }}<br>
+          </td>
+          <td> Check out </td>
+          <td>{{ booking.chekOut.format('d/m/y') }}<br>
+          </td>
+        </tr>
+		 <tr>
+          <td style="width: 140.433px;">Number Of Adults<br>
+          </td>
+          <td>{{ booking.numAdult }}<br>
+          </td>
+          <td> Number Of kids </td>
+          <td>-<br>
+          </td>
+        </tr>
+		
+		<tr>
+		<td style="padding-left: 325px;" colspan="4"rowspan="1">
+		<span style="font-weight: bold;">Billing Details:</span></address><br>
+		
+		Hotel Charges:<br>{{ booking.totalPrice }}
+		GST:<br>{{ booking.serviceTax }}
+		Total Price:<br>{{ booking.finalPrice-booking.discount }}
+		Discount(-):<br>{{ booking.discount }}
+		Total Amount:{{ booking.finalPrice }}
+		
+         </td>
+        </tr>
+		
+		
+		
+         
+        
+        
+         <tr>
+          <td colspan="4" rowspan="1"><strong style="text-decoration: underline;">Room
+              Rate is inclusive of :</strong><br>
+            
+              <li>Complimentary buffet breakfast at the Coffee Shop.</li>
+              <li>In room tea/coffee maker, cable TV, mini bar and direct dial
+                facility.</li>
+              <li>Complimentary use of the swimming pool.</li>
+              <li>Complimentary daily Newspaper.</li>
+              <li>2 Bottles of complimentary water.</li><br>
+           
+            Reservations are held till 13:00 hrs, unless guaranteed. To<strong>
+              guarantee your reservation,</strong> please provide the hotel with
+            a valid credit card number and the card expiry date.<br>
+            <br>
+            We look forward to welcoming you to at Hotel Salmon Red !<br>
+            <br>
+            <strong>With best regards,<br>
+              Yours sincerely,<br>
+            </strong><br>
+            <strong>Room Reservations.</strong><br>
+            <a href="mailto:Reservation%20Confirmation%20HTML%20Template">admin@setupmyhotel.com</a></td>
+        </tr>
+        <tr>
+          <td colspan="4" rowspan="1">
+            <h4 style="text-align: center;"><span style="text-decoration: underline;">Cancellation/amendment
+                policy</span></h4>
+            <span style="text-decoration: underline;"><strong>Individual
+                reservations</strong>:</span><br>
+            <ul>
+              <li>For Cancellations/ amendments made after 12 noon, 3 days prior
+                to check-in date, One night’s room rate is charged to the credit
+                card</li>
+              <li>For No shows and early check outs, One night’s room rate is
+                charged to the credit card.</li>
+            </ul>
+            <span style="text-decoration: underline;"><strong>Groups /
+                Conference bookings</strong>:</span><br>
+            <ul>
+              <li>In case there is any no-show or cancellation/amendment of the
+                conference/group (in part or full), within 15 days or less from
+                the date of check in, a retention charge will be levied.</li>
+              <li>&nbsp;The retention charge will be calculated as follows -
+                Number of rooms being canceled/no-shows X 1 night X applicable
+                daily rate per room for the conference/group. </li>
+              <li>In case of Early check out retention will be charged for those
+                nights booked, now being released due to the early check out.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr align="center">
+          <td colspan="4" rowspan="1">PO Box 16122 Collins Street West <br>
+Victoria 8007 Australia <br>
+Envato Headquarters<br>
+           Phone 1: +61 3 8376 6284 <br>
+          Fax 1: +61 3 8376 6284
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p><br>
+    </p>
+  </body>
+</html>

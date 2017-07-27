@@ -324,6 +324,22 @@ class BookingController extends Controller
     		//$paymentLink = "https://www.instamojo.com/Waseemsyed/tirupati-caars-services-cb8a4/";
     		$paymentLink.="?data_name=".$customer->getName()."&data_email=".$customer->getEmail()."&data_phone=".$customer->getMobile()."&embed=form";
     		
+    		
+    		
+    		$mailer = $this->renderView(
+    				'RoomBookingEngineBundle:Mail:invoice.html.twig',array(
+    						'booking' => $booking,
+    						'customer' => $customer,
+    						'selectedRoom'=>$selectedRoom
+    						 
+    				)
+    		);
+    		$subject = "Booking Confirmed";
+    		$mailService = $this->container->get( 'mail.services' );
+    		$email=$customer->getEmail();
+    		$mailService->mail($email,$subject,$mailer);
+    		
+    		
     		return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
     		
     		return $this->render('RoomBookingEngineBundle:Default:payment.html.twig', array(
