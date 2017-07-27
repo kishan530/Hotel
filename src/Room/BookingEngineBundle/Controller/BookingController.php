@@ -194,13 +194,30 @@ class BookingController extends Controller
     	$em = $this->getDoctrine()->getManager();
     	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
     	$catalogueService = $this->container->get( 'catalogue.service' );
-    	$hotel = $catalogueService->getMinPrice($hotel);
+    	$selectedRoom = $catalogueService->getSelectedRoom($hotel,$room);
     	$booking = new Booking();
-    	$price = $hotel->getPrice();
-    	$tax = $price*0.14;
+    	$price = $selectedRoom->getPrice();
+    	$serviceTax = 0;
+    	$taxPercentage = 0;
+    	if($price>999 && $price<2500){
+    		$taxPercentage = 12;
+    	}elseif($price>2499 && $price<5000){
+    		$taxPercentage = 18;
+    	}elseif($price>4999){
+    		$taxPercentage = 28;
+    	}
+    	$serviceTax = round($price*($taxPercentage/100),2);
+    	//$swachBharthCess = round($finalPrice*(0.9/100),2);
+    	//$krishiKalyanCess = round($finalPrice*(0.9/100),2);
+    	$totalTax = $serviceTax;
+    	$finalPrice = $price+$totalTax;
     	$booking->setTotalPrice($price);
-    	$booking->setServiceTax($tax);
-    	$booking->setFinalPrice($tax+$price+150);
+    	$booking->setServiceTax($serviceTax);
+    	$booking->setDiscount(0);
+    	$booking->setCouponApplyed(0);
+    	$booking->setFinalPrice($finalPrice);
+    	
+    	$session->set ('booking',$booking);
     	return $this->render('RoomBookingEngineBundle:Default:confirm.html.twig', array(
     			'form'   => $form->createView(),
     			'customer'=> $customer,
@@ -230,15 +247,7 @@ class BookingController extends Controller
     	$selectedRoom = $catalogueService->getSelectedRoom($hotel,$room);
     	$session->set('selected',$hotel);
     	$session->set('selectedRoom',$selectedRoom);
-    	$booking = new Booking();
-    	$price = $hotel->getPrice();
-    	
-    	$tax = $price*0.14;
-    	$booking->setTotalPrice($price);
-    	$booking->setServiceTax($tax);
-    	$booking->setFinalPrice($tax+$price+150);
-    	
-    	$session->set ('booking',$booking);
+    	$booking = $session->get('booking');
     	return $this->render('RoomBookingEngineBundle:Default:booking.html.twig', array(
     			'form'   => $form->createView(),
     			'customer'=> $customer,
@@ -257,6 +266,7 @@ class BookingController extends Controller
     	$searchFilter = $session->get('search');
     	$selectedService = $session->get('selected');
     	$selectedRoom = $session->get('selectedRoom');
+    	$bookingOld = $session->get('booking');
     
     
     	$customer = new Customer();
@@ -293,22 +303,13 @@ class BookingController extends Controller
     		$booking->setHotelName($selectedService->getName());
     		$booking->setLocation($address->getLocation());
     		$booking->setNumRooms(0);
-
-    		$amountToPay = $finalPrice;
-    		$tax = 0;
     		
-    		$serviceTax = round($finalPrice*(5.6/100),2);
-    		$swachBharthCess = round($finalPrice*(0.2/100),2);
-    		$krishiKalyanCess = round($finalPrice*(0.2/100),2);
-    		$totalTax = $serviceTax+$swachBharthCess+$krishiKalyanCess;
-    		$amountToPay = $amountToPay+$totalTax;
-    		$finalPrice = $finalPrice+$totalTax;
-    		//$booking->setTax($tax);
-    		$booking->setServiceTax($serviceTax);
-    		$booking->setSwachBharthCess($swachBharthCess);
-    		$booking->setKrishiKalyanCess($krishiKalyanCess);
-    		$booking->setFinalPrice($finalPrice);
-    		$booking->setCouponApplyed(0);
+    		$booking->setTotalPrice($bookingOld->getTotalPrice());
+    		$booking->setDiscount($bookingOld->getDiscount());
+    		$booking->setServiceTax($bookingOld->getServiceTax());
+    		$booking->setFinalPrice($bookingOld->getFinalPrice());
+    		$booking->setCouponApplyed($bookingOld->getCouponApplyed());
+    		$booking->setCouponCode($bookingOld->getCouponCode());
     		$em->persist($booking);
     		$em->flush();
     		
@@ -316,7 +317,7 @@ class BookingController extends Controller
     		$selectedService->setNumRooms($selectedService->getNumRooms()-1);
     		$em->merge($selectedService);
     		$em->flush();
-    		
+    		$amountToPay = $booking->getFinalPrice();
     		$session->set('bookingObj',$booking);
     		$session->set('amountToPay',$amountToPay);
     		$paymentLink = $this->getPaymentLink($amountToPay);
@@ -398,6 +399,8 @@ class BookingController extends Controller
     	$finalPrice = $booking->getFinalPrice()+$oldDiscount-$discount;
     	$booking->setFinalPrice($finalPrice);
     	$booking->setDiscount($discount);
+    	$booking->setCouponApplyed(1);
+    	$booking->setCouponCode($newcoupon);
     	$bookingDetails['finalPrice'] = $finalPrice;
     	$bookingDetails['discount'] = $discount;
 	  }

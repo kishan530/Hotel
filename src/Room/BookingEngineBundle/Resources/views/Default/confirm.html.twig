@@ -432,18 +432,18 @@ text-transform: capitalize;
                                                         
                                                     </li>
                                                      <li>
-                                                        <span class="pull-left">Hotel Taxes</span>
+                                                        <span class="pull-left">GST</span>
                                                         <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.serviceTax }} </em></span>
                                                         
                                                     </li>  
                                                      <li>
-                                                        <span class="pull-left">Convenience Fee & Taxes</span>
-                                                        <span  class="pull-right"> <i class="fa fa-inr"></i> <em > 150 </em></span>
+                                                        <span class="pull-left">Total Price</span>
+                                                        <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.finalPrice-booking.discount }} </em></span>
                                                         
                                                     </li>                            
                                                    
                                                     <li><span  class="pull-left">Discount(-)</span>
-                                                        <span  class="pull-right"><i class="fa fa-inr"></i> <em id="discount"> 0 </em></span>
+                                                        <span  class="pull-right"><i class="fa fa-inr"></i> <em id="discount"> {{ booking.discount }} </em></span>
                                                     </li>
                                                    
                                                     {% block details %}
