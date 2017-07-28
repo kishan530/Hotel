@@ -449,7 +449,7 @@ $('#guests').click(function(e){
                         {% if hotel.soldOut or hotel.numRooms<1 %}
                         	<label class="btn btn-book-now">Sold Out</label>
                         {% else %}
-                        <a class="btn btn-book-now" href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">
+                        <a class="btn btn-book-now " href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">
                           Select Room
                         </a>
                         {% endif %}

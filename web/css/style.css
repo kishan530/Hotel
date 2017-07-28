@@ -8038,6 +8038,7 @@ max-width: 140%;
 }
 .titleroom{
 	        margin-left: -35px;
+	            margin-top: 25px;
 }
 .topbody{    padding-bottom: 4px;}
 .middle{}
@@ -8047,3 +8048,39 @@ max-width: 140%;
 	padding: 10px;
 	
 }
+.room-view-general{
+  padding: 50px 1px 35px 1px !important;
+  border-bottom: 1px solid #ededed;
+  padding-top: 0px !important;
+    padding-bottom: 10px;
+}
+.roomviewheight{
+	height: 455px !important;
+}
+.amenitiesroom{
+	padding-top: 7px;
+    margin-bottom: -14px;
+}
+.amenities-border{
+	
+    border-style: solid;
+    border-width: 1px;
+}
+.book-room-button{
+
+display: initial;
+}
+.pull-book-right{
+	margin-bottom: -25px !important;
+}
+.rcorners1 {
+    border-radius: 25px;
+   
+    padding: 05px; 
+    width: auto;
+    height: auto;    
+}
+.text-room-family{
+	text-transform: capitalize;
+}
+

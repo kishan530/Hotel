@@ -64,9 +64,9 @@ class MailServices
     	try{
     		$message = \Swift_Message::newInstance()
     		->setSubject($subject)
-    		->setFrom(array('noreply@sterlingsmachotel.com'=>'sterlingsmachotel'))
+    		->setFrom(array('noreply@justtrip.in'=>'Sterling Suites'))
     		->setTo($email)
-            ->setReplyTo('contact@sterlingsmachotel.com')
+            ->setReplyTo('contact@justtrip.in')
             ->setCc($CC)
     		->setBody($body, 'text/html');
     
@@ -86,9 +86,9 @@ class MailServices
     	try{
     		$message = \Swift_Message::newInstance()
     		->setSubject($subject)
-    		->setFrom(array('noreply@sterlingsmachotel.com'=>'sterlingsmachotel'))
+    		->setFrom(array('noreply@justtrip.in'=>'Sterling Suites'))
     		->setTo($email)
-            ->setReplyTo('contact@sterlingsmachotel.com')
+            ->setReplyTo('contact@justtrip.in')
             ->attach( \Swift_Attachment::fromPath($path))
     		->setBody($body, 'text/html');
     

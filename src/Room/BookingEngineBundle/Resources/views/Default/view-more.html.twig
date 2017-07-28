@@ -63,23 +63,23 @@ $("button").click(function() {
 			{% set address = hotel.address %}
 			<p class="hotel-address"> {{ address.addressLine1 }}, {{ address.addressLine2 }}, {{ address.location }}, {{ address.city }}</p>
             </div>
-           <div class="col-md-3">
-            	 <h5 class="hotel-price"> <i class="fa fa-inr"></i> {{ hotel.price }}</h5>
+           <div class="col-md-3" style="margin-top: 20px;">
+            	 <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotel.price }}</h5>
  {% if hotel.soldOut or hotel.numRooms<1 %}
                         	<label class="btn btn-book-now">Sold Out</label>
                         {% else %}
-            		<div ><button type="button" class="btn-book-now topbody" >Choose room!</button></div>
+            		<div ><button type="button" class="btn-book-now topbody" style="margin-top: 10px;" >Choose Room!</button></div>
             	 {% endif %}
             </div>
-            <div class="room-wrapper negative-margin">
-             <div class="room-content col-md-9"> {# div 9close#}
-              <div class="room-general">
+            <div class="room-wrapper negative-margin ">
+             <div class="room-content col-md-9 "> {# div 9close#}
+              <div class="room-general room-view-general">
               
               {% if hotel.images|length>0 %}			    
 			    <ul id="view-room-slider">
 {% for image in hotel.images %}
-		<li data-thumb="{{ asset('img/Hotels/'~image.imagePath) }}" data-src="{{ asset('img/Hotels/'~image.imagePath) }}">
-		    <img src="{{ asset('img/Hotels/'~image.imagePath) }}" />
+		<li data-thumb="{{ asset('img/Hotels/'~image.imagePath) }}" data-src="{{ asset('img/Hotels/'~image.imagePath) }} ">
+		    <img src="{{ asset('img/Hotels/'~image.imagePath) }}"style="height: 300px !important;" />
 		</li>
 	{% endfor %}
 </ul>
@@ -91,8 +91,8 @@ $("button").click(function() {
                
               </div> </div>
               
-              <div class="sidebar col-md-3">             
-              <div class="sidebar-widget book-now">
+              <div class="sidebar col-md-3 roomviewheight">             
+              <div class="sidebar-widget book-now ">
                <h4 class="widget-title">Help Me</h4>
                 <div class="widget-content">
                   <ul class="contact-list custom-list">
@@ -145,44 +145,49 @@ $("button").click(function() {
                  <span class="room-title-border"></span>
                 <p>{{ hotel.overview }}</p>
               </div>
-               <div class="room-about"></div>
+              {#} <div class="room-about"></div> {#}
 
 <div class="row ">
-<div class="col-sm-12">
-	<div class="col-sm-4">ROOM TYPES</div>
-	<div class="col-sm-4">INCLUSIONS & AMENITIES</div>
-	<div class="col-sm-4">PRICE FOR 4 NIGHTS</div>
+<div class="col-sm-12 amenitiesroom">
+	<div class="col-sm-4 text-room-family">ROOM TYPES</div>
+	<div class="col-sm-4 text-room-family">INCLUSIONS & AMENITIES</div>
+	<div class="col-sm-4 text-room-family">PRICE FOR 4 NIGHTS</div>
 	</div>			
 </div>
                
-                <div class="room-about"></div>
+              {#}  <div class="room-about"></div> {#}
               
               
-             	<div class="room-about">
+             	<div class="room-about ">
                <div class="listing-room-list">
                {% for hotelRoom in hotel.hotelRooms %}
-               <div class="row">
+               
+               <div class="row rcorners1">
+               
+               
                <div class="col-sm-2">
 {#             <div class="thumbnail">#}
 				 
-				 <h5 class="titleroom">{{ hotelRoom.roomType }} </h5>
+				 <h5 class="titleroom" style="font-size: 16px;">{{ hotelRoom.roomType }} </h5>
             <img src="{{ asset('img/Hotels/'~hotel.images.first.imagePath) }}" alt="" class="img-responsive hotelroom" height="30%">
              </div>
-             <div class="col-sm-2">
+             <div class="col-sm-2" style="padding-top: 65px;">
              </br>
-             
-             <small><em>Max Adult:{{ hotelRoom.maxAdult }}</em></small></br>
-               <small><em>Max child:{{ hotelRoom.maxChild }}</em></small>
+             <ul>
+             <li><small>Max Adult:&nbsp;&nbsp;{{ hotelRoom.maxAdult }}</small> </li></br>
+               <li style="margin-top: -20px;"><small>Max child:&nbsp;&nbsp;{{ hotelRoom.maxChild }}</small></li>
+               </ul>
               </div>
               
 {#             </div>#}
 		<div class="col-sm-8">
-            <div class="listing-room-content">
+            <div class="listing-room-content" style="padding-top: 20px;">
               {#}<div class="row"> {#}
-                <div class="col-md-12">
+                <div class="col-md-12" style ="padding-top: 32px;">
                
                   <header>
                   <div class="row">
+                  
                     <div class="pull-left">
                       <h5 class="title">
 {#                         <a href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">{{ hotel.name }}</a>#}
@@ -199,23 +204,23 @@ $("button").click(function() {
                       
                     </div>
                     
-                    <div class="pull-right">
+                    <div class="pull-right"   style="  margin-bottom: -30px;">
                     
                       <span class="price priceday" >
-                        <i class="fa fa-inr"></i> {{  hotelRoom.price  }}
+                      <small style="font-size: 45%;">Price for 1 night</small></br>
+                        <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotel.price }}</h5>
                       </span>
                                              
                     </div>
-                    <div class="pull-right">
-                    <a class="btn btn-book-now bookroom middle"  href="{{ path('room_booking_engine_confrim',{ 'id' : hotel.id,'room':hotelRoom.id }) }}">
-                          
-                          Book now
+                    <div class="pull-right " style="margin-bottom: -25px;" >
+                    <a class="btn btn-book-now bookroom middle book-room-button"  href="{{ path('room_booking_engine_confrim',{ 'id' : hotel.id,'room':hotelRoom.id }) }}">
+                                                    Book now
                         </a>
                     </div>
                     </div>
                   </header>
                   
-                  <div class="room-about"></div>
+                  {#}<div class="room-about"></div> {#}
 {#                   <div class="listing-facitilities">#}
                     
 {#                   </div>#}
@@ -225,10 +230,12 @@ $("button").click(function() {
             
             
             </div>
-            
+            <div class="room-about"></div>
             </div>
+        
             {% endfor %}
           </div>
+          
             </div>  
               
               
