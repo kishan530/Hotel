@@ -42,12 +42,13 @@ class MailServices
     	try{
     		$message = \Swift_Message::newInstance()
     		->setSubject($subject)
-    		->setFrom(array('noreply@sterlingsuites.com'=>'Sterling Suites'))
+    		->setFrom(array('noreply@justtrip.in'=>'Sterling Suites'))
     		->setTo($email)
             ->setReplyTo('contact@sterlingsuites.com')
     		->setBody($body, 'text/html');
     
-    		$this->container->get('mailer')->send($message);
+    		$response = $this->container->get('mailer')->send($message);
+			//echo var_dump($message);
     
     	}catch(\Exception $e){
         		   
