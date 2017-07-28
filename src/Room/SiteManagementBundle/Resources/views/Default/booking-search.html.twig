@@ -11,10 +11,9 @@
 {% block javascripts %}
 
 <script type="text/javascript">
-
+var input = $('.calendar');
 $('.calendar').datepicker({
-    dateFormat: dateformat,
-    minDate: 0,
+    dateFormat: 'd/m/y',
     beforeShow: function() {
       input.addClass('active');
     },
