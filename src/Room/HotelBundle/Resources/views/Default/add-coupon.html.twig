@@ -7,6 +7,13 @@
             <li><a href="{{ path('room_site_management_about_us') }}">Add Hotel</a></li>
 {% endblock %}
 
+{% block javascripts %}
+
+<script type="text/javascript">
+    $("#room_hotelbundle_couponcode_expireDate").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+</script>
+
+{% endblock %}
 
 {% block body %}
 
@@ -34,12 +41,12 @@
                <div class="row form-group">
                             <div class="col-lg-12">
 								{{ form_label(form.expireDate) }}
-								<span class="calendar">
+								<span class="" id="selector">
 				{{ form_widget(form.expireDate,{ 'attr': {'class': 'form-control date-pick '}} ) }}
 								</span>
                             </div> 
                                                     
-                    </div>  
+                    </div>  	
                     
 
                      <div class="row form-group">

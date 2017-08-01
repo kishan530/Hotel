@@ -344,9 +344,17 @@ class BookingController extends Controller
     		$mailService->mail($email,$subject,$mailer);
 			//$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer);
     		
+    		$security = $this->container->get ( 'security.context' );
+    		 
+    		$user = $security->getToken ()->getUser ();
+    		 
+    		if ($security->isGranted ( 'ROLE_SUPER_ADMIN' )) {
     		
+    			return $this->redirect ( $this->generateUrl ('room_security_user_login') );
+    		
+    		}else{
     		return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
-    		
+    		}
     		return $this->render('RoomBookingEngineBundle:Default:payment.html.twig', array(
     				'customer'   => $customer,
     				'booking'   => $booking,
@@ -399,11 +407,25 @@ class BookingController extends Controller
     	
     	
     	$newcoupon = $request->get ( "coupon" );
-    //	$newcoupon='DWR1k00';
-    	$searchcoupon = $this->getDoctrine()
-    	 ->getRepository('RoomHotelBundle:CouponCode')
-    	 ->findBy( array('couponCode' => $newcoupon));
+    	//$newcoupon='FREE100';
+    	$searchcoupon = array();
+    	//$searchcoupon = $this->getDoctrine()
+    	//->getRepository('RoomHotelBundle:CouponCode')
+    	//->findBy( array('couponCode' => $newcoupon));
     	
+    	date_default_timezone_set('Asia/Kolkata');
+    	
+    	$today = new \DateTime();
+    	$em = $this->getDoctrine ()->getManager();
+    	$qb = $em->getRepository ('RoomHotelBundle:CouponCode')->createQueryBuilder("c");
+    	$qb 
+    	->Where('c.expireDate > :today')
+    	->andWhere('c.couponCode = :couponCode')
+    	->setParameter('today', $today )
+    	->setParameter('couponCode', $newcoupon) ;
+    	$searchcoupon = $qb->getQuery()->getResult();
+    	
+    
     $response = array();
     $bookingDetails = array();
     $response['success'] = 'false';
@@ -414,7 +436,7 @@ class BookingController extends Controller
 	  	$response['success'] = 'true';
     	foreach ($searchcoupon as $coupan)
     	{
-    	$discount=$coupan->getAmount();
+    	$discount=$coupan->getAmount();	
     	}
     	$oldDiscount = $booking->getDiscount();
     	$finalPrice = $booking->getFinalPrice()+$oldDiscount-$discount;
@@ -425,7 +447,7 @@ class BookingController extends Controller
     	$bookingDetails['finalPrice'] = $finalPrice;
     	$bookingDetails['discount'] = $discount;
 	  }
-	  else 
+	  else
 	  {
 	  	$response['message'] = 'coupon code '.$newcoupon.' doesnt exist ';
 	  

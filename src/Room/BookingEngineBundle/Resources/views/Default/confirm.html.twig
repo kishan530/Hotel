@@ -11,12 +11,15 @@
 {% block javascripts %}
 <script>
 $('#apply').click(function(e){		
-	e.preventDefault(); //STOP default action 		 		 	
-	 var optionSelected = $("#room_bookingenginebundle_customer_couponCode").val();		
+	e.preventDefault(); //STOP default action 		 
+			 	
+	 var optionSelected = $("#room_bookingenginebundle_customer_couponCode").val();	
+	//alert(optionSelected);
 	 $.ajax({
 	      url: "{{ path('room_booking_engine_apply_coupon') }}",
 	      type: "GET",
 	       data: { "coupon" : optionSelected },
+	   	       
 	      success: function(data) {	
 
 		      var response = JSON.parse(data);	

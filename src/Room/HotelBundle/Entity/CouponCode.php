@@ -39,7 +39,7 @@ class CouponCode
 	
 	/**
 	 * @var string
-	 * @ORM\Column(name="expireDate", type="date", nullable=true)
+	 * @ORM\Column(name="expireDate", type="datetime", nullable=true)
 	 * @Assert\Date()
 	 */
 	private $expireDate;
@@ -61,7 +61,7 @@ class CouponCode
 	
 	/**
 	 * @var string
-	 * @ORM\Column(name="createdAt", type="date", nullable=true)
+	 * @ORM\Column(name="createdAt", type="datetime", nullable=true)
 	 * @Assert\Date()
 	 */
 	private $createdAt;
@@ -76,7 +76,7 @@ class CouponCode
 	
 	/**
 	 * @var string
-	 * @ORM\Column(name="updatedAt", type="date", nullable=true)
+	 * @ORM\Column(name="updatedAt", type="datetime", nullable=true)
 	 * @Assert\Date()
 	 */
 	private $updatedAt;

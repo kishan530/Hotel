@@ -24,6 +24,10 @@ class HotelRoomType extends AbstractType
             						'1 Bhk Service Apartment'=>'1 Bhk Service Apartment',
             						'2 Bhk Service Apartment'=>'2 Bhk Service Apartment',
             						'3 Bhk Service Apartment'=>'3 Bhk Service Apartment',
+            						'Club Double Room'=>'Club Double Room',
+            						'Standard Non A/C'=>'Standard Non A/C',
+            						'Deluxe Room'=>'Deluxe Room',
+            						
             						
             						
             				),

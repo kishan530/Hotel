@@ -25,12 +25,12 @@ class CouponCodeType extends AbstractType
             				'required'    => true,
             				'label' => 'couponCode', ))
             		
-       		->add('expireDate','date',array(
+       		->add('expireDate','datetime',array(
             		'widget'=> 'single_text',
-            		'format'=>'d/M/y',
+            		'format'=>'d/M/y hh:mm',
             		'required'    => false,
             		'label'     => 'expire Date',
-            		'attr' => array('data-date-format' => 'dd/mm/yyyy')
+            		'attr' => array('data-date-format' => 'yyyy-MM-dd HH:mm')
             		
             				))
     

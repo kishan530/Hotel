@@ -79,6 +79,8 @@ class CouponController extends Controller
 	    		$couponObj->setUpdatedBy($user->getEmail());
 	    		$couponObj->setUpdatedAt($date);
 	    		//$couponObj->setUpdatedAt(new \DateTime());
+	    		
+	    		
 	    		$em->persist($couponObj);
 	    	
 	    		$em->flush();
