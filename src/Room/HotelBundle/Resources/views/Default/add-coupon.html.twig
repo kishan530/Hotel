@@ -21,6 +21,18 @@
 <h1 class="page-header">Add Coupon Details</h1>
 {{ form_start(form) }}
 
+<div class="col-lg-12 col-sm-12 form-group has-error">
+			<ul class="errors">
+	            {{ form_errors(form, { 'global_errors': true }) }}
+	            {{ form_errors(form.couponName) }}
+	            {{ form_errors(form.couponCode) }}
+	            {{ form_errors(form.expireDate) }}
+	            {{ form_errors(form.amount) }}
+	                     
+	          
+            </ul>
+            </div>
+
 	<div class="row">
 		<div class="col-lg-6">
 			 <div class="row form-group">
@@ -42,7 +54,7 @@
                             <div class="col-lg-12">
 								{{ form_label(form.expireDate) }}
 								<span class="" id="selector">
-				{{ form_widget(form.expireDate,{ 'attr': {'class': 'form-control date-pick '}} ) }}
+				{{ form_widget(form.expireDate,{ 'attr': {'class': 'form-control'}} ) }}
 								</span>
                             </div> 
                                                     

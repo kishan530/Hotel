@@ -105,121 +105,137 @@ $("#result").on('click',".delete", function (e) {
 <h1 class="page-header">Add Hotel Details</h1>
 {{ form_start(form) }}
 
+<div class="col-lg-12 col-sm-12 form-group has-error">
+			<ul class="errors">
+	            {{ form_errors(form, { 'global_errors': true }) }}
+	            {{ form_errors(form.name) }}
+	            {{ form_errors(form.city) }}
+	            {{ form_errors(form.addressLine1) }}
+	            {{ form_errors(form.addressLine2) }}
+	            {{ form_errors(form.location) }}
+	            {{ form_errors(form.pincode) }}
+	            {{ form_errors(form.overview) }}
+	            {{ form_errors(form.checkIn) }}
+	            {{ form_errors(form.checkOut) }}
+	            {{ form_errors(form.category) }}
+	            {{ form_errors(form.numRooms) }}
+	             {{ form_errors(form.priority) }}
+	            {{ form_errors(form.propertyType) }}
+	            {{ form_errors(form.active) }}
+	            {{ form_errors(form.soldOut) }}
+	            {{ form_errors(form.price) }}
+	          
+            </ul>
+            </div>
+
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-lg-12">
 			 <div class="row form-group">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                             	{{ form_label(form.name) }}
                                 {{ form_widget(form.name) }}
                             </div> 
                                                     
+                   
+                            <div class="col-lg-6">
+                            	{{ form_label(form.city) }}
+                                {{ form_widget(form.city) }}
+                            </div> 
+                                                    
                     </div>
                      <div class="row form-group">
-                            <div class="col-lg-12">
+                             <div class="col-lg-6">
+                            	{{ form_label(form.addressLine1) }}
+                                {{ form_widget(form.addressLine1) }}
+                            </div> 
+                                                    
+                    
+                            <div class="col-lg-6">
+                            	{{ form_label(form.addressLine2) }}
+                                {{ form_widget(form.addressLine2) }}
+                            </div>
+                                                    
+                    </div>
+                     <div class="row form-group">
+                            <div class="col-lg-6">
+                            	{{ form_label(form.location) }}
+                                {{ form_widget(form.location) }}
+                            </div>
+                                                    
+                   
+                           <div class="col-lg-6">
+                            	{{ form_label(form.pincode) }}
+                                {{ form_widget(form.pincode) }}
+                            </div> 
+                                                    
+                    </div>
+                      <div class="row form-group">
+                             <div class="col-lg-12">
                             	{{ form_label(form.overview) }}
                                 {{ form_widget(form.overview) }}
-                            </div> 
+                            </div>  
                                                     
                     </div>
+                    
                      <div class="row form-group">
-                            <div class="col-lg-12">
-                            	{{ form_label(form.propertyType) }}
-                                {{ form_widget(form.propertyType) }}
-                            </div> 
-                                                    
-                    </div>
-                     <div class="row form-group">
-                            <div class="col-lg-12">
-                            	{{ form_label(form.category) }}
-                                {{ form_widget(form.category) }}
-                            </div> 
-                                                    
-                    </div>
-                     <div class="row form-group">
-                            <div class="col-lg-12">
+                           <div class="col-lg-6">
                             	{{ form_label(form.checkIn) }}
                                 {{ form_widget(form.checkIn) }}
-                            </div> 
+                            </div>
                                                     
-                    </div>
-                     <div class="row form-group">
-                            <div class="col-lg-12">
+                  
+                            <div class="col-lg-6">
                             	{{ form_label(form.checkOut) }}
                                 {{ form_widget(form.checkOut) }}
                             </div> 
                                                     
                     </div>
                      <div class="row form-group">
-                            <div class="col-lg-12">
-                            	{{ form_label(form.price) }}
-                                {{ form_widget(form.price) }}
-                            </div> 
+                             <div class="col-lg-6">
+                            	{{ form_label(form.category) }}
+                                {{ form_widget(form.category) }}
+                            </div>  
                                                     
-                    </div>
-                     <div class="row form-group">
-                            <div class="col-lg-12">
+                   
+                             <div class="col-lg-6">
                             	{{ form_label(form.numRooms) }}
                                 {{ form_widget(form.numRooms) }}
                             </div> 
                                                     
                     </div>
+                    
                      <div class="row form-group">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                             	{{ form_label(form.priority) }}
                                 {{ form_widget(form.priority) }}
                             </div> 
                                                     
-                    </div>
-                     <div class="row form-group">
-                            <div class="col-lg-12">
-                            	{{ form_label(form.soldOut) }}
-                                {{ form_widget(form.soldOut) }}
+                    
+                            <div class="col-lg-6">
+                            	{{ form_label(form.propertyType) }}
+                                {{ form_widget(form.propertyType) }}
                             </div> 
                                                     
                     </div>
-                    
                      <div class="row form-group">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                             	{{ form_label(form.active) }}
                                 {{ form_widget(form.active) }}
-                            </div> 
+                            </div>
                                                     
-                    </div>
-                     <div class="row form-group">
-                            <div class="col-lg-12">
-                            	{{ form_label(form.addressLine1) }}
-                                {{ form_widget(form.addressLine1) }}
-                            </div> 
-                                                    
-                    </div>
-                     <div class="row form-group">
-                            <div class="col-lg-12">
-                            	{{ form_label(form.addressLine2) }}
-                                {{ form_widget(form.addressLine2) }}
-                            </div> 
-                                                    
-                    </div>
-                     <div class="row form-group">
-                            <div class="col-lg-12">
-                            	{{ form_label(form.city) }}
-                                {{ form_widget(form.city) }}
-                            </div> 
-                                                    
-                    </div>
-                      <div class="row form-group">
-                            <div class="col-lg-12">
-                            	{{ form_label(form.location) }}
-                                {{ form_widget(form.location) }}
-                            </div> 
-                                                    
-                    </div>
-                      <div class="row form-group">
-                            <div class="col-lg-12">
-                            	{{ form_label(form.pincode) }}
-                                {{ form_widget(form.pincode) }}
-                            </div> 
-                                                    
-                    </div>
+                    
+                            <div class="col-lg-6">
+                            	{{ form_label(form.soldOut) }}
+                                {{ form_widget(form.soldOut) }}
+                            </div>  
+                     </div>                                
+                   <div class="row form-group">
+                             <div class="col-lg-6">
+                            	{{ form_label(form.price) }}
+                                {{ form_widget(form.price) }}
+                            </div>  
+                         </div>                               
+                   
 		
 			
 		</div>
