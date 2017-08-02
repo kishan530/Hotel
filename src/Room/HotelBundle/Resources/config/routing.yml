@@ -28,3 +28,7 @@ room_hotel_edit_coupon_code:
 room_hotel_delete_coupon_code:
     path:     /{id}/coupon-code-delete
     defaults: { _controller: "RoomHotelBundle:Coupon:couponDelete" }
+
+room_hotel_service_apartment:
+    path:     /service-apartment
+    defaults: { _controller: RoomHotelBundle:Hotel:serviceApartment }

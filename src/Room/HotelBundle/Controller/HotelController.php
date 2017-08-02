@@ -72,6 +72,11 @@ class HotelController extends Controller
 				$hotelObj->setPriority($hotelDetail->getPriority());
 				$hotelObj->setCityId($selectedCity->getId());
 				$hotelObj->setActive($hotelDetail->getActive());
+				
+				$hotelObj->setFooterDisplay($hotelDetail->getFooterDisplay());
+				$hotelObj->setUrl($hotelDetail->getUrl());
+				
+				
 		
 				$hotelAddressObj->setAddressLine1($hotelDetail->getAddressLine1());
 				$hotelAddressObj->setAddressLine2($hotelDetail->getAddressLine2());
@@ -251,6 +256,12 @@ class HotelController extends Controller
 		//$HotelObj->setCityId($hotelObj->getCityId());
 		$hotelDetail->setActive($hotelObj->getActive());
 		
+		$hotelDetail->setFooterDisplay($hotelObj->getFooterDisplay());
+		$hotelDetail->setUrl($hotelObj->getUrl());
+		
+		
+		
+		
 		$hotelAddressObj = $hotelObj->getAddress();
 		
 		$hotelDetail->setAddressLine1($hotelAddressObj->getAddressLine1());
@@ -288,6 +299,12 @@ class HotelController extends Controller
 			$hotelObj->setPriority($hotelDetail->getPriority());
 			$hotelObj->setCityId($selectedCity->getId());
 			$hotelObj->setActive($hotelDetail->getActive());
+			
+			
+			$hotelObj->setFooterDisplay($hotelDetail->getFooterDisplay());
+			$hotelObj->setUrl($hotelDetail->getUrl());
+			
+			
 	
 			$hotelAddressObj->setAddressLine1($hotelDetail->getAddressLine1());
 			$hotelAddressObj->setAddressLine2($hotelDetail->getAddressLine2());
@@ -412,5 +429,40 @@ class HotelController extends Controller
 		//	return $this->redirect($this->generateUrl('room_hotel_search_hotel'));
 	}
 
+	
+	/**
+	 *
+	 */
+	public function serviceApartmentAction()
+	{
+		
+		$footerDisplay=1;
+		$serviceApartment = $this->getDoctrine()
+		->getRepository('RoomHotelBundle:Hotel')
+		->findBy( array('footerDisplay' => $footerDisplay));
+		
+		
+		/*$em = $this->getDoctrine ()->getManager();
+		$qb = $em->getRepository ('RoomHotelBundle:Hotel')->createQueryBuilder("sa");
+		$qb
+		->Where('sa.footerDisplay = 1')
+		
+		->setParameter('footerDisplay', $footerDisplay) ;
+		$serviceapartment = $qb->getQuery()->getResult();*/
+		
+	
+		/*$hotelDetail = $this->getDoctrine()
+		->getRepository('RoomHotelBundle:Hotel')
+		->find($id); */
+		// replace this example code with  whatever you need
+		return $this->render('RoomHotelBundle:Default:service-apartment.html.twig', array(
+				'serviceApartments' => $serviceApartment
+		));
+		
+		//return $this->render('RoomHotelBundle:Default:service-apartment.html.twig');
+	}
+	
+	
+	
 
 }

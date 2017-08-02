@@ -21,9 +21,9 @@ class HotelRoomType extends AbstractType
             				'multiple' => false,
             				'label' => 'RoomType',
             				'choices' => array(
-            						'1 Bhk Service Apartment'=>'1 Bhk Service Apartment',
-            						'2 Bhk Service Apartment'=>'2 Bhk Service Apartment',
-            						'3 Bhk Service Apartment'=>'3 Bhk Service Apartment',
+            						'1 BHK Service Apartment'=>'1 BHK Service Apartment',
+            						'2 BHK Service Apartment'=>'2 BHK Service Apartment',
+            						'3 BHK Service Apartment'=>'3 BHK Service Apartment',
             						'Club Double Room'=>'Club Double Room',
             						'Standard Non A/C'=>'Standard Non A/C',
             						'Deluxe Room'=>'Deluxe Room',

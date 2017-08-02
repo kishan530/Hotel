@@ -25,3 +25,7 @@ room_booking_engine_success:
 room_booking_engine_apply_coupon:
     path:     /apply-coupon
     defaults: { _controller: RoomBookingEngineBundle:Booking:applyCoupon }
+room_booking_service_details_apartment:
+    path:     /service-detail/{url}
+    defaults: { _controller: RoomBookingEngineBundle:Booking:serviceDetail }
+

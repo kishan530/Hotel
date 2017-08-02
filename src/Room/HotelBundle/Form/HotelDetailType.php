@@ -151,6 +151,13 @@ class HotelDetailType extends AbstractType
             		//),
             ))
             
+            ->add('footerDisplay', 'checkbox', array(
+            		'label'    => 'Display in footer',
+            		'required' => false,
+            ))
+            
+            ->add('url')
+            
         ;
     }
     

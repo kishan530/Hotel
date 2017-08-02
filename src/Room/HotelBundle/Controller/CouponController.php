@@ -68,7 +68,8 @@ class CouponController extends Controller
 	    		date_default_timezone_set('Asia/Kolkata');
 	    		$date = new \DateTime();
 	    		//$entity->setDate($date);
-	    		
+	    		//echo var_dump($coupon->getExpireDate());
+	    	//	exit();
 	    		$couponObj->setExpireDate($coupon->getExpireDate());
 	    		//$couponObj->setExpireDate(new \DateTime());
 	    		$couponObj->setAmount($coupon->getAmount());

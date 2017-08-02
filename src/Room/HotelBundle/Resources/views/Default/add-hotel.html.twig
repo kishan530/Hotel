@@ -233,8 +233,21 @@ $("#result").on('click',".delete", function (e) {
                              <div class="col-lg-6">
                             	{{ form_label(form.price) }}
                                 {{ form_widget(form.price) }}
-                            </div>  
-                         </div>                               
+                            </div> 
+                             <div class="col-lg-6">
+                            	{{ form_label(form.url) }}
+                                {{ form_widget(form.url) }}
+                            </div> 
+                    </div> 
+                      
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                            	
+                                {{ form_widget(form.footerDisplay) }}
+                                {{ form_label(form.footerDisplay) }}
+                            </div>
+                             </div>                       
+                                  
                    
 		
 			
@@ -406,8 +419,9 @@ $("#result").on('click',".delete", function (e) {
                             {% for i in form.roomList %}
                             	{{ _self.room_prototype(i) }}
                             {% endfor %}
-                        </div>
-                    <a href="#" id="add-another-room">Add another Room</a>
+                        </div> 
+                    <a href="#" id="add-another-room">Add another Room</a><br/><br>
+	
 	
 	
 	

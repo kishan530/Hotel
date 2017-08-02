@@ -106,6 +106,27 @@ class Hotel
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+    
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="footer_display", type="boolean")
+     */
+    private $footerDisplay;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string", length=100)
+     */
+    private $url;
+    
+    
+    
+    
+    
+    
     /**
      * @var Collection
      * @ORM\OneToOne(targetEntity="Room\HotelBundle\Entity\HotelAddress", mappedBy="hotel", cascade={"persist"})
@@ -460,6 +481,43 @@ class Hotel
 		$this->hotelRooms = $hotelRooms;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the boolean
+	 */
+	public function getFooterDisplay() {
+		return $this->footerDisplay;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$footerDisplay
+	 */
+	public function setFooterDisplay($footerDisplay) {
+		$this->footerDisplay = $footerDisplay;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getUrl() {
+		return $this->url;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$url
+	 */
+	public function setUrl($url) {
+		$this->url = $url;
+		return $this;
+	}
+	
 	
 	
 	

@@ -128,6 +128,22 @@ class HotelDto
      */
     private $pincode;
     
+    
+    /**
+     * @var boolean
+     *
+     *
+     */
+    private $footerDisplay;
+    
+    /**
+     * @var string
+     *
+     *
+     */
+    private $url;
+    
+    
     /**
      * @var Collection
      * 
@@ -584,6 +600,43 @@ class HotelDto
 		$this->roomList = $roomList;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the boolean
+	 */
+	public function getFooterDisplay() {
+		return $this->footerDisplay;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$footerDisplay
+	 */
+	public function setFooterDisplay($footerDisplay) {
+		$this->footerDisplay = $footerDisplay;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getUrl() {
+		return $this->url;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$url
+	 */
+	public function setUrl($url) {
+		$this->url = $url;
+		return $this;
+	}
+	
 	
 	
 	

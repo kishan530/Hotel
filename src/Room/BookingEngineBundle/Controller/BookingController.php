@@ -460,4 +460,37 @@ class BookingController extends Controller
     
     }
     
+public function serviceDetailAction(Request $request,$url)
+    {
+    	
+    	$session = $request->getSession();
+    	$search = $session->get('search');
+    	$numRoom=$search->getNumRooms();
+    //	$search = new Search();
+    	
+    	$form   = $this->createSearchForm($search);
+    	$em = $this->getDoctrine()->getManager();
+    	//$hotel = $em->getRepository('RoomHotelBundle:Hotel')->findby($url);
+    	
+    	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->findBy( array('url' => $url));;
+    	
+    	
+    	$hotel = $hotel[0];
+    	//echo var_dump($hotel);
+    	//exit();
+    	//findBy( array('footerDisplay' => $footerDisplay));
+    	
+    	$catalogueService = $this->container->get( 'catalogue.service' );
+    	$hotel = $catalogueService->getMinPrice($hotel);
+    	$roomPrice=$hotel->getPrice();
+    	$hotel->setPrice($roomPrice*$numRoom);
+    	    	
+    	return $this->render('RoomBookingEngineBundle:Default:view-more.html.twig', array(
+    			'form'   => $form->createView(),
+    			'hotel'=> $hotel,
+    			
+    			
+    	));
+    }
+    
 }

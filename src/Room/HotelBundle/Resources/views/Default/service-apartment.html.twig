@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+
+{% endblock %}
+{% block body %}
+
+
+  <section class="padding-110px-tb xs-padding-60px-tb blog-style1 bg-light-deep-yellow builder-bg" id="blog-section1" style="padding-top: 50px !important;">
+            <div class="container">
+			 <!-- section title -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                        <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-yellow-ochre font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text">ROOMS &amp; SUITS</h2>
+                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom  xs-margin-nineteen-bottom">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                    </div>
+                </div>
+                <!-- end section title -->
+                
+              <div class="row">   
+        {% for serviceApartment in serviceApartments %}        
+                {% if serviceApartment.images.first %}
+               
+               <a href="{{ path('room_booking_service_details_apartment', {'url': serviceApartment.url})}}">
+              
+               
+                    <!-- blog item -->
+                    <div class="col-md-4 col-sm-4 col-xs-12 xs-margin-nineteen-bottom">
+                        <div class="blog-post">
+                            <!-- blog image -->
+                            <div class="blog-image">
+                                <img src="{{ asset('img/Hotels/'~serviceApartment.images.first.imagePath) }}" alt="" class="img-responsive" height="100%">
+                            </div>
+                            <!-- end blog image -->
+                            <!-- blog details -->
+                            <div class="post-details bg-white tz-background-color">
+                                <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="#subscribe-section8" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> {{ serviceApartment.price }}</a></div>
+                                <a href="" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">{{ serviceApartment.hotelRooms.first.roomType }}</a>
+                                <div class="text-medium tz-text">{{ serviceApartment.overview }}</div>
+                            </div>
+                            <!-- end blog details -->
+                        </div>
+                    </div></a>
+                    <!-- end blog item -->
+                
+          
+                {% endif %}
+                {% endfor %}
+                    </div>
+            </div>
+        </section>
+
+
+
+
+
+{% endblock %}
