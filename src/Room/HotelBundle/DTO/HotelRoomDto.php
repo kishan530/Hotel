@@ -74,6 +74,13 @@ class HotelRoomDto
      */
     private $name;
     
+    /**
+     * @var boolean
+     *
+     *
+     */
+    private $soldOut;
+    
      /**
      * @var string
      *
@@ -266,6 +273,25 @@ class HotelRoomDto
 		$this->name = $name;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the boolean
+	 */
+	public function getSoldOut() {
+		return $this->soldOut;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$soldOut
+	 */
+	public function setSoldOut($soldOut) {
+		$this->soldOut = $soldOut;
+		return $this;
+	}
+	
 	
 	
 	

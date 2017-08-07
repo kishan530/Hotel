@@ -70,6 +70,18 @@ class HotelRoomType extends AbstractType
      		->add('name', null, array(
             				'required'    => true,
             				'label' => 'name', ))
+            				
+        	->add('soldOut', 'choice', array(
+            						'expanded' => false,
+            						'multiple' => false,
+            						'label' => 'Sold Out',
+            						'choices' => array(
+            								'0'=>'No',
+            								'1'=>'Yes',
+            				
+            						),
+            						'required'    => true,
+            				))
            
            
         ;

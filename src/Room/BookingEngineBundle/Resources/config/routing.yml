@@ -29,3 +29,11 @@ room_booking_service_details_apartment:
     path:     /service-detail/{url}
     defaults: { _controller: RoomBookingEngineBundle:Booking:serviceDetail }
 
+room_booking_engine_payment_payu:
+    path:     /payu
+    defaults: { _controller: RoomBookingEngineBundle:Booking:payu }
+
+room_booking_engine_payment_confirmation:
+    path:     /paymentconfirmation
+    defaults: { _controller: RoomBookingEngineBundle:Booking:paymentconfirmation }
+

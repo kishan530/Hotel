@@ -34,8 +34,8 @@
                             <!-- end blog image -->
                             <!-- blog details -->
                             <div class="post-details bg-white tz-background-color">
-                                <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="#subscribe-section8" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> {{ serviceApartment.price }}</a></div>
-                                <a href="" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">{{ serviceApartment.hotelRooms.first.roomType }}</a>
+                                <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="{{ path('room_booking_service_details_apartment', {'url': serviceApartment.url})}}" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> {{ serviceApartment.price }}</a></div>
+                                <a href="{{ path('room_booking_service_details_apartment', {'url': serviceApartment.url})}}" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">{{ serviceApartment.hotelRooms.first.roomType }}</a>
                                 <div class="text-medium tz-text">{{ serviceApartment.overview }}</div>
                             </div>
                             <!-- end blog details -->

@@ -212,11 +212,21 @@ $("button").click(function() {
                       </span>
                                              
                     </div>
+                    
                     <div class="pull-right " style="margin-bottom: -25px;" >
+                    {% if hotelRoom.soldOut or hotel.numRooms<1 %}
+                    		<label class="btn btn-book-now bookroom middle book-room-button">Sold Out</label>
+                    {% else %}
+                    					
                     <a class="btn btn-book-now bookroom middle book-room-button"  href="{{ path('room_booking_engine_confrim',{ 'id' : hotel.id,'room':hotelRoom.id }) }}">
                                                     Book now
                         </a>
+                      {% endif %}
                     </div>
+                    
+                    
+                    
+                    
                     </div>
                   </header>
                   

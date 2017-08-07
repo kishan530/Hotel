@@ -123,6 +123,8 @@ class HotelController extends Controller
 					$maxAdult = $hotelRoom->getMaxAdult();
 					$maxChild = $hotelRoom->getMaxChild();
 					$description = $hotelRoom->getDescription();
+					$soldout = $hotelRoom->getSoldOut();
+					
 					$name = $hotelRoom->getName();
 					
 					
@@ -134,6 +136,9 @@ class HotelController extends Controller
 					$hotelRoomObj->setMaxAdult ($maxAdult );
 					$hotelRoomObj->setMaxChild ($maxChild );
 					$hotelRoomObj->setDescription ($description );
+					$hotelRoomObj->setSoldOut ($soldout );
+					
+										
 					$hotelRoomObj->setName ($name );
 					
 					
@@ -149,9 +154,7 @@ class HotelController extends Controller
 					}
 					
 					
-					
-					
-					
+				
 					$hotelRooms->add($hotelRoomObj);
 						
 				
@@ -229,6 +232,9 @@ class HotelController extends Controller
 			$hotelRoom->setMaxAdult ($hotelRoomObj->getMaxAdult() );
 			$hotelRoom->setMaxChild ($hotelRoomObj->getMaxChild() );
 			$hotelRoom->setDescription ($hotelRoomObj->getDescription() );
+			
+			$hotelRoom->setSoldOut ($hotelRoomObj->getSoldOut() );
+			
 			$hotelRoom->setName ($hotelRoomObj->getName() );
 			$hotelRoomList = $hotelDetail->getRoomList();
 			$hotelRoomList->add($hotelRoom);
@@ -349,6 +355,7 @@ class HotelController extends Controller
 				$maxAdult = $hotelRoom->getMaxAdult();
 				$maxChild = $hotelRoom->getMaxChild();
 				$description = $hotelRoom->getDescription();
+				$soldout = $hotelRoom->getSoldOut();
 				$name = $hotelRoom->getName();
 			
 				//echo var_dump($hotelRoom->getId());
@@ -361,6 +368,8 @@ class HotelController extends Controller
 				$hotelRoomObj->setMaxAdult ($maxAdult );
 				$hotelRoomObj->setMaxChild ($maxChild );
 				$hotelRoomObj->setDescription ($description );
+				$hotelRoomObj->setSoldOut ($soldout );
+				
 				$hotelRoomObj->setName ($name );
 			//echo var_dump($hotelRoomObj);
 				$uploadedfile = $hotelRoom->getImagePath ();

@@ -1,0 +1,128 @@
+{% extends 'page.html.twig' %}
+
+{% block breadcrumbsTitle %}Booking{% endblock %}
+
+{% block breadcrumbsLinks %}
+            <li><a href="{{ path('room_booking_engine_homepage') }}">Home</a></li>
+            <li><a href="#">Booking</a></li>
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+
+
+
+  <section id="room">
+    <div class="container">
+    
+    
+    
+     <!-- START CONTENT -->
+                   
+                   <div class="col-md-6 no-left-padding no-padding-right">
+				<div class="heading-bg no-border-left">
+					<h4 class="text-center">Personal Details</h4>
+				</div>
+				<div class="margin-10">
+					<div class="row">
+						<div class="col-md-3 col-xs-3">
+							<b>Name :</b>
+						</div>
+						<div class="col-md-9 col-xs-9">
+							<p>{{ customer.name }}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-xs-3">
+							<b>E-Mail ID :</b>
+						</div>
+						<div class="col-md-9 col-xs-9">
+							<p>{{ customer.email }}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-xs-3">
+							<b>Mobile :</b>
+						</div>
+						<div class="col-md-9 col-xs-9">
+							<p>{{ customer.mobile }}</p>
+						</div>
+					</div>
+				
+					</div>
+			</div>
+                   <div class="col-sm-3">
+                                <div class="booking-price-details-border price-details box clearfix">
+                                 <h5 class="box-title">Fare Details</h5>
+                                <div class="box-content row">
+                                                                              
+                                                <ul class="price-list list-border">                                                 
+                                                    <li>
+                                                        <span class="pull-left">Hotel Charges</span>
+                                                        <span class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.totalPrice }}</em></span>
+                                                        
+                                                    </li>
+                                                     <li>
+                                                        <span class="pull-left">GST</span>
+                                                        <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.serviceTax }} </em></span>
+                                                        
+                                                    </li>  
+                                                     <li>
+                                                        <span class="pull-left">Total Price</span>
+                                                        <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.finalPrice-booking.discount }} </em></span>
+                                                        
+                                                    </li>                            
+                                                   
+                                                    <li><span  class="pull-left">Discount(-)</span>
+                                                        <span  class="pull-right"><i class="fa fa-inr"></i> <em id="discount"> {{ booking.discount }} </em></span>
+                                                    </li>
+                                                   
+                                                    {% block details %}
+                                                    <li class="text-right"><span class="you-pay">You Pay</span>
+                                                        <span class="final-price"><i class="fa fa-inr"></i><em id="price"> {{ booking.finalPrice }} </em></span> 
+                                                    </li>
+                                                    {% endblock %}
+                                                    
+                                                </ul>      
+                                                
+                                                <div class="col-md-4">
+			{#}<div class="tabbable  tabs-left">
+				<ul class="nav nav-pills nav-stacked nav-side mb30">
+					<li class="active"><a href="#payUmoney"  data-toggle="tab">PayU Money</a></li>
+			
+				</ul>
+		    </div> {#}
+		    </div>   
+		    <div class="tab-pane fade in active padding-3p dotted-border" id="payUmoney" style="min-height:190px;">
+					<p class="text-center"><b>Pay with Credit/Debit cards or Net-Banking.</b></p>
+					<div class="row">
+					    <div class="col-md-3"><img src="{{ asset('img/rupee.png')}}" /></div>
+					    <div class="col-md-9 booking-payment-gateway"><p><b>100% secure payments through PayU Money</b></p></div>
+				    </div>
+{# 					<img src="{{  cloudinary_url('payu',  {'secure': 'true' }) }}" />#}
+					<a href="{{ payuLink }}" class="btn btn-primary go-right">Pay Now</a>
+				</div>                                 
+                             
+
+
+                                </div><!-- end box-content -->
+                            </div><!-- end pricing-details -->
+                                    </div>
+                                    
+                   
+                   
+                   
+                   
+                    <!-- END CONTENT --> 
+    
+    
+    
+    
+    
+    </div>
+  </section>
+  <!-- End Room -->
+
+{% endblock %}

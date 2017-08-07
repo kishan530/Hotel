@@ -294,6 +294,7 @@ $("#result").on('click',".delete", function (e) {
                                 <th>maxAdult </th>
                                 <th>maxChild </th>
                                 <th>description</th>
+                                <th>Soldout</th>
                                 <th> Image path </th>
                                {#} <th> - </th> {#}
                                 <th> - </th>
@@ -311,6 +312,7 @@ $("#result").on('click',".delete", function (e) {
                             <td>{{ hotelRoom.maxAdult }}</td>
                             <td>{{ hotelRoom.maxChild }}</td>
                             <td>{{ hotelRoom.description }}</td>
+                            <td>{{ hotelRoom.soldOut }}</td>
                             <td>{{ hotelRoom.imagePath }}</td>
                             
                            
@@ -386,6 +388,9 @@ $("#result").on('click',".delete", function (e) {
                            		 </div> 
                          </div>
                         </div>
+                        
+                        
+                        
                         <div class="col-lg-6">
                          <div class="row form-group">
 	                            <div class="col-lg-6">
@@ -393,9 +398,24 @@ $("#result").on('click',".delete", function (e) {
                                {{ form_widget(i.description) }}
                            		 </div> 
                          </div>
+                         
+                         <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+							{{ form_label(i.maxChild) }}
+                               {{ form_widget(i.maxChild) }}
+                           		 </div> 
+                         </div>
+                        </div>
+                         
+                         
                         </div>
                                                 
                          <div class="col-lg-6">
+                         <div class="col-lg-6">
+                            	{{ form_label(i.soldOut) }}
+                                {{ form_widget(i.soldOut) }}
+                            </div>
                     		<div class="row form-group">
 	                            <div class="col-lg-6">
 	                                {{ form_label(i.imagePath) }}

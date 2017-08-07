@@ -158,7 +158,7 @@ $('#guests').click(function(e){
                       	<hr>
                       	<div class="row">
                       		<div class="col-lg-8">
-                      			<i class="children-count">0</i> Children <i class="guests-text">Bellow 12 years</i>
+                      			<i class="children-count">0</i> Children <i class="guests-text">Below 12 years</i>
                       		</div>
                       		<div class="col-lg-4">
                       			<a class="children input-group-addon" id="decrement" value="0" href="#">-</a>
@@ -448,6 +448,19 @@ $('#guests').click(function(e){
                 </div>
             </div>
         </section>
+
+   <section> 
+   <div id="" class="backgroundstyle"> 
+     {% for serviceApartment in serviceApartments %}        
+                {% if serviceApartment.images.first %}   
+     <div class="col-md-4 col-sm-4 col-xs-12 xs-margin-nineteen-bottom">
+     <a href="{{ path('room_booking_service_details_apartment', {'url': serviceApartment.url})}}"><ul><h5 style ="color: white;">{{ serviceApartment.url }}</h5> </ul></a>
+  </div>
+
+{%  endif %}
+{% endfor %}
+</div>
+</section>
 {#}
   <!-- Start Partners -->
   <section class="partners">

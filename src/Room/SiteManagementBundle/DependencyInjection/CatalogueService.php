@@ -126,6 +126,8 @@ class CatalogueService
     	$bookingId = $bookingSearch->getBookingId();
     	
     	
+    	
+    	
     	if(!is_null($bookingId)){
     		$bookings = $this->em->getRepository( 'RoomBookingEngineBundle:Booking' )->findBy(array('bookingId'=>$bookingId));
     	}else{

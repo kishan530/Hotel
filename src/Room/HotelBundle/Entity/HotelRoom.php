@@ -76,6 +76,14 @@ class HotelRoom
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sold_out", type="boolean")
+     */
+    private $soldOut;
+    
 
     /**
      * @ORM\ManyToOne(targetEntity="Room\HotelBundle\Entity\Hotel", inversedBy="images")
@@ -262,9 +270,24 @@ class HotelRoom
 		return $this;
 	}
 	
+	/**
+	 *
+	 * @return the boolean
+	 */
+	public function getSoldOut() {
+		return $this->soldOut;
+	}
 	
-	
-	
-	
+	/**
+	 *
+	 * @param
+	 *        	$soldOut
+	 */
+	public function setSoldOut($soldOut) {
+		$this->soldOut = $soldOut;
+		return $this;
+	}
+
+
 	
 }
