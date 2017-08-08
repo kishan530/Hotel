@@ -82,7 +82,23 @@ class HotelRoomType extends AbstractType
             						),
             						'required'    => true,
             				))
-           
+            				
+       			->add('blockStartDate','date',array(
+            						'widget'=> 'single_text',
+            						'format'=>'M/d/y',
+            						'required'    => false,
+            						'label'     => 'block Start Date ',
+            						'attr' => array('data-date-format' => 'dd/mm/yyyy')
+            				
+            				))
+            	->add('blockEndDate','date',array(
+            						'widget'=> 'single_text',
+            						'format'=>'M/d/y',
+            						'required'    => false,
+            						'label'     => 'block End Date ',
+            						'attr' => array('data-date-format' => 'dd/mm/yyyy')
+            				
+            				))
            
         ;
     }

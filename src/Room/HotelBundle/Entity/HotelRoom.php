@@ -84,6 +84,18 @@ class HotelRoom
      */
     private $soldOut;
     
+    /**
+     * @var string
+     * @ORM\Column(name="block_start_date", type="date")
+     */
+    private $blockStartDate; 
+    
+    /**
+     * @var string
+     * @ORM\Column(name="block_end_date", type="date")
+     */
+     private $blockEndDate; 
+    
 
     /**
      * @ORM\ManyToOne(targetEntity="Room\HotelBundle\Entity\Hotel", inversedBy="images")
@@ -287,7 +299,45 @@ class HotelRoom
 		$this->soldOut = $soldOut;
 		return $this;
 	}
-
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getBlockStartDate() {
+		return $this->blockStartDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$blockStartDate
+	 */
+	public function setBlockStartDate($blockStartDate) {
+		$this->blockStartDate = $blockStartDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getBlockEndDate() {
+		return $this->blockEndDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$blockEndDate
+	 */
+	public function setBlockEndDate($blockEndDate) {
+		$this->blockEndDate = $blockEndDate;
+		return $this;
+	}
+	
+	
+	
 
 	
 }

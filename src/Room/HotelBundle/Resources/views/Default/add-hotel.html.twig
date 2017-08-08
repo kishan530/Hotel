@@ -94,7 +94,20 @@ $("#result").on('click',".delete", function (e) {
 	
 
 </script>
+<script>
+$(document).ready(function(){  	
 
+	$('#room_hotelbundle_hoteldetail_roomList_0_blockStartDate').datepicker().on('changeDate', function(ev) {
+        $(this).datepicker("hide");   
+	 }).data('datepicker');
+
+	
+$('#room_hotelbundle_hoteldetail_roomList_0_blockEndDate').datepicker().on('changeDate', function(ev) {
+$(this).datepicker("hide");   
+}).data('datepicker');
+	
+});
+</script>
 
 
 {% endblock %}
@@ -295,6 +308,8 @@ $("#result").on('click',".delete", function (e) {
                                 <th>maxChild </th>
                                 <th>description</th>
                                 <th>Soldout</th>
+                                <th>Block start Date</th>
+                                <th>Block End Date</th>
                                 <th> Image path </th>
                                {#} <th> - </th> {#}
                                 <th> - </th>
@@ -313,6 +328,8 @@ $("#result").on('click',".delete", function (e) {
                             <td>{{ hotelRoom.maxChild }}</td>
                             <td>{{ hotelRoom.description }}</td>
                             <td>{{ hotelRoom.soldOut }}</td>
+                             <td>{{ hotelRoom.blockStartDate|date("d/m/y") }}</td>
+                              <td>{{ hotelRoom.blockEndDate|date("d/m/y") }}</td>
                             <td>{{ hotelRoom.imagePath }}</td>
                             
                            
@@ -402,8 +419,8 @@ $("#result").on('click',".delete", function (e) {
                          <div class="col-lg-6">
                          <div class="row form-group">
 	                            <div class="col-lg-6">
-							{{ form_label(i.maxChild) }}
-                               {{ form_widget(i.maxChild) }}
+								{{ form_label(i.soldOut) }}
+                                {{ form_widget(i.soldOut) }}
                            		 </div> 
                          </div>
                         </div>
@@ -413,10 +430,22 @@ $("#result").on('click',".delete", function (e) {
                                                 
                          <div class="col-lg-6">
                          <div class="col-lg-6">
-                            	{{ form_label(i.soldOut) }}
-                                {{ form_widget(i.soldOut) }}
+                         {{ form_label(i.blockStartDate) }}
+                         
+                        
+                                {{ form_widget(i.blockStartDate,{ 'attr': {'class': 'form-control date-pick'}}) }}
+                            	
                             </div>
-                    		<div class="row form-group">
+                            <div class="col-lg-6">
+                            	{{ form_label(i.blockEndDate) }}
+                                {{ form_widget(i.blockEndDate,{ 'attr': {'class': 'form-control date-pick'}}) }}
+                            </div>
+                            
+                          </div>
+                          
+                          <div class="row form-group">
+                          
+                          
 	                            <div class="col-lg-6">
 	                                {{ form_label(i.imagePath) }}
 	                            </div> 
@@ -426,7 +455,7 @@ $("#result").on('click',".delete", function (e) {
 	                                {{ form_widget(i.imagePath) }}
 	                           </div>
                                                     
-                       	</div>
+                       		</div>
                         </div>
                         
                                                 

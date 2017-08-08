@@ -175,6 +175,10 @@ class BookingController extends Controller
     {
     	$session = $request->getSession();
     	$search = $session->get('search');
+    	
+    	//echo var_dump($search->getCheckIn());
+    	//exit();
+    	
     	$numRoom=$search->getNumRooms();
     //	$search = new Search();
     	
@@ -188,7 +192,7 @@ class BookingController extends Controller
     	return $this->render('RoomBookingEngineBundle:Default:view-more.html.twig', array(
     			'form'   => $form->createView(),
     			'hotel'=> $hotel,
-    			
+    			'search'=>$search,
     			
     	));
     }

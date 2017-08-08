@@ -138,8 +138,13 @@ class HotelController extends Controller
 					$hotelRoomObj->setDescription ($description );
 					$hotelRoomObj->setSoldOut ($soldout );
 					
+					
+					//$hotelRoomObj->setBlockEndDate(new \DateTime());
+					
+					$hotelRoomObj->setBlockStartDate($hotelRoom->getBlockStartDate());
+					$hotelRoomObj->setBlockEndDate($hotelRoom->getBlockEndDate());
 										
-					$hotelRoomObj->setName ($name );
+					$hotelRoomObj->setName($name );
 					
 					
 					$uploadedfile = $hotelRoom->getImagePath ();
@@ -235,6 +240,10 @@ class HotelController extends Controller
 			
 			$hotelRoom->setSoldOut ($hotelRoomObj->getSoldOut() );
 			
+			$hotelRoom->setBlockStartDate ($hotelRoomObj->getBlockStartDate() );
+			$hotelRoom->setBlockEndDate ($hotelRoomObj->getBlockEndDate());
+			
+			
 			$hotelRoom->setName ($hotelRoomObj->getName() );
 			$hotelRoomList = $hotelDetail->getRoomList();
 			$hotelRoomList->add($hotelRoom);
@@ -258,14 +267,13 @@ class HotelController extends Controller
 		$hotelDetail->setCity($hotelObj->getCityId());
 		$hotelDetail->setNumRooms($hotelObj->getNumRooms());
 		$hotelDetail->setSoldOut($hotelObj->getSoldOut());
+		
 		$hotelDetail->setPriority($hotelObj->getPriority());
 		//$HotelObj->setCityId($hotelObj->getCityId());
 		$hotelDetail->setActive($hotelObj->getActive());
 		
 		$hotelDetail->setFooterDisplay($hotelObj->getFooterDisplay());
 		$hotelDetail->setUrl($hotelObj->getUrl());
-		
-		
 		
 		
 		$hotelAddressObj = $hotelObj->getAddress();
@@ -280,8 +288,6 @@ class HotelController extends Controller
 		$form->add('submit','submit', array('label' => 'Update'));
 		$form ->handleRequest($request);
 		 
-		
-		
 		
 		
 		if($form->isValid()) {
@@ -302,6 +308,7 @@ class HotelController extends Controller
 			$hotelObj->setCity($selectedCity->getName());
 			$hotelObj->setNumRooms($hotelDetail->getNumRooms());
 			$hotelObj->setSoldOut($hotelDetail->getSoldOut());
+			
 			$hotelObj->setPriority($hotelDetail->getPriority());
 			$hotelObj->setCityId($selectedCity->getId());
 			$hotelObj->setActive($hotelDetail->getActive());
@@ -356,6 +363,12 @@ class HotelController extends Controller
 				$maxChild = $hotelRoom->getMaxChild();
 				$description = $hotelRoom->getDescription();
 				$soldout = $hotelRoom->getSoldOut();
+				
+				$blockStartDate = $hotelRoom->getBlockStartDate();
+				$blockEndDate = $hotelRoom->getBlockEndDate();
+				
+				
+				
 				$name = $hotelRoom->getName();
 			
 				//echo var_dump($hotelRoom->getId());
@@ -369,8 +382,10 @@ class HotelController extends Controller
 				$hotelRoomObj->setMaxChild ($maxChild );
 				$hotelRoomObj->setDescription ($description );
 				$hotelRoomObj->setSoldOut ($soldout );
+				$hotelRoomObj->setBlockStartDate ($blockStartDate );
+				$hotelRoomObj->setBlockEndDate ($blockEndDate );
 				
-				$hotelRoomObj->setName ($name );
+				$hotelRoomObj->setName ($name);
 			//echo var_dump($hotelRoomObj);
 				$uploadedfile = $hotelRoom->getImagePath ();
 				if (!is_null($uploadedfile)) {

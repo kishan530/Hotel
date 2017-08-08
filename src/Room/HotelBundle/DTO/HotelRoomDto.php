@@ -81,6 +81,17 @@ class HotelRoomDto
      */
     private $soldOut;
     
+    /**
+     * @var date
+     */
+    private $blockStartDate;
+    
+    /**
+     * @var date
+     */
+    private $blockEndDate;
+    
+      
      /**
      * @var string
      *
@@ -291,6 +302,43 @@ class HotelRoomDto
 		$this->soldOut = $soldOut;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getBlockStartDate() {
+		return $this->blockStartDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$blockStartDate
+	 */
+	public function setBlockStartDate($blockStartDate) {
+		$this->blockStartDate = $blockStartDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getBlockEndDate() {
+		return $this->blockEndDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$blockEndDate
+	 */
+	public function setBlockEndDate($blockEndDate) {
+		$this->blockEndDate = $blockEndDate;
+		return $this;
+	}
+	
 	
 	
 	

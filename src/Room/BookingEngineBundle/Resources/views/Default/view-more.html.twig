@@ -214,7 +214,7 @@ $("button").click(function() {
                     </div>
                     
                     <div class="pull-right " style="margin-bottom: -25px;" >
-                    {% if hotelRoom.soldOut or hotel.numRooms<1 %}
+                    {% if (hotelRoom.soldOut or hotel.numRooms<1) or (search.checkIn>=hotelRoom.blockStartDate and  search.checkIn<=hotelRoom.blockEndDate) or ( search.checkOut>=hotelRoom.blockStartDate and search.checkOut<=hotelRoom.blockEndDate) or ( search.checkIn<=hotelRoom.blockStartDate and search.checkOut>=hotelRoom.blockEndDate)  %}
                     		<label class="btn btn-book-now bookroom middle book-room-button">Sold Out</label>
                     {% else %}
                     					
@@ -226,7 +226,7 @@ $("button").click(function() {
                     
                     
                     
-                    
+                    	
                     </div>
                   </header>
                   
