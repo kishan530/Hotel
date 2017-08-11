@@ -85,31 +85,50 @@
                                                     </li>
                                                     {% endblock %}
                                                     
-                                                </ul>      
+                                                </ul>   
                                                 
-                                                <div class="col-md-4">
-			{#}<div class="tabbable  tabs-left">
+                                                 </div><!-- end box-content -->
+                            </div><!-- end pricing-details -->
+                                    </div>   
+         
+         <div class="groove col-md-12" id="payUmoney" style="min-height:190px;">                                       
+         
+		   
+		   
+		    
+		    
+		    
+		    <div class="col-md-4">
+			<div class="tabbable  tabs-left">
 				<ul class="nav nav-pills nav-stacked nav-side mb30">
-					<li class="active"><a href="#payUmoney"  data-toggle="tab">PayU Money</a></li>
+					<li class="active"><a href="#payUmoney" style="margin-top: 30px;"  data-toggle="tab">PayU Money</a></li>
 			
 				</ul>
-		    </div> {#}
-		    </div>   
-		    <div class="tab-pane fade in active padding-3p dotted-border" id="payUmoney" style="min-height:190px;">
-					<p class="text-center"><b>Pay with Credit/Debit cards or Net-Banking.</b></p>
-					<div class="row">
-					    <div class="col-md-3"><img src="{{ asset('img/rupee.png')}}" /></div>
-					    <div class="col-md-9 booking-payment-gateway"><p><b>100% secure payments through PayU Money</b></p></div>
-				    </div>
+		    </div> 
+		    </div> 
+		    
+					{#}<p class="text-center"><b>Pay with Credit/Debit cards or Net-Banking.</b></p>{#}
+					
+					<div class="col-md-6" style="border: 1px solid; margin-top: 30px;">
+					
+					<div class="" style=" margin-left: 38px;">
+					<p class=""><b>Pay with Credit/Debit cards or Net-Banking.</b></p>
+					</div>
+					    <div class="col-md-6"><img src="{{ asset('img/payu.png') }}" alt=""></div>
+					   
+			
+				    
 {# 					<img src="{{  cloudinary_url('payu',  {'secure': 'true' }) }}" />#}
-					<a href="{{ payuLink }}" class="btn btn-primary go-right">Pay Now</a>
+
+
+					<a href="{{ paymentLink }}" class="btn btn-primary go-right" style="margin-top: 90px; margin-left: 80px;margin-bottom: 10px;" >Pay Now</a>
+					<div class="small-gap"></div> 
+					</div>
 				</div>                                 
                              
 
 
-                                </div><!-- end box-content -->
-                            </div><!-- end pricing-details -->
-                                    </div>
+                               
                                     
                    
                    

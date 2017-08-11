@@ -317,6 +317,11 @@ class BookingController extends Controller
     	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
     	$catalogueService = $this->container->get( 'catalogue.service' );
     	$selectedRoom = $catalogueService->getSelectedRoom($hotel,$room);
+    	
+    	//echo var_dump($selectedRoom);
+    	//exit();
+    	
+    	
     	$session->set('selected',$hotel);
     	$session->set('selectedRoom',$selectedRoom);
     	$booking = $session->get('booking');
@@ -390,11 +395,18 @@ class BookingController extends Controller
     		$booking->setFinalPrice($bookingOld->getFinalPrice());
     		$booking->setCouponApplyed($bookingOld->getCouponApplyed());
     		$booking->setCouponCode($bookingOld->getCouponCode());
+    		
+    		
+    		
     		$em->persist($booking);
     		$em->flush();
     		
 
     		$selectedService->setNumRooms($selectedService->getNumRooms()-1);
+    		
+    		//echo var_dump($selectedRoom);
+    		//exit();
+    		
     		$em->merge($selectedService);
     		$em->flush();
     		$amountToPay = $booking->getFinalPrice();
@@ -402,12 +414,20 @@ class BookingController extends Controller
     		$session->set('amountToPay',$amountToPay);
     		
     		//$redirectUrl = $this->generateUrl ( 'drive_booking_engine_payment_success' );
+    		//$redirectUrl = $this->generateUrl ( 'room_booking_engine_payment_confirmation' );
     		
-    		$paymentLink = $this->getPaymentLink($amountToPay);
+    		
+    		$paymentLink = $this->getPaymentLink($request,$amountToPay,$customer,$booking);
+    		
+    		//echo var_dump($paymentLink);
+    		//exit();
+    		
+    		
     		//$paymentLink = "https://www.instamojo.com/Waseemsyed/tirupati-caars-services-cb8a4/";
     //m	 $paymentLink.="?data_name=".$customer->getName()."&data_email=".$customer->getEmail()."&data_phone=".$customer->getMobile()."&embed=form";
-    		
+    		//$paymentLink = $this->generateUrl ( 'room_booking_engine_payment_payu' );
     		//$paymentLink = $this->getPaymentLink($amountToPay,$redirectUrl);
+    		
     		$payuLink = $this->generateUrl ( 'room_booking_engine_payment_payu' );
     		
     	/*m	$mailer = $this->renderView(
@@ -431,10 +451,11 @@ class BookingController extends Controller
     		 
     		if ($security->isGranted ( 'ROLE_SUPER_ADMIN' )) {
     		
-    			return $this->redirect ( $this->generateUrl ('room_security_user_login') );
+    			//return $this->redirect ( $this->generateUrl ('room_security_user_login') );
+    			return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
     		
     		}else{
-    	//	return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
+    		//return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
     		}
     		return $this->render('RoomBookingEngineBundle:Default:payment.html.twig', array(
     				'customer'   => $customer,
@@ -459,8 +480,34 @@ class BookingController extends Controller
     
     }
     
-    public function getPaymentLink($amountToPay){
-    	return '';
+    public function getPaymentLink($request,$amountToPay,$customer,$booking){
+    	
+    	$session = $request->getSession ();
+    	
+    	$bookingOld = $session->get('booking');
+    	
+    	
+    	
+    	$redirectUrl = $this->generateUrl ( 'room_booking_engine_payment_confirmation' );
+    
+    	//$total = $booking->getFinalAmount();
+    	
+    	$finalPrice =$booking->getFinalPrice();
+    	$bookingId = $booking->getBookingId();
+    	
+    	//echo var_dump($redirectUrl);
+    	//exit();
+    
+    	
+    	$data = $this->getData($request,$finalPrice,$bookingId,$customer,$redirectUrl);
+    	//echo var_dump($data);
+    	//exit();
+    	
+    	$info = $this->curlCall($data);
+    	
+    	$info['redirect_url']='https://test.payu.in/_payment';
+    	
+    	return $this->redirect($info['redirect_url']);
     }
     /**
      *
@@ -591,7 +638,7 @@ public function serviceDetailAction(Request $request,$url)
     	$session = $request->getSession ();
     	$customer = $session->get ( 'customer');
     	$booking = $session->get ( 'booking' );
-    	$redirectUrl = $this->generateUrl ( 'room_booking_engine_payment_confirmation' );
+    	$redirectUrl = $this->generateUrl( 'room_booking_engine_payment_confirmation' );
     	//$total = $booking->getFinalAmount();
     	
     	$finalPrice =$booking->getFinalPrice();
@@ -600,27 +647,28 @@ public function serviceDetailAction(Request $request,$url)
     	
     	$data = $this->getData($request,$finalPrice,$bookingId,$customer,$redirectUrl);
     	$info = $this->curlCall($data);
+    	
     	return $this->redirect($info['redirect_url']);
     }
     
 
 
-   private function getData($request,$pay,$bookingId,$customer,$redirectUrl){
+   private function getData($request,$finalPrice,$bookingId,$customer,$redirectUrl){
 	// Merchant key here as provided by Payu
-	$MERCHANT_KEY = "teKyJJEs";
+	$MERCHANT_KEY = "JBZaLc";
 	 
 	// Merchant Salt as provided by Payu
-	$SALT = "Vf8m4Waxfk";
+	$SALT = "GQs7yium";
 
 	// End point - change to https://secure.payu.in for LIVE mode
-	$PAYU_BASE_URL = "https://secure.payu.in";
+	$PAYU_BASE_URL = "https://test.payu.in";
 	 
 	$action = $PAYU_BASE_URL . '/_payment';
 	//$txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
 	$txnid = 'PAYU'.$bookingId;
-	$mobile = $customer->getUserMob ();
-	$name = $customer->getFirstName ();
-	$email = $customer->getUserEmail ();
+	$mobile = $customer->getMobile ();
+	$name = $customer->getName ();
+	$email = $customer->getEmail ();
 	$host = $request->getHost ();
 	 
 	$sUrl = 'http://' . $host . $redirectUrl.'?payment_id='.$txnid.'&status=success';
@@ -630,17 +678,19 @@ public function serviceDetailAction(Request $request,$url)
 	$data = array();
 	$data['key']= $MERCHANT_KEY;
 	$data['txnid']= $txnid;
-	$data['amount']= $pay;
+	$data['amount']= $finalPrice;
 	$data['firstname']= $name;
 	$data['email']= $email;
 	$data['phone']= $mobile;
-	$data['productinfo']= 'Drivekool services';
+	$data['productinfo']= 'SterlingSuit services';
 	$data['surl']= $sUrl;
 	$data['furl']= $fUrl;
 	$data['service_provider']= 'payu_paisa';
 	$hash = $this->getHash($data,$SALT);
 	$data['hash']= $hash;
 	$data['action']= $action;
+	
+	
 	return $data;
 }
 
@@ -649,7 +699,9 @@ public function curlCall($data){
 	$headers = array("application/x-www-form-urlencoded");
 	$url = $data['action'];
 	$postData = http_build_query($data);
+	
 	$curl = curl_init($data['action']);
+	
 	curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($curl, CURLOPT_POST, true);
@@ -657,8 +709,7 @@ public function curlCall($data){
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 	curl_exec($curl);
 	$info = curl_getinfo($curl);
-	//echo var_dump($info);
-	//exit();
+	
 	return $info;
 }
 
@@ -678,5 +729,13 @@ private function getHash($data,$SALT){
 	$hash = strtolower(hash('sha512', $hash_string));
 	return $hash;
 }
+
+
+public function paymentconfirmationAction(Request $request)
+{
+	return $this->render('RoomBookingEngineBundle:Default:success.html.twig');
+
+}
+
 
 }
