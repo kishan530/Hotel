@@ -37,3 +37,6 @@ room_booking_engine_payment_confirmation:
     path:     /paymentconfirmation
     defaults: { _controller: RoomBookingEngineBundle:Booking:paymentconfirmation }
 
+room_booking_engine_payment_Details:
+    path:     /paymentDetailsAction
+    defaults: { _controller: RoomBookingEngineBundle:Booking:paymentDetailsAction }

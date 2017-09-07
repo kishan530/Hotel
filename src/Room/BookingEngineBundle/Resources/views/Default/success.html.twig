@@ -20,12 +20,25 @@
     
     
      <!-- START CONTENT -->
+     
+     
                     <div class="row">
                     
+                    <div class="col-md-11 text-justify booking-item-deails-date-location">
+                    
+                     {% if error|length>0 %}
+	     	<div class="col-md-11 text-justify booking-item-deails-date-location">
+	     		<h3>Oops! something went wrong, your transaction cannot be completed. Sorry for the inconvinence.</h3>
+	     	</div>	    
+	     {% else %}
+                    
+                    
+                   
                         <div id="content" class="col-md-12 col-sm-12 col-xs-12">
  							<p>Your booking has been completed successfully</p>
                            
                         </div><!-- end col -->
+                        {% endif %}
                     </div><!-- end row -->
                     <!-- END CONTENT --> 
     

@@ -11,7 +11,7 @@ use Room\BookingEngineBundle\Form\CustomerType;
 use Room\BookingEngineBundle\DTO\Search;
 use Room\BookingEngineBundle\Entity\Customer;
 use Room\BookingEngineBundle\Entity\Booking;
-
+use Room\BookingEngineBundle\Entity\BookingPaymentEntity;
 class BookingController extends Controller
 { 
 
@@ -103,9 +103,9 @@ class BookingController extends Controller
     	 	
     	$numDays = $from->diff($to);
     	$numDay = (int)$numDays->format('%a');
+    	$numRoom = $search->getNumRooms();
     	
-    	
-    	//echo var_dump($numDay);
+    	//echo var_dump($numRoom);
     	//exit();
     	
     	$filters = $catalogueService->getFilters($hotels,$amenities);
@@ -119,6 +119,12 @@ class BookingController extends Controller
     	$session->set('filters',$filters);
     	
     	$session->set('numDay',$numDay);
+    	
+    	$session->set('numRoom',$numRoom);
+    	
+    	//echo var_dump($search);
+    	//exit();
+    	
     	
     	$filterForm   = $this->createFilterForm($search,$filters);
     		   		
@@ -227,10 +233,15 @@ class BookingController extends Controller
     	
     	$numDay = $session->get('numDay');
     	
+    	$numRoom = $session->get('numRoom');
+    	
     	//echo var_dump($numDay);
+    	//exit();
+    	//echo var_dump($numRoom);
     	//exit();
     	
     	$search = $session->get('search');
+    	
     	$customer = new Customer();
     	$form   = $this->createBookingForm($customer);
     	$em = $this->getDoctrine()->getManager();
@@ -290,6 +301,7 @@ class BookingController extends Controller
     			'search'=>$search,
     			'step'=> 'review',
     			 'numDay'=>$numDay,
+    			 'numRoom'=>$numRoom,
     			'price'=>$price,
     			
     	));
@@ -307,8 +319,9 @@ class BookingController extends Controller
     	$search = $session->get('search');
     	
     	$numDay = $session->get('numDay');
+    	$numRoom = $session->get('numRoom');
     	
-    	//echo var_dump($numDay);
+    	//echo var_dump($numRoom);
     	//exit();
     	
     	$customer = new Customer();
@@ -318,13 +331,15 @@ class BookingController extends Controller
     	$catalogueService = $this->container->get( 'catalogue.service' );
     	$selectedRoom = $catalogueService->getSelectedRoom($hotel,$room);
     	
-    	//echo var_dump($selectedRoom);
-    	//exit();
+    	
     	
     	
     	$session->set('selected',$hotel);
     	$session->set('selectedRoom',$selectedRoom);
     	$booking = $session->get('booking');
+    	
+    	//echo var_dump($booking);
+    	//exit();
     	
     	$price = $selectedRoom->getPrice();
     	
@@ -336,6 +351,8 @@ class BookingController extends Controller
     			'search'=>$search,
     			'step'=> 'review',
     			'numDay'=>$numDay,
+    			'numRoom'=>$numRoom,
+    			
     			'price'=>$price,
     	));
     }
@@ -349,6 +366,7 @@ class BookingController extends Controller
     	$selectedService = $session->get('selected');
     	$selectedRoom = $session->get('selectedRoom');
     	$bookingOld = $session->get('booking');
+    	
     	
     	//booking details values
     	$bookingDetails = $session->get('bookingDetails');
@@ -373,7 +391,7 @@ class BookingController extends Controller
     		$booking->setBookingId($this->getBookingId());
     		$booking->setTotalPrice($price);
     		$booking->setFinalPrice($finalPrice);
-    		$booking->setStatus('booked');
+    		$booking->setStatus('pending');
     		$booking->setJobStatus('Open');
     		$booking->setBookedOn(new \DateTime());
     		//$booking->setNumDays($searchFilter->getNumDays());
@@ -381,13 +399,14 @@ class BookingController extends Controller
     		$booking->setChekIn($searchFilter->getCheckIn());
     		$booking->setChekOut($searchFilter->getCheckOut());
     		
+    		$booking->setNumRooms($searchFilter->getNumRooms());
     		
     		$address = $selectedService->getAddress();
     		$booking->setHotelId($selectedService->getId());
     		$booking->setRoomId($selectedRoom->getId());
     		$booking->setHotelName($selectedService->getName());
     		$booking->setLocation($address->getLocation());
-    		$booking->setNumRooms(0);
+    		//$booking->setNumRooms(0);
     		
     		$booking->setTotalPrice($bookingOld->getTotalPrice());
     		$booking->setDiscount($bookingOld->getDiscount());
@@ -396,19 +415,25 @@ class BookingController extends Controller
     		$booking->setCouponApplyed($bookingOld->getCouponApplyed());
     		$booking->setCouponCode($bookingOld->getCouponCode());
     		
+    		//echo var_dump($searchFilter->getNumRooms());
+    		//exit();
     		
     		
     		$em->persist($booking);
     		$em->flush();
     		
 
-    		$selectedService->setNumRooms($selectedService->getNumRooms()-1);
+    		//$selectedService->setNumRooms($selectedService->getNumRooms() - 1);
     		
-    		//echo var_dump($selectedRoom);
+    		//echo var_dump($selectedService);
     		//exit();
+    		 
     		
-    		$em->merge($selectedService);
-    		$em->flush();
+    		//echo var_dump($searchFilter);
+    			//exit();
+    		
+    		//$em->merge($selectedService);
+    		//$em->flush();
     		$amountToPay = $booking->getFinalPrice();
     		$session->set('bookingObj',$booking);
     		$session->set('amountToPay',$amountToPay);
@@ -430,33 +455,39 @@ class BookingController extends Controller
     		
     		$payuLink = $this->generateUrl ( 'room_booking_engine_payment_payu' );
     		
-    	/*m	$mailer = $this->renderView(
+
+    		//m
+    	/* 	
+    		$mailer = $this->renderView(
     				'RoomBookingEngineBundle:Mail:invoice.html.twig',array(
     						'booking' => $booking,
     						'customer' => $customer,
     						'selectedRoom'=>$selectedRoom
     						 
     				)
-    		); */
-    		//m$subject = "Booking Confirmed -".$booking->getBookingId();
-			//m$adminSubject = "New Booking From Sterling-".$booking->getBookingId();
-    		//m$mailService = $this->container->get( 'mail.services' );
-    		//m$email=$customer->getEmail();
-    		//m$mailService->mail($email,$subject,$mailer);
-			//m$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer);
+    		); 
+    		$subject = "Booking Confirmed -".$booking->getBookingId();
+			$adminSubject = "New Booking From Sterling-".$booking->getBookingId();
+    		$mailService = $this->container->get( 'mail.services' );
+    		$email=$customer->getEmail();
+    		$mailService->mail($email,$subject,$mailer);
+			$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer); */
+			
+    		
+    		//m
     		
     		$security = $this->container->get ( 'security.context' );
     		 
     		$user = $security->getToken ()->getUser ();
     		 
-    		if ($security->isGranted ( 'ROLE_SUPER_ADMIN' )) {
+    		//if ($security->isGranted ( 'ROLE_SUPER_ADMIN' )) {
     		
     			//return $this->redirect ( $this->generateUrl ('room_security_user_login') );
-    			return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
+    			//return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
     		
-    		}else{
+    		//}else{
     		//return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
-    		}
+    		//}
     		return $this->render('RoomBookingEngineBundle:Default:payment.html.twig', array(
     				'customer'   => $customer,
     				'booking'   => $booking,
@@ -467,7 +498,7 @@ class BookingController extends Controller
     				'payuLink'=>$payuLink,
     				
     				'bookingDetails' =>$bookingDetails,
-    				
+    				'form'   => $form->createView(),
     				
     		));
     	}
@@ -480,35 +511,7 @@ class BookingController extends Controller
     
     }
     
-    public function getPaymentLink($request,$amountToPay,$customer,$booking){
-    	
-    	$session = $request->getSession ();
-    	
-    	$bookingOld = $session->get('booking');
-    	
-    	
-    	
-    	$redirectUrl = $this->generateUrl ( 'room_booking_engine_payment_confirmation' );
-    
-    	//$total = $booking->getFinalAmount();
-    	
-    	$finalPrice =$booking->getFinalPrice();
-    	$bookingId = $booking->getBookingId();
-    	
-    	//echo var_dump($redirectUrl);
-    	//exit();
-    
-    	
-    	$data = $this->getData($request,$finalPrice,$bookingId,$customer,$redirectUrl);
-    	//echo var_dump($data);
-    	//exit();
-    	
-    	$info = $this->curlCall($data);
-    	
-    	$info['redirect_url']='https://test.payu.in/_payment';
-    	
-    	return $this->redirect($info['redirect_url']);
-    }
+   
     /**
      *
      */
@@ -651,17 +654,56 @@ public function serviceDetailAction(Request $request,$url)
     	return $this->redirect($info['redirect_url']);
     }
     
-
+    public function getPaymentLink($request,$amountToPay,$customer,$booking){
+    	 
+    	$session = $request->getSession ();
+    	 
+    	$bookingOld = $session->get('booking');
+    	 
+    	 
+    	 
+    	$redirectUrl = $this->generateUrl ( 'room_booking_engine_payment_confirmation' );
+    	$bookingId = $booking->getBookingId();
+    	 
+    	//echo var_dump($redirectUrl);
+    	//exit();
+    
+    	 
+    	$data = $this->getData($request,$amountToPay,$bookingId,$customer,$redirectUrl);
+    	//echo var_dump($data);
+    	//exit();
+    	 
+    	$info = $this->curlCall($data);
+    	 
+    	
+    	
+    	
+    	 return  $data;
+    	
+    	
+    	
+    	$info['redirect_url']='https://test.payu.in/_payment';
+    	
+    	return $this->redirect($info['redirect_url']);
+    	
+    	//return $info['redirect_url'];
+    }
 
    private function getData($request,$finalPrice,$bookingId,$customer,$redirectUrl){
 	// Merchant key here as provided by Payu
-	$MERCHANT_KEY = "JBZaLc";
-	 
+	//$MERCHANT_KEY = "rjQUPktU";
+	
+	$MERCHANT_KEY = "OwPbxU2k";
+	$SALT = "aa70fUA5Hh";
 	// Merchant Salt as provided by Payu
-	$SALT = "GQs7yium";
+	
+	//$SALT = "e5iIg1jwi8";
 
 	// End point - change to https://secure.payu.in for LIVE mode
-	$PAYU_BASE_URL = "https://test.payu.in";
+	$PAYU_BASE_URL = "https://secure.payu.in";
+	
+	//testing Mode
+	//$PAYU_BASE_URL = "https://test.payu.in";
 	 
 	$action = $PAYU_BASE_URL . '/_payment';
 	//$txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
@@ -692,6 +734,8 @@ public function serviceDetailAction(Request $request,$url)
 	
 	
 	return $data;
+	
+	
 }
 
 
@@ -709,6 +753,19 @@ public function curlCall($data){
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 	curl_exec($curl);
 	$info = curl_getinfo($curl);
+	
+	if($errno = curl_errno($curl)) {
+		$error_message = curl_strerror($errno);
+		echo "cURL error ({$errno}):\n {$error_message}";
+	}
+	
+	
+	$errno = curl_errno($curl);
+	//echo var_dump($errno);
+	//echo var_dump(curl_strerror($errno));
+	
+	//echo var_dump($info);
+	//exit();
 	
 	return $info;
 }
@@ -733,8 +790,231 @@ private function getHash($data,$SALT){
 
 public function paymentconfirmationAction(Request $request)
 {
-	return $this->render('RoomBookingEngineBundle:Default:success.html.twig');
+	$session = $request->getSession();
+	$booking = $session->get ( 'booking' );
+	
+	
+	$bookingobj = $session->get ( 'bookingObj' );
+	
+	$selectedService = $session->get('selected');
+	
+	//echo var_dump($bookingobj);
+	//exit();
+	
+	$customer = $session->get ( 'customer' );
+	$payment_id = $request->get ( 'payment_id' );
+	$paidAmount=$booking->getFinalPrice();
+	$status = $request->get ( 'status' );
+	
+	$selectedRoom = $session->get('selectedRoom');
+	$searchFilter = $session->get('search');
+	
+	//echo var_dump($searchFilter);
+	//exit();
+	
+	
+	
+	
+	
+	//$numRooms = $selectedRoom->getNumRooms();
+	
+	//echo var_dump($numRooms);
+	//exit();
+	
+	
+	$bookingPaymentEntity =  null;
+	
+	
+	
+	/*if ($status == 'success'){
+		
+		$bookingobj->setStatus('booked');
+	}else { 
+		$bookingobj->setStatus('pending');
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	//echo var_dump($selectedRoom);
+	//exit();
+	
+	$number=$customer->getMobile();
+	
+	$paymentErrors = array();
+	$error = null;
+	
+	//$checksum = $request->get('CHECKSUMHASH');
+	if ($status == 'success')
+	{
+		$bookingId = $bookingobj->getbookingId();
+		$paymentDoneDate = new \DateTime();
+		
+		$bookingobj->setPaymentDoneDate($paymentDoneDate);
+		$bookingobj->setPaymentMode('online');
+		$bookingobj->setAmountPaid($paidAmount);
+		$bookingobj->setStatus('booked');
+		
+		$bookingobj->setPaymentId($payment_id);
+		
+		$bookingPaymentEntity = new BookingPaymentEntity();
+			
+		//$paymentMode->setStatus ( 'online' );
+		//$credited->setCredited('1');
+		$paidby = $customer->getName();
+		
+		$bookingPaymentEntity->setStatus ( 'success' );
+		$bookingPaymentEntity->setPaymentMode ( 'online' );
+		$bookingPaymentEntity->setCredited('1');
+		$bookingPaymentEntity->setPaidBy($paidby);
+		date_default_timezone_set('Asia/Kolkata');
+		$paymentDate = new \DateTime();
+		$bookingPaymentEntity->setPaymentDate($paymentDate);
+		
+		$bookingPaymentEntity->setTransactionNo($payment_id);
+		$bookingPaymentEntity->setPaidBy($paidby);
+		$bookingPaymentEntity->setPaidAmount($paidAmount);
+		
+		$bookingPaymentEntity->setMobile($number);
+		
+		//$bookingPay = new Booking();
+		
+		//$bookingPay->setId($bookingobj->getId());
+		
+		//$bookingPaymentEntity->setBookingId($booking);
+		$bookingPaymentEntity->setBookingId($bookingId);
+		
+		//echo var_dump($bookingPaymentEntity);
+		//exit();
+		
+		//$booking=setBookingPayment($bookingPaymentEntity);
+		//$booking=setBookingPayment($bookingPaymentEntity);
+		
+		//$bookingPayments = $booking->getBookingPayments();
+		
+		//$bookingPayments->add($bookingPaymentEntity);
+		
+		
+		//echo var_dump($bookingobj);
+		//exit();
+		
+		$selectedService->setNumRooms($selectedService->getNumRooms() - $searchFilter->getNumRooms());
+		
+		//echo var_dump($selectedService);
+		//exit();
+		 
+		
+		//echo var_dump($searchFilter);
+		//exit();
+		
+	
+		
+		
+		
+		
+		
+		$em = $this->getDoctrine()->getManager();
+		
+		$em->merge($selectedService);
+		
+		$em->merge($bookingobj);
+		
+		$em->persist($bookingPaymentEntity);
+		
+		//echo var_dump($bookingPaymentEntity);
+		//exit();
+		
+		$em->flush();
+		
+		$this->addFlash(
+				'Notice',
+				'paymentdetails Added'
+		);
+		
+		$mailer = $this->renderView(
+				'RoomBookingEngineBundle:Mail:invoice.html.twig',array(
+						'booking' => $bookingobj,
+						'customer' => $customer,
+						'selectedRoom'=>$selectedRoom,
+						'searchFilter'=>$searchFilter
+				)
+		);
+		$subject = "Booking Confirmed -".$booking->getBookingId();
+		$adminSubject = "New Booking From Sterling-".$booking->getBookingId();
+		$mailService = $this->container->get( 'mail.services' );
+		$email=$customer->getEmail();
+		$mailService->mail($email,$subject,$mailer);
+		$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer);
+		
+		
+		
+		
+		
+	}else{
+		
+		$bookingobj->setStatus('pending');
+		$paymentErrors[] = "Transaction status is failure";
+		$error = $paymentErrors;
+		
+	}
+	/*echo var_dump($checksum);
+	echo var_dump($status);
+	echo var_dump($payment_id);
+	echo var_dump($customer);
+	echo var_dump($booking);
+	exit();*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	return $this->render('RoomBookingEngineBundle:Default:success.html.twig',array(
+			'bookingPaymentEntity' => $bookingPaymentEntity,
+			'customer' => $customer,
+			'error' =>$error
+	) );
 
+}
+
+	public function paymentDetailsAction(Request $request)
+{
+	/*$em = $this->getDoctrine()->getManager();
+	
+	$paymentDetails = new PaymentDetailsDto();
+	
+	if($form->isValid()) {
+		
+	$paymentDetailsObj = new PaymentDetailsDto();
+	
+	$MERCHANT_KEY = "rjQUPktU";
+	$SALT = "e5iIg1jwi8";
+	
+	$mobile = $customer->getMobile ();
+	$name = $customer->getName ();
+	$email = $customer->getEmail ();
+	
+	$PAYU_BASE_URL = "https://secure.payu.in";
+	
+	$action = $PAYU_BASE_URL . '/_payment';
+	
+	$sUrl = 'http://' . $host . $redirectUrl.'?payment_id='.$txnid.'&status=success';
+	$fUrl = 'http://' . $host . $redirectUrl.'?status=fail';
+	$txnid = 'PAYU'.$bookingId;
+	
+	Return $this->redirectToRoute(' ');
+	
+	}*/
+	$data = $this->getData($request,$finalPrice,$bookingId,$customer,$redirectUrl);
+	//return $this->redirect($info['redirect_url']);
+	Return $this->redirectToRoute($info['redirect_url']);
 }
 
 

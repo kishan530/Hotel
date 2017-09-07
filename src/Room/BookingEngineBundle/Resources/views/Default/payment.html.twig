@@ -21,7 +21,7 @@
     
      <!-- START CONTENT -->
                    
-                   <div class="col-md-6 no-left-padding no-padding-right">
+                   <div class="col-md-6 no-left-padding no-padding-right" style="margin-top: 15px;">
 				<div class="heading-bg no-border-left">
 					<h4 class="text-center">Personal Details</h4>
 				</div>
@@ -53,9 +53,10 @@
 				
 					</div>
 			</div>
-                   <div class="col-sm-3">
+                   <div class="col-sm-3" style="margin-top: 15px;">
                                 <div class="booking-price-details-border price-details box clearfix">
-                                 <h5 class="box-title">Fare Details</h5>
+                                
+                                 <h4 class="box-title">Fare Details</h4>
                                 <div class="box-content row">
                                                                               
                                                 <ul class="price-list list-border">                                                 
@@ -99,40 +100,42 @@
 		    
 		    
 		    <div class="col-md-4">
-			<div class="tabbable  tabs-left">
-				<ul class="nav nav-pills nav-stacked nav-side mb30">
-					<li class="active"><a href="#payUmoney" style="margin-top: 30px;"  data-toggle="tab">PayU Money</a></li>
 			
-				</ul>
-		    </div> 
 		    </div> 
 		    
 					{#}<p class="text-center"><b>Pay with Credit/Debit cards or Net-Banking.</b></p>{#}
 					
-					<div class="col-md-6" style="border: 1px solid; margin-top: 30px;">
+					<div class="col-md-6" >
 					
-					<div class="" style=" margin-left: 38px;">
-					<p class=""><b>Pay with Credit/Debit cards or Net-Banking.</b></p>
-					</div>
-					    <div class="col-md-6"><img src="{{ asset('img/payu.png') }}" alt=""></div>
+					
 					   
 			
 				    
 {# 					<img src="{{  cloudinary_url('payu',  {'secure': 'true' }) }}" />#}
+				
+ 			 {% if is_granted('IS_AUTHENTICATED_FULLY') %}  
+						
+						<a href="{{ path('room_booking_engine_success') }}" class="btn btn-primary pull-right" style="margin-top: 40px; margin-left: 80px;margin-bottom: 10px;margin-right: 60px;background-color: #209838;border-color: #21bb29;" > book now </a>
+				{% else %}		
 
+					{#}<a href="#" class="btn btn-primary pull-right" style="margin-top: 40px; margin-left: 80px;margin-bottom: 10px;margin-right: 60px;background-color: #209838;border-color: #21bb29;" >Pay Now</a>{#}
+				
+				
+				<form action="{{ paymentLink['action'] }}"  method="post">
 
-					<a href="{{ paymentLink }}" class="btn btn-primary go-right" style="margin-top: 90px; margin-left: 80px;margin-bottom: 10px;" >Pay Now</a>
+                    {% for key,option in paymentLink  %}
+                    
+                    <input type="hidden" name="{{ key }}" value="{{ option }}">
+                    {% endfor %}
+                    <input type="submit" class="btn btn-primary pull-right" style="margin-top: 40px; margin-left: 80px;margin-bottom: 10px;margin-right: 60px;background-color: #209838;border-color: #21bb29;" value="Pay Now" >
+     		   </form> 
+				
+				{% endif %}	
 					<div class="small-gap"></div> 
 					</div>
 				</div>                                 
                              
 
-
-                               
-                                    
-                   
-                   
-                   
                    
                     <!-- END CONTENT --> 
     

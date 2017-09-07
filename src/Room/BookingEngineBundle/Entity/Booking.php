@@ -5,6 +5,7 @@ namespace Room\BookingEngineBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Room\BookingEngineBundle\Entity\BookingPaymentEntity;
 /**
  * Booking
  *
@@ -153,6 +154,15 @@ class Booking
      * @ORM\Column(name="location", type="integer")
      */
     private $location;
+    
+    /**
+     *
+     * @var date
+     * @ORM\Column(name="payment_done_date", type="date")
+     */
+    private $paymentDoneDate;
+    
+   
 	
 	/**
 	 *
@@ -620,6 +630,47 @@ class Booking
 		$this->roomId = $roomId;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the unknown_type
+	 */
+	public function getBookingPayments() {
+		return $this->bookingPayments;
+	}
+	
+	/**
+	 *
+	 * @param unknown_type $bookingPayments        	
+	 */
+	public function setBookingPayments($bookingPayments) {
+		$this->bookingPayments = $bookingPayments;
+		return $this;
+	}
+	
+	public function addBookingPayments($bookingPayments) {
+		$this->bookingPayments->add($bookingPayments);
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getPaymentDoneDate() {
+		return $this->paymentDoneDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$paymentDoneDate
+	 */
+	public function setPaymentDoneDate($paymentDoneDate) {
+		$this->paymentDoneDate = $paymentDoneDate;
+		return $this;
+	}
+	
 	
 	
     

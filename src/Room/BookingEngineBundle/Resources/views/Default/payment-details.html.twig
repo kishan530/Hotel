@@ -1,0 +1,57 @@
+{% extends 'page.html.twig' %}
+
+{% block breadcrumbsTitle %}Booking{% endblock %}
+
+{% block breadcrumbsLinks %}
+            <li><a href="{{ path('room_booking_engine_homepage') }}">Home</a></li>
+            <li><a href="#">Booking</a></li>
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+
+
+
+  <section id="room">
+    <div class="container">
+    
+     <!-- START CONTENT -->
+                 
+
+    
+    
+    <div class="row booking-price-details">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                {{ form_widget(form.name,{'attr':{'class':'make-margin','placeholder':'Name'}}) }}
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                               {{ form_widget(form.email,{'attr':{'class':'make-margin','placeholder':'Email'}}) }}
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                            {{ form_widget(form.mobile,{'attr':{'class':'make-margin','placeholder':'10 Digit Mobile No'}}) }} 
+                                            </div>
+                                            
+	<a href="{{path ('room_booking_engine_payment_Details') }}" class="btn btn-primary pull-right" style="margin-top: 40px; margin-left: 80px;margin-bottom: 10px;margin-right: 60px;background-color: #209838;border-color: #21bb29;" >Submit Now</a>
+    
+                   </div>
+                   
+                   
+                   
+                   <form action="{{ paymentLink['action'] }}"  method="post">
+                    {% for key,option in paymentLink  %}
+                    
+                    <input type="text" name="{{ key }}" value="{{ option }}">
+                    {% endfor %}
+                    <input type="submit">
+     </form>
+     
+     
+     <!-- END CONTENT --> 
+    
+    </div>
+  </section>
+  <!-- End Room -->
+
+{% endblock %}
