@@ -1,0 +1,30 @@
+room_hotel_add_hotel:
+    path:     /add-hotel
+    defaults: { _controller: "RoomHotelBundle:Hotel:addHotel" }
+room_hotel_edit_hotel:
+    path:     /edit/{id}/hotel
+    defaults: { _controller: "RoomHotelBundle:Hotel:editHotel" }
+room_hotel_search_hotel:
+    path:     /search-hotel
+    defaults: { _controller: "RoomHotelBundle:Hotel:searchHotel" }
+
+room_hotel_delete_hotel:
+    path:     /delete/{id}/hotel
+    defaults: { _controller: "RoomHotelBundle:Hotel:deleteHotel" }
+
+room_hotel_delete_hotelRoom:
+    path:     /{id}/delete-hotelroom
+    defaults: { _controller: "RoomHotelBundle:Hotel:deleteHotelRoom" }
+    
+room_hotel_add_coupon_code:
+    path:     /add-coupon-code
+    defaults: { _controller: "RoomHotelBundle:Coupon:addCoupon" }
+room_hotel_list_coupon_code:
+    path:     /coupon-code-list
+    defaults: { _controller: "RoomHotelBundle:Coupon:couponList" }
+room_hotel_edit_coupon_code:
+    path:     /{id}/coupon-code-edit
+    defaults: { _controller: "RoomHotelBundle:Coupon:couponEdit" }
+room_hotel_delete_coupon_code:
+    path:     /{id}/coupon-code-delete
+    defaults: { _controller: "RoomHotelBundle:Coupon:couponDelete" }
