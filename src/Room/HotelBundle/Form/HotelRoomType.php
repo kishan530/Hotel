@@ -34,6 +34,7 @@ class HotelRoomType extends AbstractType
             						'Standard Suite'=>'Standard Suite',
             						'Deluxe Suite'=>'Deluxe Suite',
             						'Club Suite'=>'Club Suite',
+									'Executive Suite'=>'Executive Suite',
             						
             						
             				),

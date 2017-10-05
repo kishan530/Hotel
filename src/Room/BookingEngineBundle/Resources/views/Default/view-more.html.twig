@@ -79,7 +79,7 @@ $("button").click(function() {
 			    <ul id="view-room-slider">
 {% for image in hotel.images %}
 		<li data-thumb="{{ asset('img/Hotels/'~image.imagePath) }}" data-src="{{ asset('img/Hotels/'~image.imagePath) }} ">
-		    <img src="{{ asset('img/Hotels/'~image.imagePath) }}"style="height: 300px !important;" />
+		    <img src="{{ asset('img/Hotels/'~image.imagePath) }}"style="height: 500px !important;width: 850px !important;" />
 		</li>
 	{% endfor %}
 </ul>
@@ -164,14 +164,16 @@ $("button").click(function() {
                
                <div class="row rcorners1">
                
-               
+                <div class="col-sm-12">
+               <h5 class="titleroom" style="margin-left: -40px;font-size: 16px;">{{ hotelRoom.name}} </h5>
+               </div>
                <div class="col-sm-2">
 {#             <div class="thumbnail">#}
 				 
-				 <h5 class="titleroom" style="font-size: 16px;">{{ hotelRoom.roomType }} </h5>
+				
             <img src="{{ asset('img/Hotels/'~hotelRoom.imagePath) }}" alt="" class="img-responsive hotelroom" height="30%">
              </div>
-             <div class="col-sm-2" style="padding-top: 65px;">
+             <div class="col-sm-2" style="padding-top: 20px;">
              </br>
              <ul>
              <li><small>Max Adult:&nbsp;&nbsp;{{ hotelRoom.maxAdult }}</small> </li></br>
@@ -183,7 +185,7 @@ $("button").click(function() {
 		<div class="col-sm-8">
             <div class="listing-room-content" style="padding-top: 20px;">
               {#}<div class="row"> {#}
-                <div class="col-md-12" style ="padding-top: 32px;">
+                <div class="col-md-12">
                
                   <header>
                   <div class="row">
@@ -208,7 +210,7 @@ $("button").click(function() {
                     
                       <span class="price priceday" >
                       <small style="font-size: 45%;">Price for 1 night</small></br>
-                        <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotel.price }}</h5>
+                        <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotelRoom.price }}</h5>
                       </span>
                                              
                     </div>
@@ -241,6 +243,9 @@ $("button").click(function() {
             
             </div>
             <div class="room-about"></div>
+			 <div class="col-sm-12 text-left">
+            	<p style="margin-left: -40px;">{{ hotelRoom.description}}</p>
+            </div>
             </div>
         
             {% endfor %}

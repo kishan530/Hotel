@@ -436,7 +436,8 @@ class HotelController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$em->remove($hotel);
 		$em->flush();
-		return $this->redirect($this->generateUrl('room_hotel_search_hotel'));
+		return new Response('true');
+		//return $this->redirect($this->generateUrl('room_hotel_search_hotel'));
 	}
 	
 	public function deleteHotelRoomAction($id)

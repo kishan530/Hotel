@@ -12,6 +12,35 @@
 
 <script type="text/javascript">
 
+ $("#result").on('click', ".delete", function (e) {
+     e.preventDefault(); //STOP default action
+    var formURL = $(this).attr("href");
+    var tr = $(this).parent().parent();
+     var name = $(this).attr('title');
+        if (!confirm("The Consumer "+name+" details will be deleted permanently form the system, please confirm")) {
+		            exit();
+		  }	
+    $.ajax(
+            {
+                url : formURL,
+                type: 'GET',
+                success:function(data, textStatus, jqXHR)
+                {
+                    if(data=='true')
+                    {
+                        tr.remove();
+                    }		                        
+                },
+                error: function(jqXHR, textStatus, errorThrown)
+                {
+                    alert(textStatus);
+                    //if fails
+                    alert('Error: ' +  errorThrown);
+                }
+            });
+   
+});
+
 $('.calendar').datepicker({
     dateFormat: dateformat,
     minDate: 0,
@@ -27,6 +56,8 @@ $('.calendar').datepicker({
       }
     }
   });
+  
+  
 
 
 </script>
@@ -114,7 +145,7 @@ $('.calendar').datepicker({
                             <td> {% if hotel.active %} Active {% else %} In-active {% endif %}</td>
                             <td>{{ hotel.url }}</td>
                             <td> <a href="{{ path('room_hotel_edit_hotel',{ 'id': hotel.id }) }}"><i class="fa fa-pencil-square-o"></i></a></td>
-                        	<td> <a href="{{ path('room_hotel_delete_hotel',{ 'id': hotel.id }) }}"><i class="fa fa-trash-o" aria-hidden="true "></i></a></td>
+                        	<td> <a href="{{ path('room_hotel_delete_hotel',{ 'id': hotel.id }) }}" class="delete" title="{{ hotel.name }}"><i class="fa fa-trash-o" aria-hidden="true "></i></a></td>
                         </tr>
                     {% endfor %}
                         </table>
