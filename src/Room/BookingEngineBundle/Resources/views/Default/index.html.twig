@@ -97,7 +97,16 @@ $('#guests').click(function(e){
 
         
     });
+
+$(function () {
+
+	// implementation of disabled form fields
+	
+});
+
+	    
     </script>
+    
 {% endblock %}
 {% block body %}
 
@@ -129,13 +138,13 @@ $('#guests').click(function(e){
                      <span class="city select-box">
                         {{ form_widget(form.city) }}
                       </span>
-                      <span class="arrival calendar">
+                      <span class=" " id="checkIn">
                       	
                         {{ form_widget(form.checkIn) }}
                        
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa fa-calendar" ></i>
                       </span>
-                      <span class="departure calendar">
+                      <span class=" " id="checkOut">
                          {{ form_widget(form.checkOut) }}
                         <i class="fa fa-calendar"></i>
                       </span>

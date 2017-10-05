@@ -27,7 +27,13 @@ class HotelRoomType extends AbstractType
             						'Club Double Room'=>'Club Double Room',
             						'Standard Non A/C'=>'Standard Non A/C',
             						'Deluxe Room'=>'Deluxe Room',
-            						
+            						'Single Suite Room'=>'Single Suite Room',
+            						'Double Suite Room'=>'Double Suite Room',
+            						'King Size Suite'=>'King Size Suite',
+            						'Queen Size Suite'=>'Queen Size Suite',
+            						'Standard Suite'=>'Standard Suite',
+            						'Deluxe Suite'=>'Deluxe Suite',
+            						'Club Suite'=>'Club Suite',
             						
             						
             				),

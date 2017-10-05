@@ -124,6 +124,24 @@ class BookingController extends Controller
     	
     	//echo var_dump($search);
     	//exit();
+    	//me
+    	$em = $this->getDoctrine ()->getManager ();
+    	$qb = $em->getRepository ( 'RoomBookingEngineBundle:Booking' )->createQueryBuilder("Booking");
+    	$qb ->select('Booking.hotelId','count(Booking.hotelId) as bookedroom')
+    	->andWhere('(:from BETWEEN Booking.chekIn AND Booking.chekOut OR :to BETWEEN Booking.chekIn AND Booking.chekOut)' ) ->setParameter('from', $from ) ->setParameter('to', $to)
+    	->groupBy('Booking.hotelId') ;
+    	$Booking_hotel = $qb->getQuery()->getResult();
+    	
+    	
+    	$roomCountByHotel = array();
+    	foreach ( $Booking_hotel as $bookedHotel ) {
+    		$roomCountByHotel[$bookedHotel['hotelId']]=$bookedHotel['bookedroom'];
+    	}
+    	
+    	//echo var_dump($Booking_hotel);
+    	//exit();
+    	//me end
+    	
     	
     	
     	$filterForm   = $this->createFilterForm($search,$filters);
@@ -132,7 +150,9 @@ class BookingController extends Controller
                 'form'   => $form->createView(),     
     			'filterForm'   => $filterForm->createView(),
     			'hotels'=>$hotels,
+    			'roomCountByHotel'=>$roomCountByHotel,
     			'numDay'=>$numDay,
+    			'Booking_hotel'=>$Booking_hotel,
     			'search'=>$search
          ));
             
@@ -632,6 +652,7 @@ public function serviceDetailAction(Request $request,$url)
     	return $this->render('RoomBookingEngineBundle:Default:view-more.html.twig', array(
     //			'form'   => $form->createView(),
     			'hotel'=> $hotel,
+    			'search'=>$search,
     			
     			
     	));
@@ -691,19 +712,19 @@ public function serviceDetailAction(Request $request,$url)
 
    private function getData($request,$finalPrice,$bookingId,$customer,$redirectUrl){
 	// Merchant key here as provided by Payu
-	//$MERCHANT_KEY = "rjQUPktU";
+	$MERCHANT_KEY = "rjQUPktU";
 	
-	$MERCHANT_KEY = "OwPbxU2k";
-	$SALT = "aa70fUA5Hh";
+	//$MERCHANT_KEY = "OwPbxU2k";
+	//$SALT = "aa70fUA5Hh";
 	// Merchant Salt as provided by Payu
 	
-	//$SALT = "e5iIg1jwi8";
+	$SALT = "e5iIg1jwi8";
 
 	// End point - change to https://secure.payu.in for LIVE mode
-	$PAYU_BASE_URL = "https://secure.payu.in";
+	//$PAYU_BASE_URL = "https://secure.payu.in";
 	
 	//testing Mode
-	//$PAYU_BASE_URL = "https://test.payu.in";
+	$PAYU_BASE_URL = "https://test.payu.in";
 	 
 	$action = $PAYU_BASE_URL . '/_payment';
 	//$txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
@@ -901,7 +922,7 @@ public function paymentconfirmationAction(Request $request)
 		//echo var_dump($bookingobj);
 		//exit();
 		
-		$selectedService->setNumRooms($selectedService->getNumRooms() - $searchFilter->getNumRooms());
+	//	$selectedService->setNumRooms($selectedService->getNumRooms() - $searchFilter->getNumRooms());
 		
 		//echo var_dump($selectedService);
 		//exit();

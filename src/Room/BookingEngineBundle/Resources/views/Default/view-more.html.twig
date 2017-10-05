@@ -169,7 +169,7 @@ $("button").click(function() {
 {#             <div class="thumbnail">#}
 				 
 				 <h5 class="titleroom" style="font-size: 16px;">{{ hotelRoom.roomType }} </h5>
-            <img src="{{ asset('img/Hotels/'~hotel.images.first.imagePath) }}" alt="" class="img-responsive hotelroom" height="30%">
+            <img src="{{ asset('img/Hotels/'~hotelRoom.imagePath) }}" alt="" class="img-responsive hotelroom" height="30%">
              </div>
              <div class="col-sm-2" style="padding-top: 65px;">
              </br>
@@ -314,7 +314,7 @@ the hotel(s)'s own cancellation charges.</p>
 would be extra and payable directly to the hotel(s). Please check with the
 hotel(s) directly for more information on the same.</p>
               </div>
-              <div class="room-related">
+           {#}   <div class="room-related">
                 <h5 class="room-title">Related Offers</h5>
                  
                 <div class="col-md-4">
@@ -392,7 +392,7 @@ hotel(s) directly for more information on the same.</p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>{#}
             </div> {# div 9close#}
             
 {#              <div class="sidebar col-md-3">             #}

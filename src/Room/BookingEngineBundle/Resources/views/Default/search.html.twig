@@ -141,13 +141,13 @@ $('#guests').click(function(e){
                      <span class="city select-box">
                         {{ form_widget(form.city) }}
                       </span>
-                      <span class="arrival calendar">
+                      <span class=" ">
                       	
                         {{ form_widget(form.checkIn) }}
                        
                         <i class="fa fa-calendar"></i>
                       </span>
-                      <span class="departure calendar">
+                      <span class=" ">
                          {{ form_widget(form.checkOut) }}
                         <i class="fa fa-calendar"></i>
                       </span>
@@ -396,12 +396,14 @@ $('#guests').click(function(e){
 {#               <li class="next"><a href="#">Next</a></li>#}
 {#             </ul>#}
           </div>
+          {% set i=0 %}
           {% for hotel in hotels %}
           <div class="listing-room-list">
             <div class="thumbnail">
             <img src="{{ asset('img/Hotels/'~hotel.images.first.imagePath) }}" alt="" class="img-responsive" height="100%">
               
             </div>
+          
             <div class="listing-room-content">
               <div class="row">
                 <div class="col-md-12">
@@ -411,6 +413,7 @@ $('#guests').click(function(e){
                         <a href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">{{ hotel.name }}</a>
                       </h5>
                       <ul class="tags custom-list list-inline pull-left">
+                      
                       {% set address = hotel.address %}
                         <li class="location"><i class="fa fa-map-marker"></i> {{ address.location }}, {{ address.city }}</li>
                        
@@ -446,14 +449,32 @@ $('#guests').click(function(e){
                        {#} <a class="btn btn-transparent-gray" href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">
                           More Details
                         </a> {#}
-                        {% if hotel.soldOut or hotel.numRooms<1 %}
-                          
+                         {% set room=1 %}
+                  {#}      {% if Booking_hotel|length>i %}
+			                  {% if hotel.id==Booking_hotel[i].hotelId %}    
+			                   {% if Booking_hotel[i].bookedroom >= hotel.numRooms %}
+			                   {% set room=0 %}
+			                   {% endif %}
+			              {% set i=i+1 %}
+			             {% endif %}
+            		 {% endif %} {#}
+            		 
+            		  {% if roomCountByHotel[hotel.id] is defined %}
+	            		  {% if roomCountByHotel[hotel.id] >= hotel.numRooms %}
+				                   {% set room=0 %}
+				          {% endif %}
+			          {% endif %}
+					            
+                      {% if hotel.soldOut or hotel.numRooms<1 or room==0 %} 
+                         
                         	<label class="btn btn-book-now">Sold Out</label>
                         {% else %}
                         <a class="btn btn-book-now " href="{{ path('room_booking_engine_view_more',{ 'id' : hotel.id }) }}">
                           Select Room
                         </a>
                         {% endif %}
+                        
+                        
                        
                       </div>
                     </div>
