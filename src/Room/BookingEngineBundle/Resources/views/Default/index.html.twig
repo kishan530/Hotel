@@ -135,6 +135,19 @@ $(function () {
                   <li class="tab-content active row">
                   <div id="search-form">
                     {{ form_start(form) }}
+                    
+           <div class="col-lg-12 col-sm-12 form-group has-error">
+			<ul class="errors">
+	            {{ form_errors(form, { 'global_errors': true }) }}
+	            {{ form_errors(form.city) }}
+	            {{ form_errors(form.checkIn) }}
+	            {{ form_errors(form.checkOut) }}
+	            
+	          
+            </ul>
+			</div>
+                    
+                    
                      <span class="city select-box">
                         {{ form_widget(form.city) }}
                       </span>
@@ -279,7 +292,11 @@ $(function () {
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                         <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-yellow-ochre font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text">ROOMS &amp; SUITS</h2>
-                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom  xs-margin-nineteen-bottom">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom  xs-margin-nineteen-bottom">This property is located in down
+town Bangalore, adjacent to the commercial hub of Bangalore's life line
+and in the plush, high end residential area, walking distance from most
+desired names of the corporate world and 5 minutes drive from M.G.Road,
+Brigade Road and Koramangala.</div>
                     </div>
                 </div>
                 <!-- end section title -->
@@ -289,14 +306,15 @@ $(function () {
                         <div class="blog-post">
                             <!-- blog image -->
                             <div class="blog-image">
-                                <a href="#subscribe-section8" class="inner-link"><img class="img100" alt="" src="{{ asset('img/agency-blog-img01.jpg') }}" data-img-size="(W)800px X (H)507px"></a>
+                                <a href="http://www.purpleorange.co.in/view-more/24" class="inner-link"><img class="img100" alt="" src="{{ asset('img/agency-blog-img01.jpg') }}" data-img-size="(W)800px X (H)507px"></a>
                             </div>
                             <!-- end blog image -->
                             <!-- blog details -->
                             <div class="post-details bg-white tz-background-color">
-                                <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="#subscribe-section8" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> 2499 / PER NIGHT</a></div>
-                                <a href="#subscribe-section8" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">CLASSIC DOUBLE ROOM</a>
-                                <div class="text-medium tz-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</div>
+                                <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="http://www.purpleorange.co.in/view-more/24" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> 2850 / PER NIGHT</a></div>
+                                <a href="http://www.purpleorange.co.in/view-more/24" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">Sterling Langford Town - Boutique Service Apartment </a>
+                                <div class="text-medium tz-text">This property is located in down town Bangalore, adjacent to the commercial hub of Bangalore's life line and in the plush, high end residential area, walking distance from most desired names of the corporate world and 5 minutes drive from M.G.Road, Brigade Road and Koramangala. It is a 5 minutes drive to the best of malls, star hotels, fine dine restaurants, lounges, prestigious club, schools, hospitals, multinational insurance financial institutions and the world famous park, the cubbon park and the historic lalbaugh. This property has been constructed keeping in mind natural light, air and with eco friendly material and yet is very contempory and stylish, not to forget the ambience and comfort one enjoys at the greenery of decades of old trees all around the property. This property consists of one 3 bedroom penthouse and four, 3 bedroom executive apartments , 
+                                which are rented out as stand alone suites or an apartment as a whole, depending on the nature and length of stay. This property has a small cafe serv</div>
                             </div>
                             <!-- end blog details -->
                         </div>
@@ -307,14 +325,15 @@ $(function () {
                         <div class="blog-post">
                             <!-- blog image -->
                             <div class="blog-image">
-                                <a href="#subscribe-section8" class="inner-link"><img class="img100" alt="" src="{{ asset('img/agency-blog-img02.jpg') }}" data-img-size="800px (W) X 507px (H)"></a>
+                                <a href="http://www.purpleorange.co.in/view-more/28" class="inner-link"><img class="img100" alt="" src="{{ asset('img/agency-blog-img02.jpg') }}" data-img-size="800px (W) X 507px (H)"></a>
                             </div>
                             <!-- end blog image -->
                             <!-- blog details -->
                             <div class="post-details bg-white tz-background-color">
-                                <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="#subscribe-section8" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> 1999 / PER NIGHT</a></div>
-                                <a href="#subscribe-section8" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">ONE BEDROOM SUITE</a>
-                                <div class="text-medium tz-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</div>
+                                <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="http://www.purpleorange.co.in/view-more/28" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> 4000 / PER NIGHT</a></div>
+                                <a href="http://www.purpleorange.co.in/view-more/28" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">Sterling Marathahalli Service Apartment</a>
+                                <div class="text-medium tz-text">Sterling Suites-Marathahalli Commenced operations in the year 2010 with 20 Studio Suites. Year 2012 saw the addition of One bedroom with kitchen, 2 & 3 bedroom with living / dinning and fully equipped kitchen apartments along with the existing 20 Studio Suites If you are visiting Bangalore on business or with family for holiday , we have all the options , Executive Suite for the entry level traveler , Club Suite for the senior member of the organization , 1 ,2 and 3 bedroom with kitchen if you are with family or a group , who are keen to eat home cooked food. You can also conduct small meetings in the apartment. This property has a Banquet hall of 1200 sq ft fully air-conditioned, a fine dine restaurant The Peppermintae and a fitness center. Leading software corporations , international school, 
+                                shopping malls , Cinema multiplexes , lounges , fine dine restaurants are in the immediate vicinity.</div>
                             </div>
                             <!-- end blog details -->
                         </div>
@@ -325,14 +344,14 @@ $(function () {
                         <div class="blog-post">
                             <!-- blog image -->
                             <div class="blog-image">
-                                <a href="#subscribe-section8" class="inner-link"><img class="img100" alt="" src="{{ asset('img/agency-blog-img03.jpg') }}" data-img-size="(W)800px X (H)507px"></a>
+                                <a href="http://www.purpleorange.co.in/view-more/30" class="inner-link"><img class="img100" alt="" src="{{ asset('img/agency-blog-img03.jpg') }}" data-img-size="(W)800px X (H)507px"></a>
                             </div>
                             <!-- end blog image -->
                             <!-- blog details -->
                             <div class="post-details bg-white tz-background-color">
-                                <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="#subscribe-section8" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> 1599 / PER NIGHT</a></div>
-                                <a href="#subscribe-section8" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">EMPIRE STATE VIEW SUITE</a>
-                                <div class="text-medium tz-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</div>
+                                <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="http://www.purpleorange.co.in/view-more/30" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> 3500 / PER NIGHT</a></div>
+                                <a href="http://www.purpleorange.co.in/view-more/30" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">Sterling Koramangala Service Apartment </a>
+                                <div class="text-medium tz-text">This property has 54 rooms of 3 star category, Located at the strategic inter section of inner ring road and 100 feet road Koramangala. It is close to most of the software companies on inner ring road and Koramangala industrial area, It is end route to Sajpur, Marathahalli / Sajpur ring road, Bomanahalli and Electronic city. It is close to Forum Mall, Manipal Hospital, Bangalore Turf Club Race Course. Sterling Suites - Royal has got an in house Multi Cuisine Restaurant, Popular Lounge Bar, Conference Hall, and Banquets facilities, Business centre, Money changing, Travel assistant, and a Board room.</div>
                             </div>
                             <!-- end blog details -->
                         </div>

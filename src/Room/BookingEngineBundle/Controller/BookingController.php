@@ -537,8 +537,9 @@ class BookingController extends Controller
      */
     public function successAction()
     {
-
-    	return $this->render('RoomBookingEngineBundle:Default:success.html.twig');
+    	$error = null;
+    	return $this->render('RoomBookingEngineBundle:Default:success.html.twig',
+    	array('error' =>$error));
     }
     private function getBookingId(){
     	$characters = 'A5B0CD9EFG1HIJ3KLM46NOPQR7STUV8WXYZ';
