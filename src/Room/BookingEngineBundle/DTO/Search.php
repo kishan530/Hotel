@@ -3,6 +3,7 @@
 namespace Room\BookingEngineBundle\DTO;
 
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * This is a DTO to hold the data of Search
  *
@@ -14,6 +15,12 @@ class Search
 
 	/**
 	 * @var string
+	 * @Assert\Length(max = 100, maxMessage="Your Name cannot contain more then 100")
+     * @Assert\Regex(
+     *     pattern="/^[a-zA-Z&.]+([s ][A-Za-z&.]+)*$/",
+     *     match=true,
+     *     message="Please enter a valid City"
+     * )
 	 */
 	private $city;
 	/**

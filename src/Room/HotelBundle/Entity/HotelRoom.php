@@ -95,6 +95,13 @@ class HotelRoom
      * @ORM\Column(name="block_end_date", type="date")
      */
      private $blockEndDate; 
+     
+     /**
+      * @var integer
+      *
+      * @ORM\Column(name="sequence", type="integer")
+      */
+     private $sequence;
     
 
     /**
@@ -335,6 +342,25 @@ class HotelRoom
 		$this->blockEndDate = $blockEndDate;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the integer
+	 */
+	public function getSequence() {
+		return $this->sequence;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$sequence
+	 */
+	public function setSequence($sequence) {
+		$this->sequence = $sequence;
+		return $this;
+	}
+	
 	
 	
 	

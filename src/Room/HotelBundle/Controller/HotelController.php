@@ -143,7 +143,8 @@ class HotelController extends Controller
 					
 					$hotelRoomObj->setBlockStartDate($hotelRoom->getBlockStartDate());
 					$hotelRoomObj->setBlockEndDate($hotelRoom->getBlockEndDate());
-										
+					$hotelRoomObj->setSequence($hotelRoom->getSequence());
+					
 					$hotelRoomObj->setName($name );
 					
 					
@@ -242,6 +243,8 @@ class HotelController extends Controller
 			
 			$hotelRoom->setBlockStartDate ($hotelRoomObj->getBlockStartDate() );
 			$hotelRoom->setBlockEndDate ($hotelRoomObj->getBlockEndDate());
+			
+			$hotelRoom->setSequence ($hotelRoomObj->getSequence());
 			
 			
 			$hotelRoom->setName ($hotelRoomObj->getName() );
@@ -366,6 +369,7 @@ class HotelController extends Controller
 				
 				$blockStartDate = $hotelRoom->getBlockStartDate();
 				$blockEndDate = $hotelRoom->getBlockEndDate();
+				$sequence = $hotelRoom->getSequence();
 				
 				
 				
@@ -384,6 +388,8 @@ class HotelController extends Controller
 				$hotelRoomObj->setSoldOut ($soldout );
 				$hotelRoomObj->setBlockStartDate ($blockStartDate );
 				$hotelRoomObj->setBlockEndDate ($blockEndDate );
+				$hotelRoomObj->setSequence ($sequence );
+				
 				
 				$hotelRoomObj->setName ($name);
 			//echo var_dump($hotelRoomObj);
@@ -452,6 +458,21 @@ class HotelController extends Controller
 		$em->flush();
 		return new Response('true');
 		//	return $this->redirect($this->generateUrl('room_hotel_search_hotel'));
+	}
+	
+	
+	public function deleteHotelImageAction($id)
+	{
+		$hotelRoom = $this->getDoctrine()
+		->getRepository('RoomHotelBundle:HotelImage')
+		->find($id);
+	
+		$em = $this->getDoctrine()->getManager();
+		//$hotelRoom->$repository->findOneBy(array('id' => 'id'));
+		$em->remove($hotelRoom);
+		$em->flush();
+		//return new Response('true');
+		return $this->redirect($this->generateUrl('room_hotel_search_hotel'));
 	}
 
 	

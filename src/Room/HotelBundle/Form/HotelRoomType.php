@@ -55,7 +55,7 @@ class HotelRoomType extends AbstractType
             						'label' => 'price', ))
              
             ->add('imagePath', 'file',array(
-            				'required' => false,
+            				'required' => true,
             				'attr'   =>  array(
             						'class'   => 'filestyle',
             						'data-icon'   => 'false',
@@ -106,6 +106,9 @@ class HotelRoomType extends AbstractType
             						'attr' => array('data-date-format' => 'dd/mm/yyyy')
             				
             				))
+           		->add('sequence', null, array(
+            						'required'    => true,
+            						'label' => 'sequence', ))
            
         ;
     }

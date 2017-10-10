@@ -91,6 +91,8 @@ $("#result").on('click',".delete", function (e) {
 	    	       }
 	    	   });
   	});			
+
+
 	
 
 </script>
@@ -107,6 +109,38 @@ $(this).datepicker("hide");
 }).data('datepicker');
 	
 });
+</script>
+
+<script>
+
+
+$("#resultimg").on('click',".delete", function (e) {
+		e.preventDefault();
+		var deleteUrl  = $(this).attr('href');
+		 if (!confirm("This Images  will be deleted permanently form the system, please confirm")) {
+	            exit();
+	        }
+	  		 var id = $(this).attr('value');
+	  		 var tr = $(this).parent().parent();
+		    	   $.ajax({
+   	     	 
+    	       url: deleteUrl,
+    	       type: "GET",
+    	       data: { 'id': id },
+    	       success: function(data) {	
+    	    	  //swal('Deactivated Successfully !');
+    	    	   alert('Hotel Image deleted'); 
+    			  tr.remove();
+    	       },
+  	       error: function(XMLHttpRequest, textStatus, errorThrown)
+    	       {
+  	           alert('Error: ' +  errorThrown);
+    	       }
+    	   });
+	});			
+
+	
+
 </script>
 
 
@@ -137,9 +171,12 @@ $(this).datepicker("hide");
 	            {{ form_errors(form.active) }}
 	            {{ form_errors(form.soldOut) }}
 	            {{ form_errors(form.price) }}
+	            {{ form_errors(form.url) }}
 	          
             </ul>
             </div>
+            
+           
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -288,8 +325,26 @@ $(this).datepicker("hide");
                             	{{ _self.image_prototype(i) }}
                             {% endfor %}
                         </div>
-         <a href="#" id="add-another-image">Add another Image</a>
-                          
+                        <div>
+         <a href="#" id="add-another-image">Add another Image</a><br>
+         </div>
+            
+         <div id="resultimg">
+
+         
+{% for image in hotel.images %}
+<a href="{{ path('room_hotel_delete_hotelImage', {'id': image.id})}}" class="delete" value="{{ image.id }}">
+<div class="show-image" >
+<img src="{{ asset('img/Hotels/'~image.imagePath)}}" class="hotel-box-img fa fa-trash-o delete" />
+<input class="delete" type="button" value="delete" />
+
+</div>
+
+</a>
+{% endfor %}
+</div>
+   
+  <div>                          
       {% if hotel.hotelRooms|length>0 %}
 			<h4 >Hotel Rooms</h4>
 		
@@ -301,6 +356,7 @@ $(this).datepicker("hide");
 				
  					<tr class="blue">
                                 <th>Sl.No #</th>
+                                 <th>Sequence</th>
                                 <th>Name</th>
                                 <th>RoomType</th>
                                 <th>capacity</th>
@@ -320,6 +376,7 @@ $(this).datepicker("hide");
 				
 		<tr>
                         	<td>{{ loop.index }} </td>
+                        	 <td>{{ hotelRoom.sequence }}</td>
                             <td>{{ hotelRoom.name }}</td>
                             <td>{{ hotelRoom.roomType }}</td>
                             <td>{{ hotelRoom.capacity }}</td>
@@ -331,11 +388,12 @@ $(this).datepicker("hide");
                             <td>{{ hotelRoom.soldOut }}</td>
                              <td>{{ hotelRoom.blockStartDate|date("d/m/y") }}</td>
                               <td>{{ hotelRoom.blockEndDate|date("d/m/y") }}</td>
-                            <td>{{ hotelRoom.imagePath }}</td>
+                            {#}<td>{{ hotelRoom.imagePath }}</td>{#}
+                           <td class=""><img src="{{ asset('img/Hotels/'~hotelRoom.imagePath) }}" class="hotel-box-img" > </td>
                             
                            
                       {#} <td> <a href="{{ path('room_hotel_edit_hotel',{ 'id': hotelRoom.id }) }}"><i class="fa fa-pencil-square-o"></i></a></td>{#}
-                     <td> <a href="{{ path('room_hotel_delete_hotelRoom', {'id': hotelRoom.id})}}" class="delete" value="{{ hotelRoom.id }}"> <i class="fa fa-trash-o pull-right" aria-hidden="true "></i> </a></td>
+                     <td> <a href="{{ path('room_hotel_delete_hotelRoom', {'id': hotelRoom.id})}}" class="delete" value="{{ hotelRoom.id }}"> <i class="fa fa-trash-o pull-right" aria-hidden="true"></i> </a></td>
                         	
                         </tr>
 		
@@ -346,7 +404,7 @@ $(this).datepicker("hide");
 	 	</div>
     </div>
         {% endif %}                
-                        
+   </div>                     
                         
                   
                     
@@ -356,6 +414,25 @@ $(this).datepicker("hide");
                      {% macro room_prototype(i) %}
                     <div class="borderhotelbox">
                      <div class="row ">
+	                    {#}print{#}
+	                    
+	                    <div class="col-lg-12 col-sm-12 form-group has-error">
+			<ul class="errors">
+	            {{ form_errors(i, { 'global_errors': true }) }}
+	            
+	            {{ form_errors(i.capacity) }}
+	            {{ form_errors(i.price) }}
+	            {{ form_errors(i.imagePath) }}
+	            {{ form_errors(i.maxAdult) }}
+	            {{ form_errors(i.maxChild) }}
+	            {{ form_errors(i.description) }}
+	            {{ form_errors(i.name) }}
+	            {{ form_errors(i.sequence) }}
+	            
+	          
+            </ul>
+            </div>
+	                    
 	                    
 	                    <div class="col-lg-6">
                          <div class="row form-group">
@@ -424,6 +501,16 @@ $(this).datepicker("hide");
                                 {{ form_widget(i.soldOut) }}
                            		 </div> 
                          </div>
+                        
+                        </div>
+                        <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+								{{ form_label(i.sequence) }}
+                                {{ form_widget(i.sequence) }}
+                           		 </div> 
+                         </div>
+                        
                         </div>
                          
                          
@@ -444,6 +531,7 @@ $(this).datepicker("hide");
                             
                           </div>
                           
+                          
                           <div class="row form-group">
                           
                           
@@ -461,7 +549,7 @@ $(this).datepicker("hide");
                         
                                                 
                      </div>
-                 	</div>  
+                 	
                                               
                      {% endmacro %}
                      <div id="room-list"

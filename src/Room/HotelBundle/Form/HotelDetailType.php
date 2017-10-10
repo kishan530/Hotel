@@ -144,7 +144,7 @@ class HotelDetailType extends AbstractType
             		'type'   => new HotelRoomType(),
             		'allow_add'    => true,
             		'prototype'=>true,
-            		'required'    => false,
+            		//'required'    => false,
             		// these options are passed to each "PackageItinerary" type
             		//'entry_options'  => array(
             		//   'attr'      => array('class' => '')
@@ -156,7 +156,9 @@ class HotelDetailType extends AbstractType
             		'required' => false,
             ))
             
-            ->add('url')
+            ->add('url','text', array(
+            		'label'    => 'Display in footer',
+            		'required' => true,))
             
         ;
     }

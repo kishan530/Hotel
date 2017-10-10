@@ -98,7 +98,45 @@ class CatalogueService
     	$hotel->setPrice($price);
     	
     	return $hotel;
+    } /**
+     * 
+     * @param unknown $hotel
+     * @return unknown
+     */
+    public function getRoomsBySequence($hotel){
+    	$rooms = $hotel->getHotelRooms();
+    	$tempArray=array();
+    	//echo $location;
+    	$price = 0;
+    	$sequence = 0;
+    	foreach($rooms as $room){
+    		$tempArray[] = $room;
+    	}
+    	for($i = 0; $i < count($tempArray)-1; $i ++){
+    		
+    		$room1=$tempArray[$i];
+    		$room2=$tempArray[$i+1];
+    		$roomPrice1 = $room1->getPrice();
+    		$roomSequence1 = $room1->getSequence();
+    		$roomPrice2 = $room2->getPrice();
+    		$roomSequence2 = $room2->getSequence();
+
+    		if($roomSequence1 > $roomSequence2) {
+    			$temp = $room2;
+    			$tempArray[$i+1]=$room1;
+    			$tempArray[$i]=$temp;
+    		}
+    		
+    		
+    	}
+    	
+    	$hotel->setHotelRooms($tempArray);
+    	
+    	return $hotel;
     }
+    
+    
+    
     
     /**
      * 

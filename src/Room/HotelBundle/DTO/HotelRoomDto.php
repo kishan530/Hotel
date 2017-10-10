@@ -91,6 +91,12 @@ class HotelRoomDto
      */
     private $blockEndDate;
     
+    /**
+     * @var integer
+     *
+     */
+    private $sequence;
+    
       
      /**
      * @var string
@@ -338,6 +344,25 @@ class HotelRoomDto
 		$this->blockEndDate = $blockEndDate;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the integer
+	 */
+	public function getSequence() {
+		return $this->sequence;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$sequence
+	 */
+	public function setSequence($sequence) {
+		$this->sequence = $sequence;
+		return $this;
+	}
+	
 	
 	
 	

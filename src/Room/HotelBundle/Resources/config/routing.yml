@@ -16,6 +16,10 @@ room_hotel_delete_hotelRoom:
     path:     /{id}/delete-hotelroom
     defaults: { _controller: "RoomHotelBundle:Hotel:deleteHotelRoom" }
     
+room_hotel_delete_hotelImage:
+    path:     /{id}/delete-hotelimage
+    defaults: { _controller: "RoomHotelBundle:Hotel:deleteHotelImage" }
+    
 room_hotel_add_coupon_code:
     path:     /add-coupon-code
     defaults: { _controller: "RoomHotelBundle:Coupon:addCoupon" }

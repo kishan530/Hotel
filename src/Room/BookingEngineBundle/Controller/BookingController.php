@@ -204,15 +204,33 @@ class BookingController extends Controller
     	
     	//echo var_dump($search->getCheckIn());
     	//exit();
-    	
+    	if($search==null){
+    		
+    		$search = new Search();
+    		$search->setNumAdult(2);
+    		$search->setNumRooms(1);
+    		
+    		$fromDate = new \DateTime();
+    		$toDate = new \DateTime();
+    		$from = $search->setCheckIn($fromDate+ '5day');
+    		
+    		$to = $search->setCheckOut($toDate+ '6day');
+    		$numRoom='1';
+    		$hotels = $search->setCity('Bangalore');
+    		$session->set('search',$search);
+    		$session->set('hotels',$hotels);
+    		
+    	}else{
     	$numRoom=$search->getNumRooms();
+    	//$form   = $this->createSearchForm($search);
     //	$search = new Search();
-    	
+    	}
     	$form   = $this->createSearchForm($search);
     	$em = $this->getDoctrine()->getManager();
     	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
     	$catalogueService = $this->container->get( 'catalogue.service' );
     	$hotel = $catalogueService->getMinPrice($hotel);
+    	$hotel = $catalogueService->getRoomsBySequence($hotel);
     	$roomPrice=$hotel->getPrice();
     	$hotel->setPrice($roomPrice*$numRoom);
     	return $this->render('RoomBookingEngineBundle:Default:view-more.html.twig', array(
@@ -222,6 +240,7 @@ class BookingController extends Controller
     			
     	));
     }
+    
     
     /**
      * 
@@ -658,6 +677,10 @@ public function serviceDetailAction(Request $request,$url)
     			
     	));
     }
+    
+    
+    
+    
     
     public function payuAction(Request $request){
     	$session = $request->getSession ();

@@ -8092,3 +8092,34 @@ display: initial;
   background-image: repeating-linear-gradient(30deg, rgba(#FFF, .2), rgba(#FFF, .2) 30px, transparent 0, transparent 60px);
 	
 }
+.hotel-box-img {
+    display: inline-block;
+    width: 75px;
+    height: 25px;
+    margin: 10px;
+    border: 1px solid #73AD21;  
+}
+
+div.show-image {
+    position: relative;
+   	display: inline-block;
+    margin:5px;
+}
+div.show-image:hover img{
+    opacity:0.5;
+}
+div.show-image:hover input {
+    display: block;
+}
+div.show-image input {
+    position:absolute;
+    display:none;
+}
+
+div.show-image input.delete {
+    top:0;
+    left:50%;
+}
+.servicetext{
+	text-align: justify;
+}
