@@ -58,7 +58,7 @@ class BookingController extends Controller
 		
 		
 		$search = new Search();
-		$search->setNumAdult(2);
+		$search->setNumAdult(1);
 		$search->setNumRooms(1);
 		$form   = $this->createSearchForm($search);
 		return $this->render('RoomBookingEngineBundle:Default:index.html.twig', array(
