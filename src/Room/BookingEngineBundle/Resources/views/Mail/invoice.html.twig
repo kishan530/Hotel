@@ -14,8 +14,7 @@
         </tr>
         <tr>
 		<td>
-		<span align="center" style="font-weight: bold;">The
-                    Hotel Salmon Red</span></address>
+		<span align="center" style="font-weight: bold;">{{ selectedService.name }}</span></address>
          </td>
         </tr >
 		<tr>
@@ -48,11 +47,10 @@
 		<tr>
           <td style="width: 140.433px;">Hotel Name:<br>
           </td>
-          <td> Sterlin Hotel<br>
+          <td> {{ selectedService.name }}<br>
           </td>
           <td> Hotel Address </td>
-          <td> 30/32, Varthur Road, Silver Springs Layout
-          Marathahalli, Bangalore<br>
+          <td> {{ address.addressLine1}} , {{ address.addressLine2}}, {{ address.location}} , {{ address.city}} - {{ address.pincode}}<br>
           </td>
         </tr>
 		<tr>
@@ -60,8 +58,8 @@
           </td>
           <td>{{ booking.bookedOn.format('d/m/y') }}<br>
           </td>
-          <td> Number of Rooms </td>
-          <td>{{ searchFilter.numRooms }}<br>
+          <td> {#} Number of Rooms {#}</td>
+          <td> {#} {{ searchFilter.numRooms }} {#}<br>
           </td>
         </tr>
         <tr>
@@ -161,11 +159,13 @@
           </td>
         </tr>
         <tr align="center">
-          <td colspan="4" rowspan="1">PO Box 16122 Collins Street West <br>
-Victoria 8007 Australia <br>
-Envato Headquarters<br>
-           Phone 1: +61 3 8376 6284 <br>
-          Fax 1: +61 3 8376 6284
+          <td colspan="4" rowspan="1">
+		 CITI STERLING FACILITIES MANAGEMENT PVT. LTD<br>
+	Streling Heights, 'Penthouse Suite' 139 <br>
+	Infantey Road, (Opp. The Hindu)<br>
+	         Bangalore-560 001 <br>
+	        Phone: +91 80 2286 8093 / 94 /95 <br>
+          Fax: +91 80 4123 9655
             </td>
         </tr>
         </tbody>
