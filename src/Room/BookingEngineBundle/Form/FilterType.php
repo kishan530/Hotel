@@ -47,6 +47,17 @@ class FilterType extends AbstractType
 		return $categories;
 	}
 	
+	/**
+	 * @param OptionsResolverInterface $resolver
+	 */
+	private function getProperties()
+	{
+		//echo var_dump($this->filters);
+		//exit();
+		$properties = $this->filters['properties'];
+		return $properties;
+	}
+	
      /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -71,6 +82,12 @@ class FilterType extends AbstractType
             		'expanded' => true,
             		'multiple' => true,
             		'choices' => $this->getCategories(),
+            		'required'    => false,
+            ))
+            ->add('properties', 'choice', array(
+            		'expanded' => true,
+            		'multiple' => true,
+            		'choices' => $this->getProperties(),
             		'required'    => false,
             ))
            

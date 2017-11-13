@@ -109,6 +109,8 @@ class BookingController extends Controller
     	//exit();
     	
     	$filters = $catalogueService->getFilters($hotels,$amenities);
+    	//echo var_dump($filters);
+    	//exit();
     	$search->setMinPrice($filters['price']['minPrice']);
     	$search->setMaxPrice($filters['price']['maxPrice']);
     	$search->setMin($filters['price']['minPrice']);
@@ -1061,6 +1063,17 @@ public function paymentconfirmationAction(Request $request)
 	//return $this->redirect($info['redirect_url']);
 	Return $this->redirectToRoute($info['redirect_url']);
 }
+
+public function removeTrailingSlashAction(Request $request)
+{
+	$pathInfo = $request->getPathInfo();
+	$requestUri = $request->getRequestUri();
+
+	$url = str_replace($pathInfo, rtrim($pathInfo, ' /'), $requestUri);
+
+	return $this->redirect($url, 301);
+}
+
 
 
 }

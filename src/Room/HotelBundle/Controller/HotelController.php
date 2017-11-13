@@ -75,7 +75,9 @@ class HotelController extends Controller
 				
 				$hotelObj->setFooterDisplay($hotelDetail->getFooterDisplay());
 				$hotelObj->setUrl($hotelDetail->getUrl());
-				
+				$hotelObj->setMetaTitle($hotelDetail->getMetaTitle());
+				$hotelObj->setMetaKeywords($hotelDetail->getMetaKeywords());
+				$hotelObj->setMetaDescription($hotelDetail->getMetaDescription());
 				
 		
 				$hotelAddressObj->setAddressLine1($hotelDetail->getAddressLine1());
@@ -238,6 +240,7 @@ class HotelController extends Controller
 			$hotelRoom->setMaxAdult ($hotelRoomObj->getMaxAdult() );
 			$hotelRoom->setMaxChild ($hotelRoomObj->getMaxChild() );
 			$hotelRoom->setDescription ($hotelRoomObj->getDescription() );
+			//$hotelRoom->setImagePath ($hotelRoomObj->getImagePath() );
 			
 			$hotelRoom->setSoldOut ($hotelRoomObj->getSoldOut() );
 			
@@ -277,6 +280,9 @@ class HotelController extends Controller
 		
 		$hotelDetail->setFooterDisplay($hotelObj->getFooterDisplay());
 		$hotelDetail->setUrl($hotelObj->getUrl());
+		$hotelDetail->setMetaTitle($hotelObj->getMetaTitle());
+		$hotelDetail->setMetaKeywords($hotelObj->getMetaKeywords());
+		$hotelDetail->setMetaDescription($hotelObj->getMetaDescription());
 		
 		
 		$hotelAddressObj = $hotelObj->getAddress();
@@ -319,6 +325,9 @@ class HotelController extends Controller
 			
 			$hotelObj->setFooterDisplay($hotelDetail->getFooterDisplay());
 			$hotelObj->setUrl($hotelDetail->getUrl());
+			$hotelObj->setMetaTitle($hotelDetail->getMetaTitle());
+			$hotelObj->setMetaKeywords($hotelDetail->getMetaKeywords());
+			$hotelObj->setMetaDescription($hotelDetail->getMetaDescription());
 			
 			
 	

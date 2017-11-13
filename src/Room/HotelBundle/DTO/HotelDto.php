@@ -143,6 +143,27 @@ class HotelDto
      */
     private $url;
     
+    /**
+     * @var string
+     *
+     *
+     */
+    private $metaTitle;
+    
+    /**
+     * @var string
+     *
+     *
+     */
+    private $metaKeywords;
+    
+    /**
+     * @var string
+     *
+     *
+     */
+    private $metaDescription;
+    
     
     /**
      * @var Collection
@@ -636,6 +657,61 @@ class HotelDto
 		$this->url = $url;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getMetaTitle() {
+		return $this->metaTitle;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$metaTitle
+	 */
+	public function setMetaTitle($metaTitle) {
+		$this->metaTitle = $metaTitle;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getMetaKeywords() {
+		return $this->metaKeywords;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$metaKeywords
+	 */
+	public function setMetaKeywords($metaKeywords) {
+		$this->metaKeywords = $metaKeywords;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getMetaDescription() {
+		return $this->metaDescription;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$metaDescription
+	 */
+	public function setMetaDescription($metaDescription) {
+		$this->metaDescription = $metaDescription;
+		return $this;
+	}
+	
 	
 	
 	

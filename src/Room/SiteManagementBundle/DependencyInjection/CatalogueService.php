@@ -226,6 +226,7 @@ class CatalogueService
     	$price = array();
     	$amenities = array();
     	$categories = array();
+    	$properties = array();
     	$maxPrice = 0;
     	$minPrice = 100000;
     	$amenitiesMstr = $this->getAmenitiesById($amenitiesMstr);
@@ -233,6 +234,9 @@ class CatalogueService
     		$address = $hotel->getAddress();
     		$hotelAmenities = $hotel->getAmenities();
     		$category = $hotel->getCategory();
+    		
+    		$property = $hotel->getPropertyType();
+    		
     		$location = $address->getLocation();
     		$price = $hotel->getPrice();
     		
@@ -245,6 +249,11 @@ class CatalogueService
     			$categories[$category] = $category.' Star';
     		$locations[$location] = $location;
     		
+    		if(!is_null($property))
+    			$properties[$property] = $property;
+    		$locations[$location] = $location;
+    		
+    		
     		foreach($hotelAmenities as $amenity){
     			$mstrAmenity = $amenitiesMstr[$amenity->getAmenity()];
     			$amenities[$mstrAmenity->getId()] = $mstrAmenity->getName();
@@ -253,8 +262,11 @@ class CatalogueService
     	
     	$filters['locations'] = $locations;
     	$filters['categories'] = $categories;
+    	$filters['properties'] = $properties;
     	$filters['amenities'] = $amenities;
     	$filters['price']=array('maxPrice'=>$maxPrice,'minPrice'=>$minPrice);
+    	//echo var_dump($filters);
+    	//exit();
     	return $filters;
     }	
     
@@ -268,6 +280,7 @@ class CatalogueService
     	
     	$slectedLocations = $search->getLocation();
     	$slectedCategories = $search->getCategories();
+    	$slectedProperties = $search->getProperties();
     	
     	if(count($slectedLocations)>0)
     		$hotels = $this->filterByLocation($slectedLocations,$hotels);
@@ -276,6 +289,10 @@ class CatalogueService
     	
     	if(count($slectedCategories)>0)
     		$hotels = $this->filterByCategory($slectedCategories,$hotels);
+    	
+    	if(count($slectedProperties)>0)
+    		$hotels = $this->filterByPropertyType($slectedProperties,$hotels);
+    	
     	return $hotels;
     }
     /**
@@ -351,5 +368,25 @@ class CatalogueService
     	//exit();
     	return $tempHotels;
     }
+    public function filterByPropertyType($slectedProperties,$hotels){
+    	$tempHotels = array();
+    	foreach($hotels as $hotel){
+    		$address = $hotel->getAddress();
+    		$hotelAmenities = $hotel->getAmenities();
+    		$property = $hotel->getPropertyType();
+    		$location = $address->getLocation();
+    		$price = $hotel->getPrice();
+    		//echo var_dump($slectedCategories);
+    		foreach($slectedProperties as $slectedProperty){
+    			//echo $category;
+    			//echo $selectedCategory;
+    			if ($property==$slectedProperty)
+    				$tempHotels[] = $hotel;
+    		}
+    	}
+    	//exit();
+    	return $tempHotels;
+    }
+    
 	
 }

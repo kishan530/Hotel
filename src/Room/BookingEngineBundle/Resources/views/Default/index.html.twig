@@ -98,6 +98,30 @@ $('#guests').click(function(e){
         
     });
 
+    
+$("#guests-box").on('click','.guestclose',function(e){ 
+	 e.preventDefault(); //STOP default action 
+	 //alert('hi');
+	 $('#guests').popover('hide');
+	
+	/* var x = document.getElementById("guestsclosediv");
+	
+	 
+	   if (x.style.display === "none") {
+	         x.style.display = "block";
+	     } else {
+	         
+	    	 x.style.display = "none";
+	         
+	     } */
+	}); 
+
+	
+
+	
+	
+
+
 $(function () {
 
 	// implementation of disabled form fields
@@ -132,8 +156,8 @@ $(function () {
                 <ul class="custom-list tab-content-list">
 
                   <!-- Start Hotel -->
-                  <li class="tab-content active row">
-                  <div id="search-form">
+                  <li class="tab-content active ">
+                  <div id="search-form" class="row search-form-boxnew">
                     {{ form_start(form) }}
                     
            <div class="col-lg-12 col-sm-12 form-group has-error">
@@ -163,11 +187,19 @@ $(function () {
                       </span>
                       <span class="city guests" id="guests-box">
                       <input type="text" id="guests" value="{{ search.numAdult }} Guests, {{ search.numRooms }} Room" readonly/>
+                      
                       <div id="popover-content" style="display: none">
                       
+                     <div id="guestsclosediv" >
                       	<h5>Room 1</h5>
-                      	
-                      	<div class="guests-room">
+                      	  <!--  <button type="button" id="guestclose" class="guestclose" aria-label="Close" >
+  								 	<span aria-hidden="true">&times;</span>
+						</button> -->
+						<a class="close btnguestclosecase guestclose" id="guestclose">&times;</a>
+						 
+						               	 
+                      	<div class="guests-room" id="guests-room">
+                      	 
                       	<div class="row">
                       		<div class="col-lg-8">
                       			<i class="adults-count">2</i> Adults <i class="guests-text">Above 12 years</i>
@@ -189,7 +221,8 @@ $(function () {
                       	</div> 
                       	<hr> 
                       	</div>
-                      	<a href="#" class="add-room" value="1">Add Room</a>                      	                      	
+                      	<a href="#" class="add-room" value="1">Add Room</a>   
+                      	</div>                   	                      	
                       </div>
                     
                       

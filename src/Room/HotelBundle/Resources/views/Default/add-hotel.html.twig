@@ -226,6 +226,28 @@ $("#resultimg").on('click',".delete", function (e) {
                             </div>  
                                                     
                     </div>
+                    <div class="row form-group">
+                             <div class="col-lg-12">
+                            	{{ form_label(form.metaTitle) }}
+                                {{ form_widget(form.metaTitle) }}
+                            </div>  
+                                                    
+                    </div>
+                    <div class="row form-group">
+                             <div class="col-lg-12">
+                            	{{ form_label(form.metaKeywords) }}
+                                {{ form_widget(form.metaKeywords) }}
+                            </div>  
+                                                    
+                    </div>
+                    <div class="row form-group">
+                             <div class="col-lg-12">
+                            	{{ form_label(form.metaDescription) }}
+                                {{ form_widget(form.metaDescription) }}
+                            </div>  
+                                                    
+                    </div>
+                    
                     
                      <div class="row form-group">
                            <div class="col-lg-6">
@@ -334,9 +356,13 @@ $("#resultimg").on('click',".delete", function (e) {
          
 {% for image in hotel.images %}
 <a href="{{ path('room_hotel_delete_hotelImage', {'id': image.id})}}" class="delete" value="{{ image.id }}">
+
 <div class="show-image" >
+
 <img src="{{ asset('img/Hotels/'~image.imagePath)}}" class="hotel-box-img fa fa-trash-o delete" />
-<input class="delete" type="button" value="delete" />
+ {#}<input class="delete" type="button" value="delete" />{#}
+<a href="{{ path('room_hotel_delete_hotelImage', {'id': image.id})}}" class="close delete " id="guestclose">&times;</a>
+{#}<a href="{{ path('room_hotel_delete_hotelImage', {'id': image.id})}}" class="close" value="{{ image.id }}"></a>{#}
 
 </div>
 

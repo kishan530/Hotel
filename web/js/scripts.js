@@ -48,64 +48,26 @@ $(document).ready(function () {
   ------------------------------------------------------------------------- */
   $.fn.uouSelectBox = function() {
 
-    var self = $(this),
-      select = self.find('select');
-    self.prepend('<ul class="select-clone custom-list"></ul>');
-
-    var selected = select.find('option:selected').text();
-    //alert();
-    var placeholder = select.data('placeholder') ? select.data('placeholder') : select.find('option:eq(0)').text(),
-      clone = self.find('.select-clone');
-    self.prepend('<input class="value-holder" type="text" disabled="disabled" value="'+selected+'" placeholder="' + placeholder + '"><i class="fa fa-sort arrow-down"></i>');
-    var value_holder = self.find('.value-holder');
+    
 
     // INPUT PLACEHOLDER FIX FOR IE
-    if ($.fn.placeholder) {
-      self.find('input, textarea').placeholder();
-    }
+    
 
     // CREATE CLONE LIST
-    select.find('option').each(function() {
-      if ($(this).attr('value')) {
-        clone.append('<li data-value="' + $(this).val() + '">' + $(this).text() + '</li>');
-      }
-    });
+  
 
     // TOGGLE LIST
-    self.click(function() {
-    	//alert('hi');
-      var media_query_breakpoint = uouMediaQueryBreakpoint();
-     // if (media_query_breakpoint > 991) {
-        clone.slideToggle(100);
-        self.toggleClass('active');
-      //}
-    });
+   
 
     // CLICK
-    clone.find('li').click(function() {
-    	 $("#hotel_search_checkIn").focus();
-      value_holder.val($(this).text());
-      select.find('option[value="' + $(this).attr('data-value') + '"]').attr('selected', 'selected');
-
-      // IF LIST OF LINKS
-      if (self.hasClass('links')) {
-        window.location.href = select.val();
-      }
-
-    });
+ 
     
 
     // HIDE LIST
-    self.bind('clickoutside', function(event) {
-      clone.slideUp(100);
-    });
+   
 
     // LIST OF LINKS
-    if (self.hasClass('links')) {
-      select.change(function() {
-        window.location.href = select.val();
-      });
-    }
+   
 
   };
 

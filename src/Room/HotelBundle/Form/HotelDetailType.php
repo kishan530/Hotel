@@ -46,6 +46,10 @@ class HotelDetailType extends AbstractType
         $builder
             ->add('name')
             ->add('overview')
+            ->add('metaTitle')
+            ->add('metaKeywords')
+            ->add('metaDescription')
+                        
             ->add('propertyType', 'choice', array(
             		'expanded' => false,
             		'multiple' => false,
@@ -61,6 +65,9 @@ class HotelDetailType extends AbstractType
             		'multiple' => false,
             		'label' => 'Category',
             		'choices' => array(
+            				'Service Apartment'=>'Service Apartment',
+            				'1'=>'Hotel',
+            				'2'=>'Guest House',
             				'3'=>'3 Star',
             				'4'=>'4 Star',
             				'5'=>'5 Star',
@@ -157,7 +164,7 @@ class HotelDetailType extends AbstractType
             ))
             
             ->add('url','text', array(
-            		'label'    => 'Display in footer',
+            		'label'    => 'URL',
             		'required' => true,))
             
         ;

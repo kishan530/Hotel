@@ -342,6 +342,26 @@ $('#guests').click(function(e){
                 
                 
                 
+                {#} property type {#}
+                
+                <hr class="filter-divider">
+                <h5 class="title">Property Type</h5>
+                <ul class="custom-list additional-filter-list clearfix">
+                
+                 {% for key, item in filterForm.properties.children %}			
+                  <li>
+                    <span class="checkbox-input">
+                     
+                      {{ form_widget(item) }}
+                      {{ form_label(item) }}
+                    </span>
+                  </li>
+                  {% endfor %} 
+                 
+                </ul>
+                
+                
+                
               </div>
 {#               <div class="buttons">#}
 {#                 <button class="btn btn-transparent-gray pull-left">#}

@@ -4582,7 +4582,7 @@ hr {
   font-family: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .default-form select {
-	display : none;
+	/* display : none; */
   background: rgba(255, 255, 255, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.5);
     height: 50px;
@@ -5598,9 +5598,11 @@ padding: 10px;
   background: #333333;
 }
 #banner #hero-tabs .tab-content-list {
-  padding: 40px;
+  padding: 33px;
   text-align: center;
   background: rgba(0, 0, 0, 0.4);
+  padding-left: 12px;
+  padding-right: 12px;
 }
 #banner #hero-tabs .tab-content-list .tab-content {
   display: none;
@@ -5730,7 +5732,7 @@ color: #ffffff !important;
   z-index: 99;
 }
 #search-form span .select-clone li {
-  padding: 20px;
+  padding: 100px;
   display: block;
   border-bottom: 1px solid #ededed;
   cursor: pointer;
@@ -8094,8 +8096,8 @@ display: initial;
 }
 .hotel-box-img {
     display: inline-block;
-    width: 75px;
-    height: 25px;
+    width: 100px;
+    height: 50px;
     margin: 10px;
     border: 1px solid #73AD21;  
 }
@@ -8122,4 +8124,22 @@ div.show-image input.delete {
 }
 .servicetext{
 	text-align: justify;
+}
+
+.btnguestclosecase{
+    position: absolute;
+	padding: 8px 20px;
+    height: 37px;
+	top: 3px;
+	right: 6px;
+	padding: 4px 20px; 
+	height: 37px;
+	font-size: 30px;
+	color:#000;
+	opacity: 1;
+}
+.search-form-boxnew{
+    text-align: center;
+    width: 96%;
+    margin: 0 auto;
 }

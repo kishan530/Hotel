@@ -40,3 +40,11 @@ room_booking_engine_payment_confirmation:
 room_booking_engine_payment_Details:
     path:     /paymentDetailsAction
     defaults: { _controller: RoomBookingEngineBundle:Booking:paymentDetailsAction }
+
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: RoomBookingEngineBundle:Booking:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]
+    

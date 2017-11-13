@@ -31,6 +31,12 @@ class Search
 	 * @var integer
 	 */
 	private $categories;
+	
+	/**
+	 * @var string
+	 */
+	private $properties;
+	
 	/**
 	 * @var Collection
 	 */
@@ -328,6 +334,28 @@ class Search
 		$this->numChildren = $numChildren;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getProperties() {
+		return $this->properties;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$properties
+	 */
+	public function setProperties($properties) {
+		$this->properties = $properties;
+		return $this;
+	}
+	
+	
+	
+	
 	
 	
 	

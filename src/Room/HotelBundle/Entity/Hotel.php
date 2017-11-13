@@ -122,8 +122,28 @@ class Hotel
      */
     private $url;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="metaTitle", type="string", length=100)
+     */
+    private $metaTitle;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="metaKeywords", type="string", length=100)
+     */
+    private $metaKeywords;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="metaDescription", type="string", length=1000)
+     */
+    private $metaDescription;
+    
+     
     
     
     
@@ -517,6 +537,61 @@ class Hotel
 		$this->url = $url;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getMetaTitle() {
+		return $this->metaTitle;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$metaTitle
+	 */
+	public function setMetaTitle($metaTitle) {
+		$this->metaTitle = $metaTitle;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getMetaKeywords() {
+		return $this->metaKeywords;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$metaKeywords
+	 */
+	public function setMetaKeywords($metaKeywords) {
+		$this->metaKeywords = $metaKeywords;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getMetaDescription() {
+		return $this->metaDescription;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$metaDescription
+	 */
+	public function setMetaDescription($metaDescription) {
+		$this->metaDescription = $metaDescription;
+		return $this;
+	}
+	
 	
 	
 	

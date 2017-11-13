@@ -113,7 +113,8 @@
 				    
 {# 					<img src="{{  cloudinary_url('payu',  {'secure': 'true' }) }}" />#}
 				
- 			 {% if is_granted('IS_AUTHENTICATED_FULLY') %}  
+ 			{#} {% if is_granted('IS_AUTHENTICATED_FULLY') %} {#}
+ 			 {% if is_granted('ROLE_SUPER_ADMIN') %} 
 						
 						<a href="{{ path('room_booking_engine_success') }}" class="btn btn-primary pull-right" style="margin-top: 40px; margin-left: 80px;margin-bottom: 10px;margin-right: 60px;background-color: #209838;border-color: #21bb29;" > book now </a>
 				{% else %}		
