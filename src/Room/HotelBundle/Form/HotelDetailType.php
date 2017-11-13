@@ -57,6 +57,10 @@ class HotelDetailType extends AbstractType
             		'choices' => array(
             				'Service Apartments'=>'Service Apartments',
             				'Resort'=>'Resort',
+							'Hotel'=>'Hotel',
+            				'Business Hotel'=>'Business Hotel',
+            				'Guest House'=>'Guest House',
+            				'PG'=>'PG',
             		),
             		'required'    => true,
             ))

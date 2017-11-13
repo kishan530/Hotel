@@ -58,7 +58,7 @@ class BookingController extends Controller
 		
 		
 		$search = new Search();
-		$search->setNumAdult(2);
+		$search->setNumAdult(1);
 		$search->setNumRooms(1);
 		$form   = $this->createSearchForm($search);
 		return $this->render('RoomBookingEngineBundle:Default:index.html.twig', array(
@@ -497,13 +497,16 @@ class BookingController extends Controller
     		$payuLink = $this->generateUrl ( 'room_booking_engine_payment_payu' );
     		
 
-    		//m
-    	/* 	
+    	
+    	 	
     		$mailer = $this->renderView(
     				'RoomBookingEngineBundle:Mail:invoice.html.twig',array(
     						'booking' => $booking,
     						'customer' => $customer,
-    						'selectedRoom'=>$selectedRoom
+    						'searchFilter'=>$searchFilter,
+    						'selectedRoom'=>$selectedRoom,
+							'selectedService'=>$selectedService,
+							'address'=>$address
     						 
     				)
     		); 
@@ -512,10 +515,10 @@ class BookingController extends Controller
     		$mailService = $this->container->get( 'mail.services' );
     		$email=$customer->getEmail();
     		$mailService->mail($email,$subject,$mailer);
-			$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer); */
+			$mailService->mail('info@sterlingsuites.in',$adminSubject,$mailer); 
 			
     		
-    		//m
+    		
     		
     		$security = $this->container->get ( 'security.context' );
     		 
@@ -738,19 +741,19 @@ public function serviceDetailAction(Request $request,$url)
 
    private function getData($request,$finalPrice,$bookingId,$customer,$redirectUrl){
 	// Merchant key here as provided by Payu
-	$MERCHANT_KEY = "rjQUPktU";
+	//$MERCHANT_KEY = "rjQUPktU";
 	
-	//$MERCHANT_KEY = "OwPbxU2k";
-	//$SALT = "aa70fUA5Hh";
+	$MERCHANT_KEY = "OwPbxU2k";
+	$SALT = "aa70fUA5Hh";
 	// Merchant Salt as provided by Payu
 	
-	$SALT = "e5iIg1jwi8";
+	//$SALT = "e5iIg1jwi8";
 
 	// End point - change to https://secure.payu.in for LIVE mode
-	//$PAYU_BASE_URL = "https://secure.payu.in";
+	$PAYU_BASE_URL = "https://secure.payu.in";
 	
 	//testing Mode
-	$PAYU_BASE_URL = "https://test.payu.in";
+	//$PAYU_BASE_URL = "https://test.payu.in";
 	 
 	$action = $PAYU_BASE_URL . '/_payment';
 	//$txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);

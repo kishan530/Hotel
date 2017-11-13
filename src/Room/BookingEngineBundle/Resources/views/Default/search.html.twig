@@ -44,7 +44,7 @@ $("#guests-box").on('click','#add-room',function(e){
     	$('#guests-room').append("<h5>Room "+roomCount+"</h5>");
     	$('#guests-room').append(room);
     	$('#hotel_search_numRooms').val(roomCount);
-    	$('#hotel_search_numAdult').val(adultCount+2);
+    	$('#hotel_search_numAdult').val(adultCount+1);
     	 var totalAdultCount = parseInt($('#hotel_search_numAdult').val());
     	 var totalChildCount = parseInt($('#hotel_search_numChildren').val());
     	var guests = totalAdultCount + totalChildCount;
@@ -160,10 +160,10 @@ $('#guests').click(function(e){
                       	<div id="guests-room">
                       	<div class="row">
                       		<div class="col-lg-8">
-                      			<i class="adults-count">2</i> Adults <i class="guests-text">Above 12 years</i>
+                      			<i class="adults-count">1</i> Adults <i class="guests-text">Above 12 years</i>
                       		</div>
                       		<div class="col-lg-4">
-                      			<a class="adults input-group-addon" id="decrement" value="2" href="#">-</a>
+                      			<a class="adults input-group-addon" id="decrement" value="1" href="#">-</a>
                       			<a class="adults input-group-addon" id="increment" href="#">+</a>
                       		</div>                     	
                       	</div>
