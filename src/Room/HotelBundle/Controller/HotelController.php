@@ -33,8 +33,6 @@ class HotelController extends Controller
 	    	$em = $this->getDoctrine()->getManager();
 	    	$hotelDetail = new HotelDto();
 	    	$hotelImage = new HotelImage();
-			$hotelDetail->setCheckIn('12:00 PM');
-			$hotelDetail->setCheckOut('11:00 AM');
 	    	$hotelImageList = $hotelDetail->getImageList();
 	    	$hotelImageList->add($hotelImage);
 			
