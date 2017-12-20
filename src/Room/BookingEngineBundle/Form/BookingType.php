@@ -26,6 +26,7 @@ class BookingType extends AbstractType
             ->add('amountPaid')
             ->add('paymentId')
             ->add('couponCode')
+            ->add('adminCoupon')
             ->add('couponApplyed')
             ->add('numDays')
             ->add('numAdult')

@@ -22,9 +22,19 @@ room_booking_engine_booking_submit:
 room_booking_engine_success:
     path:     /booking-success
     defaults: { _controller: RoomBookingEngineBundle:Booking:success }
+
+room_booking_engine_pay_online:
+    path:     /{bookingId}/pay-online
+    defaults: { _controller: RoomBookingEngineBundle:Booking:payOnline }
+
 room_booking_engine_apply_coupon:
     path:     /apply-coupon
     defaults: { _controller: RoomBookingEngineBundle:Booking:applyCoupon }
+
+room_booking_engine_admin_apply_coupon:
+    path:     /admin-apply
+    defaults: { _controller: RoomBookingEngineBundle:Booking:adminapplyCoupon }
+
 room_booking_service_details_apartment:
     path:     /service-detail/{url}
     defaults: { _controller: RoomBookingEngineBundle:Booking:serviceDetail }
@@ -36,6 +46,10 @@ room_booking_engine_payment_payu:
 room_booking_engine_payment_confirmation:
     path:     /paymentconfirmation
     defaults: { _controller: RoomBookingEngineBundle:Booking:paymentconfirmation }
+
+room_booking_engine_customer_payment_confirmation:
+    path:     /customerpaymentconfirmation
+    defaults: { _controller: RoomBookingEngineBundle:Booking:adminpaymentSuccess }
 
 room_booking_engine_payment_Details:
     path:     /paymentDetailsAction

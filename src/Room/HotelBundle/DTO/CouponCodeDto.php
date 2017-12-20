@@ -31,6 +31,12 @@ class CouponCodeDto
      */
     private $couponCode;
    
+   
+    /**
+     * @var date
+     */
+    private $startDate;
+   
    /**
 	 * @var date
 	 */
@@ -229,6 +235,25 @@ class CouponCodeDto
 		$this->updatedAt = $updatedAt;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getStartDate() {
+		return $this->startDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$startDate
+	 */
+	public function setStartDate($startDate) {
+		$this->startDate = $startDate;
+		return $this;
+	}
+	
 	
 
 	

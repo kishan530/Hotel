@@ -37,6 +37,15 @@ class CouponCode
 	 */
 	private $couponCode;
 	
+	
+	/**
+	 * @var string
+	 * @ORM\Column(name="startDate", type="datetime", nullable=true)
+	 * @Assert\Date()
+	 */
+	private $startDate;
+	
+	
 	/**
 	 * @var string
 	 * @ORM\Column(name="expireDate", type="datetime", nullable=true)
@@ -242,6 +251,25 @@ class CouponCode
 		$this->updatedAt = $updatedAt;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getStartDate() {
+		return $this->startDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$startDate
+	 */
+	public function setStartDate($startDate) {
+		$this->startDate = $startDate;
+		return $this;
+	}
+	
 	
 
 }

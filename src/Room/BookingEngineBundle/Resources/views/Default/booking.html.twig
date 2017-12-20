@@ -21,12 +21,28 @@
                                             {{ form_widget(form.mobile,{'attr':{'class':'make-margin','placeholder':'10 Digit Mobile No'}}) }} 
                                             </div>
                                              <div class="row">
+                                           {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                             <div class="col-md-6 col-sm-6 col-xs-12">
+                                          
+                                             <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                <div class="input-group" id="admincouponCode">
+                                                {{ form_widget(form.adminCoupon,{'attr':{'placeholder':'Enter Discount Amount'}}) }}
+                                                    <a class="input-group-addon" id="adminapply" href="#">Give Discount</a>
+                                                   {#} <button type="submit" class="btn btn-primary " id="apply"> Apply</button>{#}
+                                                </div>
+                                                
+                                            	</div>
+                                               </div>
+                                               {% else %} 
+                                              {{ form_widget(form.adminCoupon,{ 'attr': {'class': 'hidden'} }) }}
+                                            {% endif %}
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                             
-                                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                             <div class="col-md-12 col-sm-12 col-xs-12 ">
                                                 <div class="input-group" id="couponCode">
                                                 {{ form_widget(form.couponCode,{'attr':{'placeholder':'Enter a Coupon code'}}) }}
                                                     <a class="input-group-addon" id="apply" href="#">Apply</a>
+                                                   {#} <button type="submit" class="btn btn-primary " id="apply"> Apply</button>{#}
                                                 </div>
                                                 <div class="row form-group has-error">
                                                     <ul class="errors help-block">
@@ -35,13 +51,15 @@
                                                 </div>
                                             	</div>
                                                </div>
+                                        
+                                             
                                             
                                                 
                                             </div>
                                             <div class="make-margin"></div>
                                              
                                              <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="checkbox" required="required" name="cb" class="remove_margin">  {% trans %} I agree to the {% endtrans%} <a target="_blank" href="#">{% trans %} Terms of Service{% endtrans%}</a>
+                                                <input type="checkbox" required="required" name="cb" class="remove_margin">  {% trans %} I agree to  {% endtrans%} <a target="_blank" href="#">{% trans %} Terms of Service{% endtrans%}</a>
                                             </div>
                                              <div class="col-md-4 col-sm-4 col-xs-12">
                                                 <button type="submit" class="btn btn-primary btn-block btn-lg"> Continue</button>

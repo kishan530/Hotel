@@ -22,8 +22,8 @@
 							
 							<div id="login" class="login" >
 							<div class="row" >
-							<div class="hotel-title" >
-							                <h5 class="classic-title"><span >{% trans %}Login{% endtrans %}</span></h5>
+							<div class="hotel-title " >
+							                <h5 class="classic-title logintext "><span >{% trans %}Login{% endtrans %}</span></h5>
 							            </div>
 							</div>
 							
@@ -74,7 +74,7 @@
 							<div class="row top-buffer3"></div>
 						</div>
 						<div class="col-md-4 page-content">
-							<div id="reg" class="reg">
+							<div id="reg" class="reg form_input_register">
 							{% if app.session.get('regFail')| length > 0 %}
 									{% include "FOSUserBundle:Registration:register.html.twig" %}
 							{% else %}

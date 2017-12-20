@@ -23,8 +23,9 @@
                    
                    <div class="col-md-6 no-left-padding no-padding-right" style="margin-top: 15px;">
 				<div class="heading-bg no-border-left">
-					<h4 class="text-center">Personal Details</h4>
-				</div>
+				<h4><span  class="pull-left">Personal Details</span></h4>
+					{#}<h4 class="text-center">Personal Details</h4>{#}
+				</div><br/><br/>
 				<div class="margin-10">
 					<div class="row">
 						<div class="col-md-3 col-xs-3">
@@ -61,27 +62,29 @@
                                                                               
                                                 <ul class="price-list list-border">                                                 
                                                     <li>
-                                                        <span class="pull-left">Hotel Charges</span>
+                                                        <span class="pull-left">Hotel Price</span>
                                                         <span class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.totalPrice }}</em></span>
                                                         
                                                     </li>
                                                      <li>
-                                                        <span class="pull-left">GST</span>
+                                                        {#}<span class="pull-left">GST ({{ taxPercentage }})%</span>{#}
+                                                        <span class="pull-left">GST %</span>
                                                         <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.serviceTax }} </em></span>
                                                         
                                                     </li>  
                                                      <li>
                                                         <span class="pull-left">Total Price</span>
-                                                        <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.finalPrice-booking.discount }} </em></span>
+                                                        <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.finalPrice+booking.discount }} </em></span>
                                                         
                                                     </li>                            
                                                    
-                                                    <li><span  class="pull-left">Discount(-)</span>
+                                                    <li><span  class="pull-left">Discount Price(-)</span>
                                                         <span  class="pull-right"><i class="fa fa-inr"></i> <em id="discount"> {{ booking.discount }} </em></span>
                                                     </li>
                                                    
                                                     {% block details %}
-                                                    <li class="text-right"><span class="you-pay">You Pay</span>
+                                                    <li class="text-right">
+                                                    <span  class="pull-left">You Pay</span>
                                                         <span class="final-price"><i class="fa fa-inr"></i><em id="price"> {{ booking.finalPrice }} </em></span> 
                                                     </li>
                                                     {% endblock %}

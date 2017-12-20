@@ -4,6 +4,7 @@
 
 {% block breadcrumbsLinks %}
             <li><a href="{{ path('room_booking_engine_homepage') }}">Home</a></li>
+            <li><a href="#">Search</a></li>
             <li><a href="#">Booking</a></li>
 {% endblock %}
 
@@ -54,6 +55,55 @@ $('#apply').click(function(e){
 	   });						 		   			   							
 });
 </script>
+
+<script>
+$('#adminapply').click(function(e){		
+	e.preventDefault(); //STOP default action 		 
+			 	
+	 var optionSelected = $("#room_bookingenginebundle_customer_adminCoupon").val();	
+	//alert(optionSelected);
+	 $.ajax({
+	      url: "{{ path('room_booking_engine_admin_apply_coupon') }}",
+	      type: "GET",
+	       data: { "admincoupon" : optionSelected },
+	   	       
+	      success: function(data) {	
+
+		      var response = JSON.parse(data);	
+		     // alert(data);
+		    //  alert(response);		     			        	  		        	
+			     if(response.success=='false')
+			     {
+			    	 $('#coupon-error').html(response.message);
+			    	 $('#coupon-error').show();
+				  }
+			     else
+			     {
+			    	 $('#coupon-error').html('');
+			    	 $('#coupon-error').hide();
+					 var price = response.bookingDetails.finalPrice;
+					 var discount = response.bookingDetails.discount;
+					 //alert(price);
+					   //  alert(discount);
+				     $('#price').html(price);
+				 //    $('#fee').show();
+				     $('#discount').html(discount);
+				    // $('#discount').show();
+				     //$('#equals').show();	
+			     }			     
+			     
+	      },
+
+	      error: function(XMLHttpRequest, textStatus, errorThrown)
+	      {
+	        alert('Error: ' +  errorThrown);
+	      }
+	   });						 		   			   							
+});
+</script>
+
+
+
 {% endblock %}
 
 {% block stylesheets %}
@@ -365,13 +415,13 @@ text-transform: capitalize;
 											<div class="date-box">
 												<p class="date-day">{{ search.checkOut|date('D') }}</p>
 												<p class="date-no"><span class="ng-binding">{{ search.checkOut|date('j') }}</span> {{ search.checkOut|date('M') }}</p>
-												<p class="date-time">12:00 PM</p>
+												<p class="date-time">11:00 AM</p>
 											</div>
 											{#}	{{ search.checkOut|date('F jS Y') }} {#}
 											</div>
 											</div>
 											<div class="col-sm-6">
-												<p class="pax-details ">{{ search.numAdult }} Adult in {{ search.numRooms }} Room </p>
+												<p class="pax-details " style="font-weight: bold;">{{ search.numAdult }} Adult in {{ search.numRooms }} Room </p>
 												<div class="col-sm-12 font-13 address">
 												{% set address = hotel.address %}
 													<h6 class="font-13">Address :</h6>
@@ -380,9 +430,9 @@ text-transform: capitalize;
 												</div>
 											</div>
 											<div class="col-sm-12 padding-top">
-											<p class="room-type"> <strong>Room Type:</strong> Executive Suit</p>
+											<p class="room-type"> <strong>Room Type:</strong>{{ roomType }}</p>
 											<p class="room-type"> <strong>Inclusions:</strong> 
-											<span>-Breakfast</span>
+											<span>-Hot Breakfast</span>
 											<span>-Wi-Fi Internet</span>
 											</p>
 											{#}
@@ -410,6 +460,8 @@ text-transform: capitalize;
                                            <form action="{{ path('room_booking_engine_booking') }}">
                                            <input type="hidden" name="id" value="{{ hotel.id }}">
                                             <input type="hidden" name="room" value="{{ room }}">
+                                            <input type="hidden" name="taxpercentage" value="{{ taxPercentage }}">
+                                            
                                                 <button type="submit" class="btn btn-primary btn-block btn-sm btn-continue"> Continue</button>
                                                 </form>
                                             </div>
@@ -430,30 +482,44 @@ text-transform: capitalize;
                                                                               
                                                 <ul class="price-list list-border">                                                 
                                                     <li>
-                                                        <span class="pull-left">Hotel Charges</span>
+                                                        <span class="pull-left">Room price </span>
                                                          <span  class="pull-left">     </span>
-                                                        <span class="pull-right"> {{ numDay }} X   <i class="fa fa-inr"></i> <em > {{ price }}</em></span>
+                                                         {% if (promotionStartDate<=today) and (today<=promotionEndDate) %}
+                                                         <span class="pull-right"> {{ numRoom }} X   <i class="fa fa-inr"></i> <em > {{ rooomPromoprice }}</em></span>
+                                                        {% else %} 
+                                                        <span class="pull-right"> {{ numRoom }} X   <i class="fa fa-inr"></i> <em > {{ price }}</em></span>
                                                        
-                                                        
+                                                        {% endif %}
                                                     </li>
-                                                    
                                                     <li>
-                                                        <span class="pull-left">Price for {{ numDay }} days</span>
+                                                    <span class="pull-left">Day Price </span>
+                                                     {% if (promotionStartDate<=today) and (today<=promotionEndDate) %}
+                                                   {#}  {% set promotionprice = rooomPromoprice * numRoom %}{#}
+                                                   {{ numDay }}
+                                                    <span class="pull-right"> {{ numDay }} X   <i class="fa fa-inr"></i> <em > {{ rooomPromoprice * numRoom }}</em></span>
+                                                    {% else %} 
+                                                    <span class="pull-right"> {{ numDay }} X   <i class="fa fa-inr"></i> <em > {{ price * numRoom}}</em></span>
+                                                    {% endif %}
+                                                    </li>
+                                                    <li>
+                                                        <span class="pull-left"> Hotel price</span>
                                                         <span class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.totalPrice }}</em></span>
                                                         
                                                     </li>
                                                      <li>
-                                                        <span class="pull-left">GST</span>
+                                                        <span class="pull-left">GST ({{ taxPercentage }} %)</span>
+                                                         {#} <span class="pull-left">GST</span>{#}
                                                         <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.serviceTax }} </em></span>
                                                         
                                                     </li>  
                                                      <li>
                                                         <span class="pull-left">Total Price</span>
-                                                        <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.finalPrice-booking.discount }} </em></span>
+                                                        {#}<span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.finalPrice-booking.discount }} </em></span>{#}
+                                                        <span  class="pull-right"> <i class="fa fa-inr"></i> <em > {{ booking.finalPrice }} </em></span>
                                                         
                                                     </li>                            
                                                    
-                                                    <li><span  class="pull-left">Discount(-)</span>
+                                                    <li><span  class="pull-left">Discount price (-)</span>
                                                         <span  class="pull-right"><i class="fa fa-inr"></i> <em id="discount"> {{ booking.discount }} </em></span>
                                                     </li>
                                                    

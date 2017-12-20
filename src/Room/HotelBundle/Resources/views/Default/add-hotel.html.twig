@@ -48,6 +48,7 @@ $('#add-another-room').click(function(e) {
         }*/
 
         var roomList = $('#room-list');
+        
 
         // grab the prototype template
         var newWidget = roomList.attr('data-prototype1');
@@ -59,6 +60,32 @@ $('#add-another-room').click(function(e) {
         // create a new list element and add it to the list
         var newLi = $('<div></div>').html(newWidget);
         newLi.appendTo(roomList);
+
+        var s= roomCount-1;
+        $("#room_hotelbundle_hoteldetail_roomList_"+s+"_blockStartDate").datepicker({
+    	      todayHighlight: true
+      }).on('changeDate', function(ev) {
+       $(this).datepicker("hide");   
+    	 }).data('datepicker');
+
+      $("#room_hotelbundle_hoteldetail_roomList_"+s+"_blockEndDate").datepicker({
+    	      todayHighlight: true
+    }).on('changeDate', function(ev) {
+     $(this).datepicker("hide");   
+    	 }).data('datepicker');
+
+      $("#room_hotelbundle_hoteldetail_roomList_"+s+"_promotionStartDate").datepicker({
+    	    todayHighlight: true
+    	}).on('changeDate', function(ev) {
+    	$(this).datepicker("hide");   
+    	}).data('datepicker');
+
+      $("#room_hotelbundle_hoteldetail_roomList_"+s+"_promotionEndDate").datepicker({
+    	    todayHighlight: true
+    	}).on('changeDate', function(ev) {
+    	$(this).datepicker("hide");   
+    	}).data('datepicker');
+        
     });
 
 </script>
@@ -74,6 +101,7 @@ $("#result").on('click',".delete", function (e) {
   	            exit();
   	        }
  	  		 var id = $(this).attr('value');
+ 	  		 
  	  		 var tr = $(this).parent().parent();
  		    	   $.ajax({
 	   	     	 
@@ -82,6 +110,8 @@ $("#result").on('click',".delete", function (e) {
 	    	       data: { 'id': id },
 	    	       success: function(data) {	
 	    	    	  //swal('Deactivated Successfully !');
+	    	    	 //$("#room_hotelbundle_hoteldetail_roomList_0_isDeleted").val("0");
+	    	    	  $("[data-id*="+id+"]").val("0");
 	    	    	   alert('room deleted'); 
 	    			  tr.remove();
 	    	       },
@@ -97,8 +127,22 @@ $("#result").on('click',".delete", function (e) {
 
 </script>
 <script>
-$(document).ready(function(){  	
+var roomCount = '{{ form.roomList|length }}';
+$(document).ready(function(){  
 
+	var s= roomCount-1;
+    $("#room_hotelbundle_hoteldetail_roomList_"+s+"_blockStartDate").datepicker({
+	      todayHighlight: true
+  }).on('changeDate', function(ev) {
+   $(this).datepicker("hide");   
+	 }).data('datepicker');
+
+  $("#room_hotelbundle_hoteldetail_roomList_"+s+"_blockEndDate").datepicker({
+	      todayHighlight: true
+}).on('changeDate', function(ev) {
+ $(this).datepicker("hide");   
+	 }).data('datepicker');
+	
 	$('#room_hotelbundle_hoteldetail_roomList_0_blockStartDate').datepicker().on('changeDate', function(ev) {
         $(this).datepicker("hide");   
 	 }).data('datepicker');
@@ -107,8 +151,38 @@ $(document).ready(function(){
 $('#room_hotelbundle_hoteldetail_roomList_0_blockEndDate').datepicker().on('changeDate', function(ev) {
 $(this).datepicker("hide");   
 }).data('datepicker');
+
+
+
+
+$('#room_hotelbundle_hoteldetail_roomList_0_promotionStartDate').datepicker().on('changeDate', function(ev) {
+  $(this).datepicker("hide");   
+}).data('datepicker');
+
+
+
+$('#room_hotelbundle_hoteldetail_roomList_0_promotionEndDate').datepicker().on('changeDate', function(ev) {
+  $(this).datepicker("hide");   
+}).data('datepicker');
+
+ 
 	
 });
+</script>
+<script>
+$(document).ready(function(){  	
+
+$('#room_hotelbundle_hoteldetail_hotelblockStartDate').datepicker().on('changeDate', function(ev) {
+        $(this).datepicker("hide");   
+	 }).data('datepicker');
+
+	
+$('#room_hotelbundle_hoteldetail_hotelblockEndDate').datepicker().on('changeDate', function(ev) {
+$(this).datepicker("hide");   
+}).data('datepicker');
+	
+});
+
 </script>
 
 <script>
@@ -128,6 +202,7 @@ $("#resultimg").on('click',".delete", function (e) {
     	       type: "GET",
     	       data: { 'id': id },
     	       success: function(data) {	
+    	    	   $("#isdeleted").val("0");
     	    	  //swal('Deactivated Successfully !');
     	    	   alert('Hotel Image deleted'); 
     			  tr.remove();
@@ -300,9 +375,25 @@ $("#resultimg").on('click',".delete", function (e) {
                             	{{ form_label(form.soldOut) }}
                                 {{ form_widget(form.soldOut) }}
                             </div>  
-                     </div>                                
+                     </div>       
+                     
+                     <div class="row form-group">
+                            <div class="col-lg-6">
+                            	{{ form_label(form.hotelblockStartDate) }}
+                                {{ form_widget(form.hotelblockStartDate,{ 'attr': {'class': 'form-control date-pick'}}) }}
+                                
+                               
+                            </div>
+                                                    
+                    
+                            <div class="col-lg-6">
+                            	{{ form_label(form.hotelblockEndDate) }}
+                                {{ form_widget(form.hotelblockEndDate,{ 'attr': {'class': 'form-control date-pick'}}) }}
+                            </div>  
+                     </div>        
+                                              
                    <div class="row form-group">
-                             <div class="col-lg-6">
+                             <div class="col-lg-6 hidden">
                             	{{ form_label(form.price) }}
                                 {{ form_widget(form.price) }}
                             </div> 
@@ -438,7 +529,7 @@ $("#resultimg").on('click',".delete", function (e) {
 	<h4>Room Detail</h4>
                      
                      {% macro room_prototype(i) %}
-                    <div class="borderhotelbox">
+                    <div class="borderhotelbox" id="result">
                      <div class="row ">
 	                    {#}print{#}
 	                    
@@ -541,24 +632,29 @@ $("#resultimg").on('click',".delete", function (e) {
                          
                          
                         </div>
+                        
+                        
+                        
                                                 
                          <div class="col-lg-6">
                          <div class="col-lg-6">
                          {{ form_label(i.blockStartDate) }}
                          
                         
-                                {{ form_widget(i.blockStartDate,{ 'attr': {'class': 'form-control date-pick'}}) }}
+                         {{ form_widget(i.blockStartDate,{ 'attr': {'class': 'form-control date-pick blockStartDate'}}) }}
                             	
                             </div>
                             <div class="col-lg-6">
                             	{{ form_label(i.blockEndDate) }}
-                                {{ form_widget(i.blockEndDate,{ 'attr': {'class': 'form-control date-pick'}}) }}
+                                {{ form_widget(i.blockEndDate,{ 'attr': {'class': 'form-control date-pick blockEndDate'}}) }}
                             </div>
                             
                           </div>
                           
                           
-                          <div class="row form-group">
+                          
+                       		
+                       		<div class="row form-group">
                           
                           
 	                            <div class="col-lg-6">
@@ -571,6 +667,39 @@ $("#resultimg").on('click',".delete", function (e) {
 	                           </div>
                                                     
                        		</div>
+                       		
+                       		 <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+							{{ form_label(i.promotionStartDate) }}
+							{{ form_widget(i.promotionStartDate,{ 'attr': {'class': 'form-control date-pick'}}) }}
+                          </div> 
+                         </div>
+                        </div>
+                         <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+ 							{{ form_label(i.promotionEndDate) }}
+							{{ form_widget(i.promotionEndDate,{ 'attr': {'class': 'form-control date-pick'}}) }}
+                         </div> 
+                         </div>
+                        </div>
+                        <div class="col-lg-6">
+                         <div class="row form-group">
+	                            <div class="col-lg-6">
+  							{{ form_label(i.promotionPrice) }}
+                            {{ form_widget(i.promotionPrice) }}
+                           		 </div> 
+                         </div>
+                        </div>
+                        <div class="col-lg-6 hidden" >
+                            	{{ form_label(i.isDeleted) }}
+                            {#}    {{ form_widget(i.isDeleted,{'attr'{data-id:'{i.id}'0}) }} {#}
+                                
+			{{ form_widget(i.isDeleted,{ 'attr': {'data-id': i.id.vars.value}}) }}
+                                
+                            </div> 
+                       		                       		
                         </div>
                         
                                                 
@@ -583,7 +712,7 @@ $("#resultimg").on('click',".delete", function (e) {
                             {% for i in form.roomList %}
                             	{{ _self.room_prototype(i) }}
                             {% endfor %}
-                        </div> 
+                       </div> 
                     <a href="#" id="add-another-room">Add another Room</a><br/><br>
 	
 	

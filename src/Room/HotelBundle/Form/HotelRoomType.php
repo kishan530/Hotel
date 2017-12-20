@@ -109,6 +109,37 @@ class HotelRoomType extends AbstractType
            		->add('sequence', null, array(
             						'required'    => true,
             						'label' => 'sequence', ))
+            						
+ 					->add('promotionStartDate','date',array(
+            								'widget'=> 'single_text',
+            								'format'=>'M/d/y',
+            								'required'    => false,
+            								'label'     => 'Promotion Start Date ',
+            								'attr' => array('data-date-format' => 'dd/mm/yyyy')
+            						
+            						))
+            		->add('promotionEndDate','date',array(
+            								'widget'=> 'single_text',
+            								'format'=>'M/d/y',
+            								'required'    => false,
+            								'label'     => 'Promotion End Date ',
+            								'attr' => array('data-date-format' => 'dd/mm/yyyy')
+            						
+            						))
+            		->add('promotionPrice', null, array(
+            								'required'    => false,
+            								'label' => 'Promotion Price', ))
+            		
+            		->add('isDeleted', 'choice', array(
+            										'expanded' => false,
+            										'multiple' => false,
+            										'label' => 'Status',
+            										'choices' => array(
+            												'1'=>'NO',
+            												'0'=>'Yes',
+            										),
+            										'required'    => true,
+            								))
            
         ;
     }

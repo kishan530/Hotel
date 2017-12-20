@@ -102,6 +102,27 @@ class HotelRoom
       * @ORM\Column(name="sequence", type="integer")
       */
      private $sequence;
+     
+     /**
+      * @var string
+      * @ORM\Column(name="promotion_start_date", type="date")
+      */
+     private $promotionStartDate ;
+     
+     /**
+      * @var string
+      * @ORM\Column(name="promotion_end_date", type="date")
+      */
+     private $promotionEndDate;
+     
+     /**
+      * @var float
+      *
+      * @ORM\Column(name="promotion_price", type="float")
+      */
+     private $promotionPrice;
+     
+     
     
 
     /**
@@ -360,6 +381,61 @@ class HotelRoom
 		$this->sequence = $sequence;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getPromotionStartDate() {
+		return $this->promotionStartDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$promotionStartDate
+	 */
+	public function setPromotionStartDate($promotionStartDate) {
+		$this->promotionStartDate = $promotionStartDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getPromotionEndDate() {
+		return $this->promotionEndDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$promotionEndDate
+	 */
+	public function setPromotionEndDate($promotionEndDate) {
+		$this->promotionEndDate = $promotionEndDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the float
+	 */
+	public function getPromotionPrice() {
+		return $this->promotionPrice;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$promotionPrice
+	 */
+	public function setPromotionPrice($promotionPrice) {
+		$this->promotionPrice = $promotionPrice;
+		return $this;
+	}
+	
 	
 	
 	

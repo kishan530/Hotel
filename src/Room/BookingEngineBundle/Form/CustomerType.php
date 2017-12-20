@@ -19,6 +19,7 @@ class CustomerType extends AbstractType
             ->add('email','email')
             ->add('mobile')
             ->add('couponCode')
+            ->add('adminCoupon')
             
            // ->add('address','textarea')
         ;

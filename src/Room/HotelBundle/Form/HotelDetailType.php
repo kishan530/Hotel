@@ -57,10 +57,6 @@ class HotelDetailType extends AbstractType
             		'choices' => array(
             				'Service Apartments'=>'Service Apartments',
             				'Resort'=>'Resort',
-							'Hotel'=>'Hotel',
-            				'Business Hotel'=>'Business Hotel',
-            				'Guest House'=>'Guest House',
-            				'PG'=>'PG',
             		),
             		'required'    => true,
             ))
@@ -69,12 +65,12 @@ class HotelDetailType extends AbstractType
             		'multiple' => false,
             		'label' => 'Category',
             		'choices' => array(
-            				'Service Apartment'=>'Service Apartment',
-            				'1'=>'Hotel',
-            				'2'=>'Guest House',
-            				'3'=>'3 Star',
-            				'4'=>'4 Star',
-            				'5'=>'5 Star',
+            				'1'=>'Service Apartment',
+            				'2'=>'Hotel',
+            				'3'=>'Guest House',
+            				'4'=>'3 Star',
+            				'5'=>'4 Star',
+            				'6'=>'5 Star',
             		),
             		'required'    => true,
             ))
@@ -161,6 +157,28 @@ class HotelDetailType extends AbstractType
             		//   'attr'      => array('class' => '')
             		//),
             ))
+            
+           
+            
+            ->add('hotelblockStartDate','date',array(
+            		'widget'=> 'single_text',
+            		'format'=>'M/d/y',
+            		'required'    => false,
+            		'label'     => 'hotel block Start Date',
+            		'attr' => array('data-date-format' => 'dd/mm/yyyy')
+            
+            ))
+            
+            ->add('hotelblockEndDate','date',array(
+            		'widget'=> 'single_text',
+            		'format'=>'M/d/y',
+            		'required'    => false,
+            		'label'     => 'hotel block End Date',
+            		'attr' => array('data-date-format' => 'dd/mm/yyyy')
+            
+            ))
+            
+           
             
             ->add('footerDisplay', 'checkbox', array(
             		'label'    => 'Display in footer',

@@ -57,6 +57,7 @@ $("button").click(function() {
     <div class="container">
       <div class="row" id="bookroom">
         <div class="col-md-12">
+       
           
             <div class="col-md-9">
             <h1 class="hotel-title">{{ hotel.name }}</h1>           
@@ -64,10 +65,22 @@ $("button").click(function() {
 			<p class="hotel-address"> {{ address.addressLine1 }}, {{ address.addressLine2 }}, {{ address.location }}, {{ address.city }}</p>
             </div>
            <div class="col-md-3" style="margin-top: 20px;">
-            	 <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotel.price }}</h5>
+            
+            
+           
+                     
+                     
+                     
+                    {% if (promotionStartDate<=today) and (today<=promotionEndDate) %}   
+            	 <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ promotionPrice }} <strike><i class="fa fa-inr"></i>{{ hotel.price }}</strike></h5>
+					 
+                      {% else %}
+					<h5 class="hotel-price" style="float: left;"><i class="fa fa-inr"></i>{{ hotel.price }}</h5>
+					{% endif %}       	 
  {% if hotel.soldOut or hotel.numRooms<1 %}
                         	<label class="btn btn-book-now">Sold Out</label>
                         {% else %}
+                        
             		<div ><button type="button" class="btn-book-now topbody" style="margin-top: 10px;" >Choose Room!</button></div>
             	 {% endif %}
             </div>
@@ -96,9 +109,14 @@ $("button").click(function() {
                <h4 class="widget-title">Help Me</h4>
                 <div class="widget-content">
                   <ul class="contact-list custom-list">
-                    <li><i class="fa fa-phone"></i><span>+ 91 98801 12360</span></li>
-                    <li><i class="fa fa-phone"></i><span>+ 91 9900032872 / 73</span></li>
+                    <li><i class="fa fa-phone"></i><span>+ 91 9900032872</span></li>
+                    <li><i class="fa fa-phone"></i><span>+ 91 9900032873 </span></li>
+                    <li><i class="fa fa-phone"></i><span> +91 8892007790 </span></li>
+                   
                     <li><i class="fa fa-envelope-o"></i><span>reservation@sterlingsuites.in</span></li>
+                    <li><i class="fa fa-envelope-o"></i><span>sales@sterlingsuites.in</span></li>
+                    
+                    
                     <br>
                      <li><i class="fa fa-clock-o"></i> <label>Check-In:</label> <span>{{ hotel.checkIn }}</span></li>
                      <li><i class="fa fa-clock-o"></i> <label>Check-Out:</label> <span>{{ hotel.checkOut }}</span></li>
@@ -126,14 +144,16 @@ $("button").click(function() {
                         <div class="col-md-4 col-sm-4">
                           <ul class="facilities-list custom-list">
                             <li><i class="fa fa-female"></i> <span>Room service</span></li>
-                            <li><i class="fa fa-key"></i> <span>Free safe</span></li>
-                            <li><i class="fa fa-desktop"></i> <span>TV & Audio</span></li>
+                            <li><i class="fa fa-key"></i> <span>Digital Safety Locker</span></li>
+                            <li><i class="fa fa-desktop"></i> <span> Flat T.V & Audio</span></li>
                           </ul>
                         </div>
                         <div class="col-md-4 col-sm-4">
                           <ul class="facilities-list custom-list">
                             <li><i class="fa fa-wifi"></i> <span>WIFI access</span></li>
-                            <li><i class="fa fa-clock-o"></i> <span>24/7 Service</span></li>
+                            <li><i class="fa fa-clock-o"></i> <span>24/7 Housekeeping</span></li>
+                            <li><i class="fa fa-lock"></i> <span>Security 24 / 7</span></li>
+                            
                           </ul>
                         </div>
                       </div>
@@ -148,17 +168,17 @@ $("button").click(function() {
               {#} <div class="room-about"></div> {#}
 
 <div class="row ">
-<div class="col-sm-12 amenitiesroom">
-	<div class="col-sm-4 text-room-family">ROOM TYPES</div>
-	<div class="col-sm-4 text-room-family">INCLUSIONS & AMENITIES</div>
-	<div class="col-sm-4 text-room-family">PRICE FOR 4 NIGHTS</div>
+<div class="col-md-12 amenitiesroom">
+	<div class="col-md-4 col-sm-12 text-room-family">ROOM TYPES</div>
+	<div class="col-md-4 col-sm-12 text-room-family">INCLUSIONS & AMENITIES</div>
+	<div class="col-md-4 col-sm-12 text-room-family">PRICE FOR  NIGHTS</div>
 	</div>			
 </div>
                
               {#}  <div class="room-about"></div> {#}
               
               
-             	<div class="room-about ">
+         <div class="room-about ">
                <div class="listing-room-list">
                {% for hotelRoom in hotel.hotelRooms %}
                
@@ -167,13 +187,13 @@ $("button").click(function() {
                 <div class="col-sm-12">
                <h5 class="titleroom" style="margin-left: -40px;font-size: 16px;">{{ hotelRoom.name}} </h5>
                </div>
-               <div class="col-sm-2">
+               <div class="col-md-2 col-sm-12">
 {#             <div class="thumbnail">#}
 				 
 				
             <img src="{{ asset('img/Hotels/'~hotelRoom.imagePath) }}" alt="" class="img-responsive hotelroom" height="30%">
              </div>
-             <div class="col-sm-2" style="padding-top: 20px;">
+             <div class="col-md-2 col-sm-12 mobilehotelroom" >
              </br>
              <ul>
              <li><small>Max Adult:&nbsp;&nbsp;{{ hotelRoom.maxAdult }}</small> </li></br>
@@ -182,7 +202,7 @@ $("button").click(function() {
               </div>
               
 {#             </div>#}
-		<div class="col-sm-8">
+		<div class="col-md-8 col-sm-12 mobileamenitiesview">
             <div class="listing-room-content" style="padding-top: 20px;">
               {#}<div class="row"> {#}
                 <div class="col-md-12">
@@ -200,7 +220,7 @@ $("button").click(function() {
 {#                         <li class="location"><i class="fa fa-map-marker"></i> {{ address.location }}, {{ address.city }}</li></br>#}
                         <li><i class="fa fa-wifi"></i><span>  Free WiFi</span>	</li> </br>
                         <li><i class="fa fa-female"></i><span> Room service</span></li></br>
-                        
+                        <li><i class="fa fa-cutlery"></i><span> Free Hot Break Fast</span></li></br>
                        
                       </ul>
                       
@@ -209,15 +229,22 @@ $("button").click(function() {
                     <div class="pull-right"   style="  margin-bottom: -30px;">
                     
                       <span class="price priceday" >
+                    
+
+ {% if (hotelRoom.promotionStartDate<=today) and (today<=hotelRoom.promotionEndDate) %}  
+                      <small style="font-size: 45%;">Price for 1 night</small></br>
+                        <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotelRoom.promotionPrice }}  <i class="fa fa-inr"></i><strike> {{ hotelRoom.price }}</strike></h5>
+                      </span>
+           {% else %}           
                       <small style="font-size: 45%;">Price for 1 night</small></br>
                         <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotelRoom.price }}</h5>
                       </span>
-                                             
+             {% endif %}                                
                     </div>
                     
-                    <div class="pull-right " style="margin-bottom: -25px;" >
+                    <div class="pull-right" >
                     {% if (hotelRoom.soldOut or hotel.numRooms<1) or (search.checkIn>=hotelRoom.blockStartDate and  search.checkIn<=hotelRoom.blockEndDate) or ( search.checkOut>=hotelRoom.blockStartDate and search.checkOut<=hotelRoom.blockEndDate) or ( search.checkIn<=hotelRoom.blockStartDate and search.checkOut>=hotelRoom.blockEndDate)  %}
-                    		<label class="btn btn-book-now bookroom middle book-room-button">Sold Out</label>
+                    		<label class="btn btn-book-now bookroom middle book-room-button" disabled>Sold Out</label>
                     {% else %}
                     					
                     <a class="btn btn-book-now bookroom middle book-room-button"  href="{{ path('room_booking_engine_confrim',{ 'id' : hotel.id,'room':hotelRoom.id }) }}">
@@ -243,7 +270,7 @@ $("button").click(function() {
             
             </div>
             <div class="room-about"></div>
-			 <div class="col-sm-12 text-left">
+			 <div class="col-md-12 col-sm-12 text-left amenitiesview">
             	<p style="margin-left: -40px;">{{ hotelRoom.description}}</p>
             </div>
             </div>

@@ -4,6 +4,7 @@ namespace Room\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Hotel
@@ -143,8 +144,51 @@ class Hotel
      */
     private $metaDescription;
     
-     
+    /**
+     * @var string
+     * @ORM\Column(name="hotelblock_start_date", type="date")
+     */
+    private $hotelblockStartDate;
     
+    /**
+     * @var string
+     * @ORM\Column(name="hotelblock_end_date", type="date")
+     */
+    private $hotelblockEndDate;
+    
+    
+    
+    /**
+     * @var string
+     * @ORM\Column(name="audit_info_CREATED_AT", type="datetime", nullable=true)
+     * @Assert\Date()
+     */
+    private $auditInfocreatedAt;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="audit_info_CREATED_BY", type="string", length=100)
+     */
+    private $auditInfocreatedBy;
+    
+    /**
+     * @var string
+     * @ORM\Column(name="audit_info_UPDATED_AT", type="datetime", nullable=true)
+     * @Assert\Date()
+     */
+    private $auditInfoupdatedAt;
+    
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="audit_info_UPDATED_BY", type="string", length=5000)
+     */
+    private $auditInfoupdatedBy;
+    
+    
+      
     
     
     /**
@@ -591,6 +635,116 @@ class Hotel
 		$this->metaDescription = $metaDescription;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getHotelblockStartDate() {
+		return $this->hotelblockStartDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$hotelblockStartDate
+	 */
+	public function setHotelblockStartDate($hotelblockStartDate) {
+		$this->hotelblockStartDate = $hotelblockStartDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getHotelblockEndDate() {
+		return $this->hotelblockEndDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$hotelblockEndDate
+	 */
+	public function setHotelblockEndDate($hotelblockEndDate) {
+		$this->hotelblockEndDate = $hotelblockEndDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getAuditInfocreatedAt() {
+		return $this->auditInfocreatedAt;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$auditInfocreatedAt
+	 */
+	public function setAuditInfocreatedAt($auditInfocreatedAt) {
+		$this->auditInfocreatedAt = $auditInfocreatedAt;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getAuditInfocreatedBy() {
+		return $this->auditInfocreatedBy;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$auditInfocreatedBy
+	 */
+	public function setAuditInfocreatedBy($auditInfocreatedBy) {
+		$this->auditInfocreatedBy = $auditInfocreatedBy;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getAuditInfoupdatedAt() {
+		return $this->auditInfoupdatedAt;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$auditInfoupdatedAt
+	 */
+	public function setAuditInfoupdatedAt($auditInfoupdatedAt) {
+		$this->auditInfoupdatedAt = $auditInfoupdatedAt;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getAuditInfoupdatedBy() {
+		return $this->auditInfoupdatedBy;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$auditInfoupdatedBy
+	 */
+	public function setAuditInfoupdatedBy($auditInfoupdatedBy) {
+		$this->auditInfoupdatedBy = $auditInfoupdatedBy;
+		return $this;
+	}
+	
+	
 	
 	
 	

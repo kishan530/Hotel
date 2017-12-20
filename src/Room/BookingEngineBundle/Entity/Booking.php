@@ -79,6 +79,13 @@ class Booking
      * @ORM\Column(name="coupon_code", type="string", length=100)
      */
     private $couponCode; 
+    
+    /**
+     * @var string
+     * @ORM\Column(name="adminCoupon", type="string", length=100)
+     */
+    private $adminCoupon;
+    
     /**
      * @var string
      * @ORM\Column(name="is_coupon_applyed", type="boolean")
@@ -94,6 +101,13 @@ class Booking
      * @ORM\Column(name="num_of_adult", type="integer")
      */
     private $numAdult;
+    
+    /**
+     * @var integer
+     * @ORM\Column(name="num_of_child", type="integer")
+     */
+    private $numChildren;
+    
     /**
      * @var integer
      * @ORM\Column(name="num_of_rooms", type="integer")
@@ -670,6 +684,44 @@ class Booking
 		$this->paymentDoneDate = $paymentDoneDate;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getAdminCoupon() {
+		return $this->adminCoupon;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$adminCoupon
+	 */
+	public function setAdminCoupon($adminCoupon) {
+		$this->adminCoupon = $adminCoupon;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the integer
+	 */
+	public function getNumChildren() {
+		return $this->numChildren;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$numChildren
+	 */
+	public function setNumChildren($numChildren) {
+		$this->numChildren = $numChildren;
+		return $this;
+	}
+	
+	
 	
 	
 	

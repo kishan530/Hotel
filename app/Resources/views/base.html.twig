@@ -68,10 +68,10 @@
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-7 pull-right">
             <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-9 hidden-xs">
-            <ul class="contact-info custom-list list-inline">
-              <li><i class="fa fa-phone"></i><span>+91 98801 12360  |  + 91 9900032872 / 73</span></li>
-              <li><i class="fa fa-envelope"></i><span>reservation@sterlingsuites.in</span></li>
+            <div class="col-lg-9 col-md-9 col-sm-9 hidden-xs" >
+            <ul class="contact-info custom-list list-inline" style="margin-left: -66px;">
+              <li><i class="fa fa-phone"></i><span> +91 9900032872 / 9900032873 / +91 8892007790 </span></li>
+              <li><i class="fa fa-envelope"></i><span style="text-transform: lowercase;">reservation@sterlingsuites.in | sales@sterlingsuites.in </span></li>
             </ul>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right pull-right">
@@ -124,7 +124,9 @@
                                             <li><a href="{{ path('room_site_management_booking_search') }}">Bookings</a></li>
                                              <li><a href="{{ path('room_hotel_add_hotel') }}">Add Hotel</a></li>
                                               <li><a href="{{ path('room_hotel_search_hotel') }}">Search Hotel</a></li> 
-                                               <li><a href="{{ path('room_hotel_add_coupon_code') }}">Add Coupons</a></li>                                                                                       
+                                               <li><a href="{{ path('room_hotel_add_coupon_code') }}">Add Coupons</a></li>
+                                               <li><a href="{{ path('room_hotel_list_coupon_code') }}">Coupons List</a></li>                                                                                       
+                                        
                                         </ul>
                                     </li>
                    {% endif %}
@@ -157,7 +159,7 @@
           <div class="col-md-12 logo-footer">
             <img src="{{ asset('img/logo.png') }}" alt="" class="img-responsive">
           </div>
-          <div class="col-md-8 widget widget-about">
+          <div class="col-md-8 widget widget-about ">
             <h5 class="title">
               About Us
             </h5>
@@ -165,7 +167,7 @@
             <p>Each apartment / hotel has been individually and stylishly designed with very high standard to give you the comfort of a modern living with extra facilities like satellite channels, complimentary broadband, luxury linen and respite from frequent power outages.</p>
           </div>
          
-          <div class="col-md-4 widget widget-newsletter">
+          <div class="col-md-4 widget widget-newsletter ">
            
             <div class="social">
               <h5 class="title">

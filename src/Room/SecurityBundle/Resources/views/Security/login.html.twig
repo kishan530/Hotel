@@ -27,7 +27,7 @@
 					
 						<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 						<div class="row form-group top-buffer2">
-						<input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" placeholder="Enter email address"/>
+						<input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" placeholder="Enter Email Id"/>
 						
 						</div>
 						<div class="row form-group">
@@ -41,7 +41,7 @@
 						<a href="{{ path("fos_user_resetting_request") }}"  target="_blank" class="forgot">{% trans %}Forgot password ?{% endtrans %}</a>
                             </div>
                             <div class="col-lg-4 text-right">
-                            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-primary" />
+                            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-primary loginbtnview" />
                             </div>
 						
 						</div>

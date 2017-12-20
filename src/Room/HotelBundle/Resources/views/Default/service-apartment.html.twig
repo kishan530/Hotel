@@ -2,6 +2,48 @@
 
 {% block javascripts %}
 
+<script>
+
+$(document).ready(function() {
+    // Configure/customize these variables.
+    var showChar = 100;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "Show more >";
+    var lesstext = "Show less";
+    
+
+    $('.more').each(function() {
+        var content = $(this).html();
+ 
+        if(content.length > showChar) {
+ 
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar, content.length - showChar);
+ 
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+ 
+            $(this).html(html);
+        }
+ 
+    });
+ 
+    $(".morelink").click(function(){
+        if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+        } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+    });
+});
+
+</script>
+
+
 {% endblock %}
 {% block body %}
 
@@ -11,8 +53,10 @@
 			 <!-- section title -->
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+
                         <h2 class="section-title-large sm-section-title-medium xs-section-title-large text-yellow-ochre font-weight-600 alt-font margin-three-bottom xs-margin-fifteen-bottom tz-text">ROOMS &amp; SUITES</h2>
-                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom  xs-margin-nineteen-bottom">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                        <div class="text-medium width-60 margin-lr-auto md-width-70 sm-width-100 tz-text margin-thirteen-bottom  xs-margin-nineteen-bottom">This property is located in downtown Bangalore, adjacent to the commercial hub of Bangalore's life line and in the plush, high end residential area, walking distance from most desired names of the corporate world and 5 minutes drive from M.G.Road, Brigade Road and Koramangala.</div>
+
                     </div>
                 </div>
                 <!-- end section title -->
@@ -29,14 +73,14 @@
                         <div class="blog-post">
                             <!-- blog image -->
                             <div class="blog-image">
-                                <img src="{{ asset('img/Hotels/'~serviceApartment.images.first.imagePath) }}" alt="" class="img-responsive" height="100%">
+                                <img src="{{ asset('img/Hotels/'~serviceApartment.images.first.imagePath) }}" alt="" class="img-responsive" style="height: 250px;">
                             </div>
                             <!-- end blog image -->
                             <!-- blog details -->
                             <div class="post-details bg-white tz-background-color">
                                 <div class="post-author tz-background-color bg-yellowish-gray margin-thirteen-bottom md-margin-eleven-bottom xs-margin-eight-bottom"><a href="{{ path('room_booking_service_details_apartment', {'url': serviceApartment.url})}}" class="tz-text text-white blog-name inner-link">FROM <i class="fa fa-inr"></i> {{ serviceApartment.price }}</a></div>
                                 <a href="{{ path('room_booking_service_details_apartment', {'url': serviceApartment.url})}}" class="tz-text text-dark-gray blog-post-title text-medium font-weight-600 margin-five-bottom display-inline-block md-margin-five-bottom inner-link">{{ serviceApartment.hotelRooms.first.roomType }}</a>
-                                <div class="text-medium tz-text">{{ serviceApartment.overview }}</div>
+                                <div class="text-medium tz-text" style="text-align: justify"><span class="more">{{ serviceApartment.overview }}</span></div>
                             </div>
                             <!-- end blog details -->
                         </div>

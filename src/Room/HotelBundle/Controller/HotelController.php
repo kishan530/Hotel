@@ -33,8 +33,6 @@ class HotelController extends Controller
 	    	$em = $this->getDoctrine()->getManager();
 	    	$hotelDetail = new HotelDto();
 	    	$hotelImage = new HotelImage();
-			$hotelDetail->setCheckIn('12:00 PM');
-			$hotelDetail->setCheckOut('11:00 AM');
 	    	$hotelImageList = $hotelDetail->getImageList();
 	    	$hotelImageList->add($hotelImage);
 			
@@ -46,7 +44,7 @@ class HotelController extends Controller
 			
 	    	$catalogueService = $this->container->get( 'catalogue.service' );
 	    	$form = $this->createForm(new HotelDetailType($catalogueService),$hotelDetail);
-	    	$form->add('submit','submit', array('label' => 'Add'));
+	    	$form->add('submit','submit', array('label' => 'Add Hotel'));
 	    	$form ->handleRequest($request);
 	    		
 	    	if($form->isValid()) {
@@ -81,6 +79,21 @@ class HotelController extends Controller
 				$hotelObj->setMetaKeywords($hotelDetail->getMetaKeywords());
 				$hotelObj->setMetaDescription($hotelDetail->getMetaDescription());
 				
+				$hotelObj->setHotelblockStartDate($hotelDetail->getHotelblockStartDate());
+				$hotelObj->setHotelblockEndDate($hotelDetail->getHotelblockEndDate());
+				
+				date_default_timezone_set('Asia/Kolkata');
+				$date = new \DateTime();
+				$adminname = $user->getEmail();
+				//$timestamp = strtotime($date);
+				//$new_date = date('Y-m-d',$date );
+				
+				$hotelObj->setAuditInfocreatedAt($date);
+				$hotelObj->setAuditInfocreatedBy($adminname);
+				$hotelObj->setAuditInfoupdatedBy($adminname);
+				$hotelObj->setAuditInfoupdatedAt($date);
+				//echo var_dump($hotelObj);
+				//exit();
 		
 				$hotelAddressObj->setAddressLine1($hotelDetail->getAddressLine1());
 				$hotelAddressObj->setAddressLine2($hotelDetail->getAddressLine2());
@@ -149,6 +162,13 @@ class HotelController extends Controller
 					$hotelRoomObj->setBlockEndDate($hotelRoom->getBlockEndDate());
 					$hotelRoomObj->setSequence($hotelRoom->getSequence());
 					
+					
+					$hotelRoomObj->setPromotionStartDate($hotelRoom->getPromotionStartDate());
+					$hotelRoomObj->setPromotionEndDate($hotelRoom->getPromotionEndDate());
+					$hotelRoomObj->setPromotionPrice($hotelRoom->getPromotionPrice());
+					
+					
+					
 					$hotelRoomObj->setName($name );
 					
 					
@@ -170,7 +190,8 @@ class HotelController extends Controller
 				
 				}
 				
-				
+				//echo var_dump($hotelObj);
+				//exit();
 				
 				$em->persist($hotelObj);
 				
@@ -249,8 +270,13 @@ class HotelController extends Controller
 			$hotelRoom->setBlockStartDate ($hotelRoomObj->getBlockStartDate() );
 			$hotelRoom->setBlockEndDate ($hotelRoomObj->getBlockEndDate());
 			
+						
 			$hotelRoom->setSequence ($hotelRoomObj->getSequence());
 			
+			
+			$hotelRoom->setPromotionStartDate ($hotelRoomObj->getPromotionStartDate() );
+			$hotelRoom->setPromotionEndDate ($hotelRoomObj->getPromotionEndDate() );
+			$hotelRoom->setPromotionPrice ($hotelRoomObj->getPromotionPrice() );
 			
 			$hotelRoom->setName ($hotelRoomObj->getName() );
 			$hotelRoomList = $hotelDetail->getRoomList();
@@ -285,6 +311,13 @@ class HotelController extends Controller
 		$hotelDetail->setMetaTitle($hotelObj->getMetaTitle());
 		$hotelDetail->setMetaKeywords($hotelObj->getMetaKeywords());
 		$hotelDetail->setMetaDescription($hotelObj->getMetaDescription());
+		
+		$hotelDetail->setHotelblockStartDate($hotelObj->getHotelblockStartDate());
+		$hotelDetail->setHotelblockEndDate($hotelObj->getHotelblockEndDate());
+		
+		
+		
+		
 		
 		
 		$hotelAddressObj = $hotelObj->getAddress();
@@ -331,7 +364,15 @@ class HotelController extends Controller
 			$hotelObj->setMetaKeywords($hotelDetail->getMetaKeywords());
 			$hotelObj->setMetaDescription($hotelDetail->getMetaDescription());
 			
+			$hotelObj->setHotelblockStartDate($hotelDetail->getHotelblockStartDate());
+			$hotelObj->setHotelblockEndDate($hotelDetail->getHotelblockEndDate());
 			
+			date_default_timezone_set('Asia/Kolkata');
+			$date = new \DateTime();
+			$hotelObj->setAuditInfoupdatedBy($user->getEmail());
+			$hotelObj->setAuditInfoupdatedAt($date);
+			//$hotelObj->>setAuditInfocreatedBy($user->getEmail());
+			//$hotelObj->setAuditInfocreatedAt($date);
 	
 			$hotelAddressObj->setAddressLine1($hotelDetail->getAddressLine1());
 			$hotelAddressObj->setAddressLine2($hotelDetail->getAddressLine2());
@@ -369,6 +410,8 @@ class HotelController extends Controller
 			$hotelRoomList = $hotelDetail->getRoomList();
 			$hotelRooms =$hotelObj->getHotelRooms();
 			foreach($hotelRoomList as $hotelRoom){
+				$isdeleted = $hotelRoom->getIsDeleted();
+				if($isdeleted==1){
 				$roomType = $hotelRoom->getRoomType();
 				$capacity = $hotelRoom->getCapacity();
 				$price = $hotelRoom->getPrice();
@@ -381,6 +424,11 @@ class HotelController extends Controller
 				$blockStartDate = $hotelRoom->getBlockStartDate();
 				$blockEndDate = $hotelRoom->getBlockEndDate();
 				$sequence = $hotelRoom->getSequence();
+				
+				$promotionStartDate = $hotelRoom->getPromotionStartDate();
+				$promotionEndDate = $hotelRoom->getPromotionEndDate();
+				$promotionPrice = $hotelRoom->getPromotionPrice();
+				
 				
 				
 				
@@ -400,7 +448,9 @@ class HotelController extends Controller
 				$hotelRoomObj->setBlockStartDate ($blockStartDate );
 				$hotelRoomObj->setBlockEndDate ($blockEndDate );
 				$hotelRoomObj->setSequence ($sequence );
-				
+				$hotelRoomObj->setPromotionStartDate ($promotionStartDate );
+				$hotelRoomObj->setPromotionEndDate ($promotionEndDate );
+				$hotelRoomObj->setPromotionPrice ($promotionPrice );
 				
 				$hotelRoomObj->setName ($name);
 			//echo var_dump($hotelRoomObj);
@@ -415,10 +465,13 @@ class HotelController extends Controller
 			
 				}
 				$hotelRooms->add($hotelRoomObj);
-			
+				
+				}
+				
 			}
 			
-			//exit();
+			//
+			
 	
 			$hotelObj->setImages($hotelImages);
 			
@@ -482,8 +535,8 @@ class HotelController extends Controller
 		//$hotelRoom->$repository->findOneBy(array('id' => 'id'));
 		$em->remove($hotelRoom);
 		$em->flush();
-		//return new Response('true');
-		return $this->redirect($this->generateUrl('room_hotel_search_hotel'));
+		return new Response('true');
+		//return $this->redirect($this->generateUrl('room_hotel_search_hotel'));
 	}
 
 	

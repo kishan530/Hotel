@@ -56,6 +56,12 @@ class Customer
      * @var string
      */
     private $couponCode; 
+    
+    /**
+     * @var string
+     */
+    private $adminCoupon;
+    
     /**
      * @var integer
      */
@@ -247,5 +253,24 @@ class Customer
     	return $this->paymentMode;
 
     }
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getAdminCoupon() {
+		return $this->adminCoupon;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$adminCoupon
+	 */
+	public function setAdminCoupon($adminCoupon) {
+		$this->adminCoupon = $adminCoupon;
+		return $this;
+	}
+	
 
 }

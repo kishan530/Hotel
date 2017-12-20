@@ -10,8 +10,8 @@
 				{{ form_widget(form._token) }}
 					
 						<div class="row form-group {% if form.email.vars.errors|length %}has-error{% endif %}">
-							<div class="row">
-								{{ form_widget(form.email,{ 'attr': {'placeholder': 'Enter your email Id'}}) }}
+							<div class="row ">
+								{{ form_widget(form.email,{ 'attr': {'placeholder': 'Enter your Email Id','class':'registerdetail'} }) }}
 							</div>
 							<div class="row">
 								{{ form_errors(form.email) }}
@@ -20,7 +20,7 @@
 						
 						<div class="row form-group {% if form.plainPassword.first.vars.errors|length %}has-error{% endif %}">
 							<div class="row">
-								{{ form_widget(form.plainPassword.first,{ 'attr': {'placeholder': 'Enter Password'}}) }}
+								{{ form_widget(form.plainPassword.first,{ 'attr': {'placeholder': 'Enter Password','class':'registerdetail'}}) }}
 							</div>
 							<div class="row">
 								{{ form_errors(form.plainPassword.first) }}
@@ -28,7 +28,7 @@
 						</div>
 						<div class="row form-group {% if form.plainPassword.second.vars.errors|length %}has-error{% endif %}">
 							<div class="row">
-								{{ form_widget(form.plainPassword.second,{ 'attr': {'placeholder': 'Re-enter Password'}}) }}
+								{{ form_widget(form.plainPassword.second,{ 'attr': {'placeholder': 'Re-enter Password','class':'registerdetail'}}) }}
 							</div>
 							<div class="row">
 								{{ form_errors(form.plainPassword.second) }}
@@ -37,12 +37,12 @@
 						
                         <div class="row form-group">
 							<div class="row">
-								<input type="checkbox" required="required" name="cb" class="remove_margin">  {% trans %} I agree to the JustTrip {% endtrans%} <a target="_blank" href="#">{% trans %} Terms of Service{% endtrans%}</a>
+								<input type="checkbox" required="required" name="cb" class="remove_margin">  {% trans %} I agree to the Sterlingsuites {% endtrans%} <a target="_blank" href="#">{% trans %} Terms of Service{% endtrans%}</a>
 							</div>
 						</div>
 						<div class="row">
 						<div class="row top-buffer1">
-							<input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary"/>
+							<input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary registerbtnview pull-right registermobilepull"/>
 						</div>
 						</div>
 				 </form>

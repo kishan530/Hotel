@@ -9,6 +9,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityManager;
 use Trip\BookingEngineBundle\DTO\Catalogue;
+
+use Room\HotelBundle\DTO\HotelDto;
+
 /**
  * This is Catalogue Service.    
  *
@@ -60,22 +63,98 @@ class CatalogueService
     	foreach($hotels as $hotel){
     		$rooms = $hotel->getHotelRooms();
     		//echo $location;
-    		$price = 0;
+    		$minPrice = 0;
+    		$minPromoPrice = 0;
+    		$selectedPromoStartDate = 0;
+    		$selectedPromoEndDate = 0;
     		foreach($rooms as $room){    			
     			$roomPrice = $room->getPrice();
+    			$promoStartDate = $room->getPromotionStartDate();
+    			$promoEndDate = $room->getPromotionEndDate();
+    			$promoPrice = $room->getPromotionPrice();
+    			 
     			
-    			if($price==0)
-    				$price = $roomPrice;
+    			if($minPrice==0){
+    				$minPrice = $roomPrice;
+    				$minPromoPrice = $promoPrice;
+    				$selectedPromoStartDate = $promoStartDate;
+    				$selectedPromoEndDate = $promoEndDate;
+    			}
     			//	echo $slectedLocation;
-    			if ($price>$roomPrice)
-    				$price = $roomPrice;
+    			if ($minPrice>$roomPrice){
+    				$minPrice = $roomPrice;
+    				$minPromoPrice = $promoPrice;
+    				$selectedPromoStartDate = $promoStartDate;
+    				$selectedPromoEndDate = $promoEndDate;
+    			}
     		}
+    		    		
     		
-    		$hotel->setPrice($price);
-    		$tempHotels[] = $hotel;
+    		$hotelDetail = new HotelDto();
+    		$address = $hotel->getAddress();
+    		$hotelDetail->setId($address->getId());
+    		$hotelDetail->setAddressLine1($address->getAddressLine1());
+    		$hotelDetail->setAddressLine2($address->getAddressLine2());
+    		$hotelDetail->setLocation($address->getLocation());
+    		$hotelDetail->setPincode($address->getPincode());
+    		
+    		//$hotelDetail->setCity($address->getCity());
+    		//$hotelDetail->setCityId($address->getCityId());
+    		
+    		//$hotelDetail->setHotel($address->getHotel());
+    		
+    		
+    		$hotelDetail->setId($hotel->getId());
+    		$hotelDetail->setName($hotel->getName());
+    		$hotelDetail->setOverview($hotel->getOverview());
+    		//$hotelDetail->setId($hotel->getId());
+    		
+    		$hotelDetail->setPropertyType($hotel->getPropertyType());
+    		$hotelDetail->setCategory($hotel->getCategory());
+    		$hotelDetail->setCheckIn($hotel->getCheckIn());
+    		$hotelDetail->setCheckOut($hotel->getCheckOut());
+    		$hotelDetail->setCity($hotel->getCity());
+    		$hotelDetail->setNumRooms($hotel->getNumRooms());
+    		$hotelDetail->setCityId($hotel->getCityId());
+    		$hotelDetail->setActive($hotel->getActive());
+    		
+    		$hotelDetail->setSoldOut($hotel->getSoldOut());
+    		$hotelDetail->setPriority($hotel->getPriority());
+    		
+    		$hotelDetail->setFooterDisplay($hotel->getFooterDisplay());
+    		$hotelDetail->setUrl($hotel->getUrl());
+    		$hotelDetail->setMetaTitle($hotel->getMetaTitle());
+    		$hotelDetail->setMetaKeywords($hotel->getMetaKeywords());
+    		$hotelDetail->setMetaDescription($hotel->getMetaDescription());
+    		$hotelDetail->setHotelblockStartDate($hotel->getHotelblockStartDate());
+    		$hotelDetail->setHotelblockEndDate($hotel->getHotelblockEndDate());
+    		
+    		$hotelDetail->setHotelRooms($hotel->getHotelRooms());
+    		//$hotelDetail->setAddress($hotel->getAddress());
+    		$hotelDetail->setImages($hotel->getImages());
+    		$hotelDetail->setAmenities($hotel->getAmenities());
+    		
+    		
+    		
+    		
+    		
+    		
+    		$hotelDetail->setPrice($minPrice);
+    		$hotelDetail->setPromotionStartDate($selectedPromoStartDate);
+    		$hotelDetail->setPromotionEndDate($selectedPromoEndDate);
+    		$hotelDetail->setPromotionPrice($minPromoPrice);
+    		
+    		$activehotel=$hotel->getActive();
+    		if($activehotel=='Active')
+    		{//$tempHotels[] = $hotel;
+    		$tempHotels[] = $hotelDetail;
+    		}
     	}
+    	//var_dump($tempHotels);
+    	//exit();
     	return $tempHotels;
     }
+    
     /**
      * 
      * @param unknown $hotel
@@ -151,8 +230,36 @@ class CatalogueService
     		if($room->getId()==$roomId)
     			$selectedRoom = $room;    	
     	}
+    	//var_dump($selectedRoom);
+    	//exit();
     	return $selectedRoom;
     }
+    
+    
+  public function  getavailablerooms($hotels,$roomCountByHotel){
+  	
+  	foreach($hotels as $hotel){
+  		$totalRooms = $hotel->getNumRooms();
+  		$id = $hotel->getId();
+  		//if (array_key_exists('first', $search_array))
+  		if (array_key_exists($id, $roomCountByHotel))
+  			$countofBookedRooms = $roomCountByHotel[$id];
+  		else
+  			$countofBookedRooms = 0;
+  		$totalRooms = $hotel->getNumRooms();
+  		$availableRoom = $totalRooms - $countofBookedRooms;
+  		//var_dump($id);
+  		//var_dump($totalRooms);
+  		//var_dump($countofBookedRooms);
+  		//var_dump($availableRoom);
+  		$hotel->setAvailableRooms($availableRoom);
+  		//var_dump($hotel);
+  		//exit();
+  	}
+  //	var_dump($hotels);
+  	//exit();
+  	return $hotels;
+  }
     
     public function getBookingsBySearch($bookingSearch){
     	
@@ -231,13 +338,13 @@ class CatalogueService
     	$minPrice = 100000;
     	$amenitiesMstr = $this->getAmenitiesById($amenitiesMstr);
     	foreach($hotels as $hotel){
-    		$address = $hotel->getAddress();
+    		//$address = $hotel->getAddress();
     		$hotelAmenities = $hotel->getAmenities();
     		$category = $hotel->getCategory();
     		
     		$property = $hotel->getPropertyType();
     		
-    		$location = $address->getLocation();
+    		$location = $hotel->getLocation();
     		$price = $hotel->getPrice();
     		
     		if($price>$maxPrice)
@@ -304,10 +411,10 @@ class CatalogueService
     public function filterByLocation($slectedLocations,$hotels){
     	$tempHotels = array();
     	foreach($hotels as $hotel){
-    		$address = $hotel->getAddress();
+    		//$address = $hotel->getAddress();
     		$hotelAmenities = $hotel->getAmenities();
     		$category = $hotel->getCategory();
-    		$location = $address->getLocation();
+    		$location = $hotel->getLocation();
     		$price = $hotel->getPrice();
     		//echo $location;
     		
@@ -328,10 +435,10 @@ class CatalogueService
     public function filterByPrice($search,$hotels,$minPrice,$maxPrice){
     	$tempHotels = array();
     	foreach($hotels as $hotel){
-    		$address = $hotel->getAddress();
+    	//	$address = $hotel->getAddress();
     		$hotelAmenities = $hotel->getAmenities();
     		$category = $hotel->getCategory();
-    		$location = $address->getLocation();
+    		$location = $hotel->getLocation();
     		$price = $hotel->getPrice();
     		//echo $price;
     		//echo $minPrice;
@@ -352,10 +459,10 @@ class CatalogueService
     public function filterByCategory($slectedCategories,$hotels){
     	$tempHotels = array();
     	foreach($hotels as $hotel){
-    		$address = $hotel->getAddress();
+    	//	$address = $hotel->getAddress();
     		$hotelAmenities = $hotel->getAmenities();
     		$category = $hotel->getCategory();
-    		$location = $address->getLocation();
+    		$location = $hotel->getLocation();
     		$price = $hotel->getPrice();	    		
     		//echo var_dump($slectedCategories);
     		foreach($slectedCategories as $selectedCategory){
@@ -371,10 +478,10 @@ class CatalogueService
     public function filterByPropertyType($slectedProperties,$hotels){
     	$tempHotels = array();
     	foreach($hotels as $hotel){
-    		$address = $hotel->getAddress();
+    	//	$address = $hotel->getAddress();
     		$hotelAmenities = $hotel->getAmenities();
     		$property = $hotel->getPropertyType();
-    		$location = $address->getLocation();
+    		$location = $hotel->getLocation();
     		$price = $hotel->getPrice();
     		//echo var_dump($slectedCategories);
     		foreach($slectedProperties as $slectedProperty){

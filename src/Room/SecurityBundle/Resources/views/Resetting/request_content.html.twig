@@ -43,13 +43,13 @@
 						<p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
 					{% endif %}
 					<label for="username">Email-Id</label>
-					<input type="text" id="username" name="username" required="required" />
+					<input type="text" id="username" name="username" required="required" placeholder="Enter Email Id"/>
 				</div>
 			
             </div>            <!-- /modal-body -->
             <div class="modal-footer">
-                <a href="#" class="btn-system btn-medium" id="cancel">Cancel</a>
-				<input type="submit" class="btn-system btn-medium" value="{{ 'resetting.request.submit'|trans }}" />
+               {#} <a href="#" class="btn-system btn-medium" id="cancel">Cancel</a>{#}
+				<input type="submit" class="btn-primary btn-system  btn-medium" value="{{ 'resetting.request.submit'|trans }}" />
                 
             </div>            <!-- /modal-footer -->
 

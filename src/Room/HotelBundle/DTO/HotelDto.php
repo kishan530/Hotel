@@ -164,12 +164,68 @@ class HotelDto
      */
     private $metaDescription;
     
+    /**
+     * @var date
+     */
+    private $hotelblockStartDate;
+    
+    /**
+     * @var date
+     */
+    private $hotelblockEndDate;
+    
+    /**
+     * @var date
+     */
+    private $auditInfocreatedAt;
+    
+    /**
+     * @var string
+     *
+     *
+     */
+    private $auditInfocreatedBy;
+       
+    
+    /**
+     * @var date
+     */
+    private $auditInfoupdatedAt;
+    
+    /**
+     * @var string
+     *
+     *
+     */
+    private $auditInfoupdatedBy;
+    
+      
+    
+    
+    /**
+     * @var date
+     */
+    private $promotionStartDate;
+    
+    /**
+     * @var date
+     */
+    private $promotionEndDate;
+    
+    /**
+     * @var float
+     *
+     *
+     */
+    private $promotionPrice;
+    
     
     /**
      * @var Collection
      * 
      */
     protected $images;
+    
     
     /**
      * @var Collection
@@ -191,6 +247,12 @@ class HotelDto
   	 *
   	 */
   	protected $roomList;
+  	
+  	/**
+  	 * @var Collection
+  	 *
+  	 */
+  	protected $availableRooms;
     
     
     /**
@@ -202,6 +264,7 @@ class HotelDto
     	$this->imageList = new ArrayCollection();
     	$this->hotelRooms = new ArrayCollection();
     	$this->roomList = new ArrayCollection();
+    	$this->availableRooms = new ArrayCollection();
     }
     
     
@@ -711,6 +774,190 @@ class HotelDto
 		$this->metaDescription = $metaDescription;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getHotelblockStartDate() {
+		return $this->hotelblockStartDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$hotelblockStartDate
+	 */
+	public function setHotelblockStartDate($hotelblockStartDate) {
+		$this->hotelblockStartDate = $hotelblockStartDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getHotelblockEndDate() {
+		return $this->hotelblockEndDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$hotelblockEndDate
+	 */
+	public function setHotelblockEndDate($hotelblockEndDate) {
+		$this->hotelblockEndDate = $hotelblockEndDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getPromotionStartDate() {
+		return $this->promotionStartDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$promotionStartDate
+	 */
+	public function setPromotionStartDate($promotionStartDate) {
+		$this->promotionStartDate = $promotionStartDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getPromotionEndDate() {
+		return $this->promotionEndDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$promotionEndDate
+	 */
+	public function setPromotionEndDate($promotionEndDate) {
+		$this->promotionEndDate = $promotionEndDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the float
+	 */
+	public function getPromotionPrice() {
+		return $this->promotionPrice;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$promotionPrice
+	 */
+	public function setPromotionPrice($promotionPrice) {
+		$this->promotionPrice = $promotionPrice;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getAuditInfocreatedAt() {
+		return $this->auditInfocreatedAt;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$auditInfocreatedAt
+	 */
+	public function setAuditInfocreatedAt($auditInfocreatedAt) {
+		$this->auditInfocreatedAt = $auditInfocreatedAt;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getAuditInfocreatedBy() {
+		return $this->auditInfocreatedBy;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$auditInfocreatedBy
+	 */
+	public function setAuditInfocreatedBy($auditInfocreatedBy) {
+		$this->auditInfocreatedBy = $auditInfocreatedBy;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getAuditInfoupdatedAt() {
+		return $this->auditInfoupdatedAt;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$auditInfoupdatedAt
+	 */
+	public function setAuditInfoupdatedAt($auditInfoupdatedAt) {
+		$this->auditInfoupdatedAt = $auditInfoupdatedAt;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the string
+	 */
+	public function getAuditInfoupdatedBy() {
+		return $this->auditInfoupdatedBy;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$auditInfoupdatedBy
+	 */
+	public function setAuditInfoupdatedBy($auditInfoupdatedBy) {
+		$this->auditInfoupdatedBy = $auditInfoupdatedBy;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the Collection
+	 */
+	public function getAvailableRooms() {
+		return $this->availableRooms;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$availableRooms
+	 */
+	public function setAvailableRooms($availableRooms) {
+		$this->availableRooms = $availableRooms;
+		return $this;
+	}
+	
+	
+	
+	
 	
 	
 	

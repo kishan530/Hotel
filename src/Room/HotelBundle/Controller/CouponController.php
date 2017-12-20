@@ -70,6 +70,9 @@ class CouponController extends Controller
 	    		//$entity->setDate($date);
 	    		//echo var_dump($coupon->getExpireDate());
 	    	//	exit();
+	    		
+	    		$couponObj->setStartDate($coupon->getStartDate());
+	    		
 	    		$couponObj->setExpireDate($coupon->getExpireDate());
 	    		//$couponObj->setExpireDate(new \DateTime());
 	    		$couponObj->setAmount($coupon->getAmount());
@@ -79,6 +82,10 @@ class CouponController extends Controller
 	    		//$couponObj->setCreatedAt(new \DateTime());
 	    		$couponObj->setUpdatedBy($user->getEmail());
 	    		$couponObj->setUpdatedAt($date);
+	    		
+	    		//var_dump($date);
+	    		//exit();
+	 
 	    		//$couponObj->setUpdatedAt(new \DateTime());
 	    		
 	    		
@@ -125,6 +132,9 @@ class CouponController extends Controller
 		
 		$CouponCodeDto->setCouponName($couponObj->getCouponName());
 		$CouponCodeDto->setCouponCode($couponObj->getCouponCode());
+		
+		$CouponCodeDto->setStartDate($couponObj->getStartDate());
+		
 		$CouponCodeDto->setExpireDate($couponObj->getExpireDate());
 		$CouponCodeDto->setAmount($couponObj->getAmount());
 		
@@ -140,6 +150,9 @@ class CouponController extends Controller
 				
 			$couponObj->setCouponName($CouponCodeDto->getCouponName());
 			$couponObj->setCouponCode($CouponCodeDto->getCouponCode());
+			
+			$couponObj->setStartDate($CouponCodeDto->getStartDate());
+			
 			$couponObj->setExpireDate($CouponCodeDto->getExpireDate());
 			$couponObj->setAmount($CouponCodeDto->getAmount());
 

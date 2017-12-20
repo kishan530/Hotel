@@ -97,6 +97,29 @@ class HotelRoomDto
      */
     private $sequence;
     
+    /**
+     * @var date
+     */
+    private $promotionStartDate;
+    
+    /**
+     * @var date
+     */
+    private $promotionEndDate;
+    
+    /**
+     * @var float
+     *
+     *
+     */
+    private $promotionPrice;
+    
+    /**
+     * @var boolean
+     *
+     *
+     */
+    private $isDeleted;
       
      /**
      * @var string
@@ -362,6 +385,80 @@ class HotelRoomDto
 		$this->sequence = $sequence;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getPromotionStartDate() {
+		return $this->promotionStartDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$promotionStartDate
+	 */
+	public function setPromotionStartDate($promotionStartDate) {
+		$this->promotionStartDate = $promotionStartDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the date
+	 */
+	public function getPromotionEndDate() {
+		return $this->promotionEndDate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$promotionEndDate
+	 */
+	public function setPromotionEndDate($promotionEndDate) {
+		$this->promotionEndDate = $promotionEndDate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the float
+	 */
+	public function getPromotionPrice() {
+		return $this->promotionPrice;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$promotionPrice
+	 */
+	public function setPromotionPrice($promotionPrice) {
+		$this->promotionPrice = $promotionPrice;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the boolean
+	 */
+	public function getIsDeleted() {
+		return $this->isDeleted;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$isDeleted
+	 */
+	public function setIsDeleted($isDeleted) {
+		$this->isDeleted = $isDeleted;
+		return $this;
+	}
+	
+	
 	
 	
 	
