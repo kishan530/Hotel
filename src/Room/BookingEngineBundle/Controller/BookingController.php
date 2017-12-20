@@ -634,6 +634,7 @@ class BookingController extends Controller
     		$payuLink = $this->generateUrl ( 'room_booking_engine_payment_payu' );
     		
 
+
     		$security = $this->container->get ( 'security.context' );
     		 
     		$user = $security->getToken ()->getUser ();
@@ -659,24 +660,9 @@ class BookingController extends Controller
     			//$mailService->mail('info@sterlingsuites.in',$adminSubject,$mailer);
     		
     		}
-    		
-			
-    		
-    		//m
 
     		
-    		//$security = $this->container->get ( 'security.context' );
-    		 
-    		//$user = $security->getToken ()->getUser ();
-    		 
-    		//if ($security->isGranted ( 'ROLE_SUPER_ADMIN' )) {
     		
-    			//return $this->redirect ( $this->generateUrl ('room_security_user_login') );
-    			//return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
-    		
-    		//}else{
-    		//return $this->redirect ( $this->generateUrl ( "room_booking_engine_success" ) );
-    		//}
     		return $this->render('RoomBookingEngineBundle:Default:payment.html.twig', array(
     				'customer'   => $customer,
     				'booking'   => $booking,
@@ -1052,7 +1038,8 @@ public function serviceDetailAction(Request $request,$url)
    private function getData($request,$finalPrice,$bookingId,$customer,$redirectUrl){
 	// Merchant key here as provided by Payu
 	$MERCHANT_KEY = "rjQUPktU";
- 
+
+
 	$SALT = "e5iIg1jwi8";
 
 	// End point - change to https://secure.payu.in for LIVE mode
