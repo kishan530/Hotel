@@ -177,8 +177,15 @@ class HotelDetailType extends AbstractType
 //             		//	'choices' => $this->getLocations(),
 //             		'required'    => true,
 //             ))
-            ->add('location')
-            ->add('pincode')
+           // ->add('location')
+            //->add('pincode')
+            ->add('location', null, array(
+            		'required'    => true,
+            		'label' => 'Location', ))
+            ->add('pincode', null, array(
+            		'required'    => true,
+            		'label' => 'Pincode', ))
+            
             
             ->add('imageList', 'collection', array(
             		// each entry in the array will be an "PackageItinerary" field
