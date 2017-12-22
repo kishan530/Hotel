@@ -49,6 +49,8 @@ class BookingController extends Controller
 	 */
 	public function indexAction()
 	{
+		$mailService = $this->container->get( 'mail.services' );
+		$mailService->mail('mmshivukumar@gmail.com','Just Trip:Booking Confirmation','this is test');
 			//$mailService = $this->container->get( 'mail.services' );
     		
     		//$mailService->mail('kishan.kish530@gmail.com','kishan test','this is kishan test');
@@ -1367,10 +1369,13 @@ public function adminpaymentSuccessAction(Request $request){
 	$selectedService = $em->getRepository('RoomHotelBundle:Hotel')->findBy( array('id' => $hotelId));
 	$selectedService=$selectedService[0];
 	$address = $selectedService->getAddress();
-	
+	//var_dump($roomId);
 	$selectedRoom = $em->getRepository('RoomHotelBundle:HotelRoom')->findBy( array('id' => $roomId));
-	$selectedRoom=$selectedRoom[0];
 	
+	
+	//var_dump($selectedRoom);
+	//exit();
+	$selectedRoom=$selectedRoom[0];
 	$paymentErrors = array();
 	$error = null;
 	

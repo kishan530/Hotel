@@ -5,16 +5,17 @@
     <title>Reservation At Hotel Sterlin</title>
   </head>
   <body>
+   <p>Thank you for choosing Sterling Suites !  Your reservation is confirmed.</p>
     <table style="width: 611px; background-color: ;" "="" border="1">
       <tbody>
         <tr align="center">
           <td colspan="4" rowspan="1">
-            <h3>Hotel Booking Confirmation</h3>
+            <h3>Reservation Status - Pending</h3>
           </td>
         </tr>
         <tr>
-		<td>
-		<span align="center" style="font-weight: bold;">{{ selectedService.name }}</span></address>
+		<td align="center" colspan="4" rowspan="1">
+		<span align="center" style="font-weight: bold;width:100%">{{ selectedService.name }}</span>
          </td>
         </tr >
 		<tr>
@@ -68,7 +69,7 @@
             </td>
           <td style="width: 163.084px;"> Room Type<br>
           </td>
-          <td style="width: 159.367px;"> <br>{{ selectedRoom.roomType }}
+          <td style="width: 159.367px;">{{ selectedRoom.roomType }}
           </td>
         </tr>
         <tr>
@@ -94,11 +95,19 @@
 		<td style="padding-left: 325px;" colspan="4"rowspan="1">
 		<span style="font-weight: bold;">Billing Details:</span></address><br>
 		
-		Hotel Charges: {{ booking.totalPrice }} <br>
+		
+		
+		Hotel Price: {{ booking.totalPrice }} <br>
+		GST: {{ booking.serviceTax }} <br>
+		Total Price: {{ booking.totalPrice+booking.serviceTax }} <br>
+		Special Discount (-): {{ booking.discount }} <br>
+		Total Price:{{ booking.finalPrice }}
+		
+		{#}Hotel Charges: {{ booking.totalPrice }} <br>
 		GST: {{ booking.serviceTax }} <br>
 		Total Price: {{ booking.finalPrice-booking.discount }} <br>
-		Discount(-): {{ booking.discount }} <br>
-		Total Amount:{{ booking.finalPrice }}
+		Special Discount (-): {{ booking.discount }} <br>
+		Total Amount:{{ booking.finalPrice }}{#}
 		
          </td>
         </tr>
@@ -112,55 +121,40 @@
          
         
         
-         <tr>
-          <td colspan="4" rowspan="1"><strong style="text-decoration: underline;">Room
-              Rate is inclusive of :</strong><br>
+           <tr>
+          <td colspan="4" rowspan="1">
+		  <strong style="text-decoration: underline;">Room Rate is inclusive of :</strong><br>
             
-              <li>Complimentary buffet breakfast at the Coffee Shop.</li>
-              <li>In room tea/coffee maker, cable TV, mini bar and direct dial
-                facility.</li>
-              <li>Complimentary use of the swimming pool.</li>
-              <li>Complimentary daily Newspaper.</li>
-              <li>2 Bottles of complimentary water.</li><br>
-           
-            Reservations are held till 13:00 hrs, unless guaranteed. To<strong>
-              guarantee your reservation,</strong> please provide the hotel with
-            a valid credit card number and the card expiry date.<br>
+              <li>Complimentary Continental / Indian Breakfast.</li>
+              <li>Complimentary WIFI. </li>
+              <li>Inclusive Of  Taxes.</li>
+          </td>
+		 </tr>		 
+        
+        <tr>
+          <td colspan="4" rowspan="1">
+            <h4><span>Cancellation policy</span></h4>            
+            <ul>
+              <li>Booking cancelled beyond 48 hrs from the date of confirmation will carry a 10% retention charge</li>
+              <li>Booking cancelled between a seven (7) to three (3) days from the date of arrival will carry a 50% retention charge</li>
+			  <li>Booking cancelled in the last 24 hrs from the date of arrival will carry a 100% retention charge</li>
+			  <li>A no-show will carry a 100% retention charge</li>
+            </ul>
+            
+          </td>
+        </tr>
+		<tr>
+          <td colspan="4" rowspan="1">
+		  <p>You will soon receive an official welcome letter or call from us with additional information on the hotel you have booked</p>
+		   <br>
             <br>
-            We look forward to welcoming you to at Hotel Salmon Red !<br>
+            We look forward to welcoming you to at {{ selectedService.name }}<br>
             <br>
             <strong>With best regards,<br>
               Yours sincerely,<br>
             </strong><br>
             <strong>Room Reservations.</strong><br>
-            <a href="mailto:Reservation%20Confirmation%20HTML%20Template">admin@setupmyhotel.com</a></td>
-        </tr>
-        <tr>
-          <td colspan="4" rowspan="1">
-            <h4 style="text-align: center;"><span style="text-decoration: underline;">Cancellation/amendment
-                policy</span></h4>
-            <span style="text-decoration: underline;"><strong>Individual
-                reservations</strong>:</span><br>
-            <ul>
-              <li>For Cancellations/ amendments made after 12 noon, 3 days prior
-                to check-in date, One night’s room rate is charged to the credit
-                card</li>
-              <li>For No shows and early check outs, One night’s room rate is
-                charged to the credit card.</li>
-            </ul>
-            <span style="text-decoration: underline;"><strong>Groups /
-                Conference bookings</strong>:</span><br>
-            <ul>
-              <li>In case there is any no-show or cancellation/amendment of the
-                conference/group (in part or full), within 15 days or less from
-                the date of check in, a retention charge will be levied.</li>
-              <li>&nbsp;The retention charge will be calculated as follows -
-                Number of rooms being canceled/no-shows X 1 night X applicable
-                daily rate per room for the conference/group. </li>
-              <li>In case of Early check out retention will be charged for those
-                nights booked, now being released due to the early check out.</li>
-            </ul>
-          </td>
+            <a href="mailto:reservation@sterlingsuites.in">reservation@sterlingsuites.in</a></td>
         </tr>
         <tr align="center">
           <td colspan="4" rowspan="1">
@@ -172,6 +166,11 @@
           Fax: +91 80 4123 9655
             </td>
         </tr>
+		<tr align="center">
+          <td colspan="4" rowspan="1">
+			<p>GSTIN : 29AACCC6463G2Z1  | PAN:AACCC6463G  | SAC CODE: 996311 </p>
+		  </td>
+		 </tr>
         </tbody>
     </table>
     <p><br>

@@ -445,8 +445,11 @@ $("#guests-box").on('click','.guestclose',function(e){
           {% for hotel in hotels %}
           <div class="listing-room-list">
             <div class="thumbnail">
+            {% if hotel.images.first %}
             <img src="{{ asset('img/Hotels/'~hotel.images.first.imagePath) }}" alt="" class="img-responsive" height="100%">
-              
+                          {% else %}
+           <img src="/hotel/web/img/Hotels/shirdib3.jpg" alt="" class="img-responsive" height="100%">
+           {% endif %}
             </div>
           
             <div class="listing-room-content">
@@ -500,6 +503,10 @@ $("#guests-box").on('click','.guestclose',function(e){
               {% if hotel.promotionStartDate %}
                 {% if (hotel.promotionStartDate<=today) and (today<=hotel.promotionEndDate) %}  
                  {% set promotion = true %}
+                 <div class="tipsy from-right-top active txt-ac uprcse price-tipsy">
+                 <div class="arrow_box info theme-blue  savedprice">You Save <i class="fa fa-inr">{{ price - hotel.promotionPrice }}</i>
+          			</div>
+          			</div>
                  
                     <span class="price">
                         <i class="fa fa-inr"></i> {{ hotel.promotionPrice }} <strike> <i class="fa fa-inr"></i> {{ price }} </strike>

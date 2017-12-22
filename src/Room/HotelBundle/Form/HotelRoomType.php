@@ -55,7 +55,7 @@ class HotelRoomType extends AbstractType
             						'label' => 'price', ))
              
             ->add('imagePath', 'file',array(
-            				'required' => false,
+            				'required' => true,
             				'attr'   =>  array(
             						'class'   => 'filestyle',
             						'data-icon'   => 'false',

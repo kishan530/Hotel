@@ -44,11 +44,29 @@ class HotelDetailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            /*->add('name')
             ->add('overview')
             ->add('metaTitle')
             ->add('metaKeywords')
-            ->add('metaDescription')
+            ->add('metaDescription')*/
+        ->add('name', null, array(
+        		'required'    => true,
+        		'label' => 'Name', ))
+        		
+        ->add('overview', null, array(
+        		'required'    => true,
+        		'label' => 'Overview', ))
+        		
+        ->add('metaTitle', null, array(
+        		'required'    => false,
+        		'label' => 'MetaTitle', ))  
+        
+        ->add('metaKeywords', null, array(
+        		'required'    => false,
+        		'label' => 'MetaKeywords', ))
+        ->add('metaDescription', null, array(
+        		'required'    => false,
+        		'label' => 'MetaDescription', ))
                         
             ->add('propertyType', 'choice', array(
             		'expanded' => false,
@@ -74,10 +92,30 @@ class HotelDetailType extends AbstractType
             		),
             		'required'    => true,
             ))
-            ->add('checkIn')
-            ->add('checkOut')
+           // ->add('checkIn')
+           // ->add('checkOut')
             ->add('price')          
-            ->add('numRooms')
+           // ->add('numRooms')
+            
+            
+            ->add('checkIn', null, array(
+            		'required'    => true,
+            		'label' => 'CheckIn', ))
+            		
+            ->add('checkOut', null, array(
+            		'required'    => true,
+            		'label' => 'CheckOut', ))
+            		
+            ->add('price')
+            
+            ->add('numRooms', null, array(
+            		'required'    => true,
+            		'label' => 'numRooms', ))
+            
+            
+            
+            
+            
             ->add('priority', 'choice', array(
             		'expanded' => false,
             		'multiple' => false,
@@ -112,8 +150,16 @@ class HotelDetailType extends AbstractType
             		),
             		'required'    => true,
             ))
-            ->add('addressLine1')
-            ->add('addressLine2')
+           // ->add('addressLine1')
+           // ->add('addressLine2')
+            
+            ->add('addressLine1', null, array(
+            		'required'    => true,
+            		'label' => 'AddressLine1', ))
+            ->add('addressLine2', null, array(
+            		'required'    => false,
+            		'label' => 'AddressLine2', ))
+            
             //->add('city')
             ->add('city', 'choice', array(
             		'expanded' => false,
@@ -139,7 +185,7 @@ class HotelDetailType extends AbstractType
             		'type'   => new HotelImageType(),
             		'allow_add'    => true,
             		'prototype'=>true,
-            		'required'    => false,
+            		'required'    => true,
             		// these options are passed to each "PackageItinerary" type
             		//'entry_options'  => array(
             		//   'attr'      => array('class' => '')

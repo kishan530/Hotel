@@ -21,7 +21,7 @@ class HotelImageType extends AbstractType
     {
         $builder
         ->add('imagePath', 'file',array(
-        		'required' => false,
+        		'required' => true,
         		'data_class' => null,
         		'label'=>'Image',
         		'attr'   =>  array(

@@ -127,6 +127,7 @@ $('.calendar').datepicker({
                                 <th>Sold Out </th>
                                 <th> Status </th>
                                 <th> URL </th>
+                                <th> Updated by </th>
                                 <th> - </th>
                                 <th> - </th>
                                 
@@ -144,6 +145,8 @@ $('.calendar').datepicker({
                             <td> {% if hotel.soldOut %} Yes {% else %} No {% endif %}</td>
                             <td> {% if hotel.active %} Active {% else %} In-active {% endif %}</td>
                             <td>{{ hotel.url }}</td>
+                            <td>{{ hotel.auditInfoupdatedBy }}<br>{{ hotel.auditInfoupdatedAt |date('Y-m-d H:i:s') }}</td>
+                            
                             <td> <a href="{{ path('room_hotel_edit_hotel',{ 'id': hotel.id }) }}"><i class="fa fa-pencil-square-o"></i></a></td>
                         	<td> <a href="{{ path('room_hotel_delete_hotel',{ 'id': hotel.id }) }}" class="delete" title="{{ hotel.name }}"><i class="fa fa-trash-o" aria-hidden="true "></i></a></td>
                         </tr>
