@@ -49,8 +49,8 @@ class BookingController extends Controller
 	 */
 	public function indexAction()
 	{
-		$mailService = $this->container->get( 'mail.services' );
-		$mailService->mail('mmshivukumar@gmail.com','Just Trip:Booking Confirmation','this is test');
+		//$mailService = $this->container->get( 'mail.services' );
+		//$mailService->mail('mmshivukumar@gmail.com','Just Trip:Booking Confirmation','this is test');
 			//$mailService = $this->container->get( 'mail.services' );
     		
     		//$mailService->mail('kishan.kish530@gmail.com','kishan test','this is kishan test');
@@ -309,10 +309,11 @@ class BookingController extends Controller
     	
     	    	
     	
-    	
+    	$viewMore=0;
     	return $this->render('RoomBookingEngineBundle:Default:view-more.html.twig', array(
     			'form'   => $form->createView(),
     			'hotel'=> $hotel,
+    			'viewMore'=> $viewMore,
     			'search'=>$search,
     			'today'=>$today,
     			'promotionPrice'=>$promotionPrice,
@@ -915,6 +916,7 @@ public function serviceDetailAction(Request $request,$url)
     	$numRoom=1;
     	$session = $request->getSession();
     	$search = $session->get('search');
+    	
     	if($search!==null)
     	{
     		$numRoom=$search->getNumRooms();
@@ -952,9 +954,20 @@ public function serviceDetailAction(Request $request,$url)
     	
     	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->findBy( array('url' => $url));
     	
+    	$catalogueService = $this->container->get( 'catalogue.service' );
+    	$hotel = $catalogueService->getMinroom($hotel);
+    	//echo var_dump($hotel);
+    	//exit();
+    	$promotionStartDate = $hotel->getPromotionStartDate();
+    	$promotionEndDate = $hotel->getPromotionEndDate();
+    	$promotionPrice = $hotel->getPromotionPrice();
+    	//$hotel = $hotel[0];
     	
+    	//echo var_dump($promotionStartDate);
+    	//echo var_dump($promotionEndDate);
+    	//echo var_dump($promotionPrice);
     	
-    	$hotel = $hotel[0];
+    	//exit();
     	
     	$roomId = $hotel->getId();
     	$selectedRoom = $em->getRepository('RoomHotelBundle:HotelRoom')->findBy( array('id' => $roomId));
@@ -968,12 +981,18 @@ public function serviceDetailAction(Request $request,$url)
     	$hotel = $catalogueService->getMinPrice($hotel);
     	$roomPrice=$hotel->getPrice();
     	$hotel->setPrice($roomPrice*$numRoom);
-    	    	
+    	$viewMore=1;
+    	    //	echo var_dump($hotel->getAddressLine1());
+    	    //	exit();
     	return $this->render('RoomBookingEngineBundle:Default:view-more.html.twig', array(
     //			'form'   => $form->createView(),
     			'hotel'=> $hotel,
+    			'viewMore'=> $viewMore,
     			'search'=>$search,
     			'today'=>$today,
+    			'promotionPrice'=>$promotionPrice,
+    			'promotionStartDate'=>$promotionStartDate,
+    			'promotionEndDate'=>$promotionEndDate,
     			
     			
     	));
@@ -1039,16 +1058,18 @@ public function serviceDetailAction(Request $request,$url)
 
    private function getData($request,$finalPrice,$bookingId,$customer,$redirectUrl){
 	// Merchant key here as provided by Payu
-	$MERCHANT_KEY = "rjQUPktU";
+	//$MERCHANT_KEY = "rjQUPktU";
 
+	$MERCHANT_KEY = "OwPbxU2k";
+	$SALT = "aa70fUA5Hh";
 
-	$SALT = "e5iIg1jwi8";
+	//$SALT = "e5iIg1jwi8";
 
 	// End point - change to https://secure.payu.in for LIVE mode
-	//$PAYU_BASE_URL = "https://secure.payu.in";
+	$PAYU_BASE_URL = "https://secure.payu.in";
 	
 	//testing Mode
-	$PAYU_BASE_URL = "https://test.payu.in";
+	//$PAYU_BASE_URL = "https://test.payu.in";
 	 
 	$action = $PAYU_BASE_URL . '/_payment';
 	//$txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);

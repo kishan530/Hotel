@@ -60,16 +60,20 @@ $("button").click(function() {
        
           
             <div class="col-md-9">
-            <h1 class="hotel-title">{{ hotel.name }}</h1>           
-			{% set address = hotel.address %}
+            <h1 class="hotel-title">{{ hotel.name }}</h1>  
+            
+             {% if viewMore == 1 %} 
+             <p class="hotel-address"> {{ hotel.addressLine1 }}, {{ hotel.addressLine2 }}, {{ hotel.location }}, {{ hotel.city }}</p>
+                  {% else %}
+              {% set address = hotel.address %} 
+			
 			<p class="hotel-address"> {{ address.addressLine1 }}, {{ address.addressLine2 }}, {{ address.location }}, {{ address.city }}</p>
+			
+			{% endif %}
             </div>
            <div class="col-md-3" style="margin-top: 20px;">
             
             
-           
-                     
-                     
                      
                     {% if (promotionStartDate<=today) and (today<=promotionEndDate) %}   
             	 <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ promotionPrice }} <strike><i class="fa fa-inr"></i>{{ hotel.price }}</strike></h5>

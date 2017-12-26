@@ -160,6 +160,106 @@ class CatalogueService
      * @param unknown $hotel
      * @return unknown
      */
+    public function getMinroom($hotel){
+    	$hotel=$hotel[0];
+    	
+    	$rooms = $hotel->getHotelRooms();
+    	//echo $location;
+    	$price = 0;
+    	$hotel=$this->gethotelinfo($hotel);
+    	foreach($rooms as $room){
+    		$roomPrice = $room->getPrice();
+    		$roompromotionStartDate = $room->getPromotionStartDate();
+    		$roompromotionEndDate = $room->getPromotionEndDate();
+    		$roompromotionPrice = $room->getPromotionPrice();
+    		 
+    		if($price==0)
+    			$price = $roomPrice;
+    		$promotionPrice = $roompromotionPrice;
+    		$promotionStartDate = $roompromotionStartDate;
+    		$promotionEndDate = $roompromotionEndDate;
+    
+    		
+    		
+    		
+    		//	echo $slectedLocation;
+    		if ($price>$roomPrice)
+    			$price = $roomPrice;
+    		
+    		$promotionStartDate = $roompromotionStartDate;
+    		$promotionEndDate = $roompromotionEndDate;
+    		$promotionPrice = $roompromotionPrice;
+    	}
+    	
+    	$hotel->setPrice($price);
+    	
+    	$hotel->setPromotionStartDate($promotionStartDate);
+    	$hotel->setPromotionEndDate($promotionEndDate);
+    	$hotel->setPromotionPrice($promotionPrice);
+    	
+    	return $hotel;
+    } 
+    
+    public function gethotelinfo($hotel){
+    	$hotelinfo = array();
+    	$hotelDetail = new HotelDto();
+    	$address = $hotel->getAddress();
+    	$hotelDetail->setId($address->getId());
+    	$hotelDetail->setAddressLine1($address->getAddressLine1());
+    	$hotelDetail->setAddressLine2($address->getAddressLine2());
+    	$hotelDetail->setLocation($address->getLocation());
+    	$hotelDetail->setPincode($address->getPincode());
+    	
+    	//$hotelDetail->setCity($address->getCity());
+    	//$hotelDetail->setCityId($address->getCityId());
+    	
+    	//$hotelDetail->setHotel($address->getHotel());
+    	
+    	
+    	$hotelDetail->setId($hotel->getId());
+    	$hotelDetail->setName($hotel->getName());
+    	$hotelDetail->setOverview($hotel->getOverview());
+    	//$hotelDetail->setId($hotel->getId());
+    	
+    	$hotelDetail->setPropertyType($hotel->getPropertyType());
+    	$hotelDetail->setCategory($hotel->getCategory());
+    	$hotelDetail->setCheckIn($hotel->getCheckIn());
+    	$hotelDetail->setCheckOut($hotel->getCheckOut());
+    	$hotelDetail->setCity($hotel->getCity());
+    	$hotelDetail->setNumRooms($hotel->getNumRooms());
+    	$hotelDetail->setCityId($hotel->getCityId());
+    	$hotelDetail->setActive($hotel->getActive());
+    	
+    	$hotelDetail->setSoldOut($hotel->getSoldOut());
+    	$hotelDetail->setPriority($hotel->getPriority());
+    	
+    	$hotelDetail->setFooterDisplay($hotel->getFooterDisplay());
+    	$hotelDetail->setUrl($hotel->getUrl());
+    	$hotelDetail->setMetaTitle($hotel->getMetaTitle());
+    	$hotelDetail->setMetaKeywords($hotel->getMetaKeywords());
+    	$hotelDetail->setMetaDescription($hotel->getMetaDescription());
+    	$hotelDetail->setHotelblockStartDate($hotel->getHotelblockStartDate());
+    	$hotelDetail->setHotelblockEndDate($hotel->getHotelblockEndDate());
+    	
+    	$hotelDetail->setHotelRooms($hotel->getHotelRooms());
+    	//$hotelDetail->setAddress($hotel->getAddress());
+    	$hotelDetail->setImages($hotel->getImages());
+    	$hotelDetail->setAmenities($hotel->getAmenities());
+    	
+    	
+    	$hotelDetail->setPrice($hotel->getPrice());
+    	//$hotelDetail->setPromotionStartDate();
+    	//$hotelDetail->setPromotionEndDate();
+    	//$hotelDetail->setPromotionPrice();
+    	$hotelinfo = $hotelDetail;
+    	return $hotelinfo;
+    	
+    }
+    /**
+     *
+     * @param unknown $hotel
+     * @return unknown
+     */
     public function getMinPrice($hotel){
     	$rooms = $hotel->getHotelRooms();
     	//echo $location;
@@ -173,11 +273,20 @@ class CatalogueService
     		if ($price>$roomPrice)
     			$price = $roomPrice;
     	}
-    	
+    	 
     	$hotel->setPrice($price);
-    	
+    	 
     	return $hotel;
-    } /**
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
      * 
      * @param unknown $hotel
      * @return unknown

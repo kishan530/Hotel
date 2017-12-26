@@ -192,7 +192,7 @@ class HotelDetailType extends AbstractType
             		'type'   => new HotelImageType(),
             		'allow_add'    => true,
             		'prototype'=>true,
-            		'required'    => true,
+            		'required'    => false,
             		// these options are passed to each "PackageItinerary" type
             		//'entry_options'  => array(
             		//   'attr'      => array('class' => '')

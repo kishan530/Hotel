@@ -144,7 +144,15 @@ $("#guests-box").on('click','.guestclose',function(e){
 	         
 	     } */
 	}); 
-    
+
+function getcheckin() {
+    document.getElementById("hotel_search_checkIn").focus();
+}
+function getcheckout() {
+    document.getElementById("hotel_search_checkOut").focus();
+}
+
+	
     </script>
 {% endblock %}
 {% block body %}
@@ -169,11 +177,11 @@ $("#guests-box").on('click','.guestclose',function(e){
                       	
                         {{ form_widget(form.checkIn) }}
                        
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa fa-calendar" onclick="getcheckin()"></i>
                       </span>
                       <span class=" ">
                          {{ form_widget(form.checkOut) }}
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa fa-calendar" onclick="getcheckout()"></i>
                       </span>
                       <span class="city guests" id="guests-box">
                       <input type="text" id="guests" value="{{ search.numAdult }} Guests, {{ search.numRooms }} Room" readonly/>
@@ -504,7 +512,7 @@ $("#guests-box").on('click','.guestclose',function(e){
                 {% if (hotel.promotionStartDate<=today) and (today<=hotel.promotionEndDate) %}  
                  {% set promotion = true %}
                  <div class="tipsy from-right-top active txt-ac uprcse price-tipsy">
-                 <div class="arrow_box info theme-blue  savedprice">You Save <i class="fa fa-inr">{{ price - hotel.promotionPrice }}</i>
+                 <div class="arrow_box info theme-blue  savedprice">You Save <i class="fa fa-inr"> {{ price - hotel.promotionPrice }}</i>
           			</div>
           			</div>
                  

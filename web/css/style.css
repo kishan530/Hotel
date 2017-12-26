@@ -8269,7 +8269,8 @@ display: none;
     border: 2px solid #2db11b;
     padding: 4px;
     border-radius: 25px;
-        color: #2db11b;
+     color: #2db11b;
+     text-align: center;  
 }
 
 
