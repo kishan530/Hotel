@@ -70,7 +70,7 @@
             <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-9 hidden-xs" >
             <ul class="contact-info custom-list list-inline" style="margin-left: -66px;">
-              <li><i class="fa fa-phone"></i><span> +91 9900032872 / 9900032873 / +91 8892007790 </span></li>
+              <li><i class="fa fa-phone"></i><span> +91 8892007790 /+91 9900032872 / 9900032873  </span></li>
               <li><i class="fa fa-envelope"></i><span style="text-transform: lowercase;">reservation@sterlingsuites.in | sales@sterlingsuites.in </span></li>
             </ul>
           </div>
@@ -118,7 +118,7 @@
                   <li class="active"><a href="{{ path('room_booking_engine_homepage') }}">Hotels</a></li>                                                     
                   <li><a href="{{ path('room_hotel_service_apartment') }}">Service Apartments</a></li>
                   <li><a href="{{ path('room_site_management_about_us') }}">About Us</a></li>
-                  <li><a href="#">Hot Deals</a></li>                
+                  <li><a href="{{ path('room_hotel_hot_deals') }}">Hot Deals</a></li>                
                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin</a>
                                         <ul class="dropdown-menu" role="menu">

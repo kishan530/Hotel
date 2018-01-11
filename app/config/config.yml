@@ -37,7 +37,7 @@ fos_user:
     firewall_name: main
     from_email:
                 address: %mailer_user%
-                sender_name:  Just Trip
+                sender_name:  Sterling Suites
     user_class: Room\SecurityBundle\Entity\User
     registration:
         form:
@@ -46,7 +46,7 @@ fos_user:
             enabled: false
             from_email:
                 address: %mailer_user%
-                sender_name:  Just Trip
+                sender_name:  Sterling Suites
         
        
 fos_facebook:

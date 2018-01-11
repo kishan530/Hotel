@@ -5,7 +5,7 @@
     <title>Reservation At Hotel Sterlin</title>
   </head>
   <body>
-  <p>Thank you for choosing Sterling Suites !  Your reservation is confirmed.</p>
+  <p>Thank you for choosing Sterling Suites !  Here is the status of your Reservation.</p>
     <table style="width: 611px; background-color: ;" "="" border="1">
       <tbody>
         <tr align="center">
@@ -100,8 +100,10 @@
 		GST: {{ booking.serviceTax }} <br>
 		Total Price: {{ booking.totalPrice+booking.serviceTax }} <br>
 		Special Discount (-): {{ booking.discount }} <br>
-		Total Price:{{ booking.finalPrice }}
-		
+		You Pay:{{ booking.finalPrice }}<br>
+		{% if booking.amountPaid == booking.finalPrice %}
+		Amount Paid : {{ booking.amountPaid }}
+		{% endif %}
          </td>
         </tr>
 		

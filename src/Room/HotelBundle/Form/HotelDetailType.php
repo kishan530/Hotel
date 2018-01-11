@@ -74,6 +74,7 @@ class HotelDetailType extends AbstractType
             		'label' => 'Property Type',
             		'choices' => array(
             				'Service Apartments'=>'Service Apartments',
+            				'Business Hotel'=>'Business Hotel',
             				'Resort'=>'Resort',
             		),
             		'required'    => true,
@@ -86,9 +87,10 @@ class HotelDetailType extends AbstractType
             				'1'=>'Service Apartment',
             				'2'=>'Hotel',
             				'3'=>'Guest House',
-            				'4'=>'3 Star',
-            				'5'=>'4 Star',
-            				'6'=>'5 Star',
+            				'4'=>'Business Hotel',
+            				'5'=>'3 Star',
+            				'6'=>'4 Star',
+            				'7'=>'5 Star',
             		),
             		'required'    => true,
             ))

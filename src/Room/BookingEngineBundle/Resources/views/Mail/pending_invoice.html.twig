@@ -59,8 +59,8 @@
           </td>
           <td>{{ booking.bookedOn.format('d/m/y') }}<br>
           </td>
-          <td> {#} Number of Rooms {#}</td>
-          <td> {#} {{ searchFilter.numRooms }} {#}<br>
+          <td>  Number of Rooms </td>
+          <td>  {{ booking.numRooms }} <br>
           </td>
         </tr>
         <tr>
@@ -87,7 +87,7 @@
           <td>{{ booking.numAdult }}<br>
           </td>
           <td> Number Of kids </td>
-          <td>-<br>
+          <td> {{ booking.numChildren }}
           </td>
         </tr>
 		
@@ -101,7 +101,8 @@
 		GST: {{ booking.serviceTax }} <br>
 		Total Price: {{ booking.totalPrice+booking.serviceTax }} <br>
 		Special Discount (-): {{ booking.discount }} <br>
-		Total Price:{{ booking.finalPrice }}
+		You Pay:{{ booking.finalPrice }}<br>
+{# 		Due Amount:{{ booking.finalPrice }}#}
 		
 		{#}Hotel Charges: {{ booking.totalPrice }} <br>
 		GST: {{ booking.serviceTax }} <br>

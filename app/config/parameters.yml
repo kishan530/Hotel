@@ -5,10 +5,10 @@ parameters:
     database_port: null
     database_name: hotel
     database_user: root
-    database_password: null
+    database_password: 
     mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: kishan.kis530@gmail.com
-    mailer_password: null
+    mailer_host: mail.exclusivehosting.net:2525
+    mailer_user: noreply@sterlingsuites.in
+    mailer_password: Walk@123
     locale: en
     secret: ThisTokenIsNotSoSecretChangeit

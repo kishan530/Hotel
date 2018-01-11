@@ -572,6 +572,37 @@ class HotelController extends Controller
 		//return $this->render('RoomHotelBundle:Default:service-apartment.html.twig');
 	}
 	
+	public function hotdealsAction()
+	{
+		$searchcoupons = array();
+    	//$searchcoupon = $this->getDoctrine()
+    	//->getRepository('RoomHotelBundle:CouponCode')
+    	//->findBy( array('couponCode' => $newcoupon));
+    	
+    	date_default_timezone_set('Asia/Kolkata');
+    	
+    	$today = new \DateTime();
+    	$em = $this->getDoctrine()->getManager();
+    	$qb = $em->getRepository ('RoomHotelBundle:CouponCode')->createQueryBuilder("c");
+    	$qb 
+    	->Where(':today between c.startDate and c.expireDate')
+    	//->andWhere('c.couponCode = :couponCode')
+    	->setParameter('today', $today );
+    	//->setParameter('couponCode', $newcoupon) ;
+    	$searchcoupons = $qb->getQuery()->getResult();
+    	
+//  		$hotdeals = $this->getDoctrine()
+//  		->getRepository('RoomHotelBundle:couponCode')
+//  		->findBy( array('footerDisplay' => $footerDisplay));
+	
+		//return $this->render('RoomHotelBundle:Default:hotdeals.html.twig');
+		// replace this example code with  whatever you need
+		return $this->render('RoomHotelBundle:Default:hotdeals.html.twig', array(
+				'searchcoupons' => $searchcoupons
+		));
+	
+		//return $this->render('RoomHotelBundle:Default:service-apartment.html.twig');
+	}
 	
 	
 

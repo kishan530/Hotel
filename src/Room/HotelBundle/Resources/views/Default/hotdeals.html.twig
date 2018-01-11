@@ -1,0 +1,102 @@
+{% extends 'page.html.twig' %}
+
+{% block breadcrumbsTitle %}Hot Deals{% endblock %}
+
+{% block breadcrumbsLinks %}
+            <li><a href="{{ path('room_booking_engine_homepage') }}">Home</a></li>
+            <li><a href="{{ path('room_site_management_about_us') }}">Hot Deals</a></li>
+{% endblock %}
+
+{% block body %}
+
+
+
+  <!-- Start Team -->
+  <section class="team">
+    <div class="container">
+      <div class="row">
+        <div class="preamble col-md-12">
+          <h3>Hot Coupons & Offers Of The Day</h3>
+{#           <p>Sterling Suites, is a professionally managed hospitality firm by a team of dedicated professionals from the construction industry who have been in the industry for more than 2 decades.</p>#}
+        </div>
+        {% if searchcoupons|length > 0 %}
+        {% for searchcoupon in searchcoupons %}  
+      {#}  {% if searchcoupon.couponName %}{#}
+         
+        <div class="member col-md-3 col-sm-6">
+          <div class="avatar">
+{#             <img src="img/member1.jpg" alt="" class="img-responsive">#}
+            <ul class="social custom-list list-inline">
+             <b>{{ searchcoupon.couponCode }}</b>
+            </ul>
+          </div>
+          <div class="description">
+{#             Coupon Code :<h4> {{ searchcoupon.couponName }}</h4>#}
+{#             <span class="work"> Customer Care </span>#}
+            <p>Copy The Above Coupon & Apply It At The Time Of Payment. And You will get Discount Upto <i class="fa fa-inr"></i> <b>{{ searchcoupon.amount }}</b></b></p>
+          </div>
+        </div>
+        
+        
+      
+        {% endfor %}
+        {% else %}
+        <div class="preamble col-md-12">
+         
+          <h3>No Coupons  Available </h3>
+         
+        </div>
+          {% endif %}
+{#       
+  <div class="member col-md-3 col-sm-6">#}
+{#           <div class="avatar">#}
+{#             <img src="img/member2.jpg" alt="" class="img-responsive">#}
+{#             <ul class="social custom-list list-inline">#}
+{#               <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>#}
+{#               <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>#}
+{#               <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>#}
+{#             </ul>#}
+{#           </div>#}
+{#           <div class="description">#}
+{#             <h4>William Blake</h4>#}
+{#             <span class="work">  Partner </span>#}
+{#             <p>Lorem ipsum dolor sit amet, consect adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed.</p>#}
+{#           </div>#}
+{#         </div>#}
+{#         <div class="member col-md-3 col-sm-6">#}
+{#           <div class="avatar">#}
+{#             <img src="img/member3.jpg" alt="" class="img-responsive">#}
+{#             <ul class="social custom-list list-inline">#}
+{#               <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>#}
+{#               <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>#}
+{#               <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>#}
+{#             </ul>#}
+{#           </div>#}
+{#           <div class="description">#}
+{#             <h4>John Doe</h4>#}
+{#             <span class="work">  Founder </span>#}
+{#             <p>Lorem ipsum dolor sit amet, consect adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed.</p>#}
+{#           </div>#}
+{#         </div>#}
+{#         <div class="member col-md-3 col-sm-6">#}
+{#           <div class="avatar">#}
+{#             <img src="img/member4.jpg" alt="" class="img-responsive">#}
+{#             <ul class="social custom-list list-inline">#}
+{#               <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>#}
+{#               <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>#}
+{#               <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>#}
+{#             </ul>#}
+{#           </div>#}
+{#           <div class="description">#}
+{#             <h4>Anette Darling</h4>#}
+{#             <span class="work"> Customer Care </span>#}
+{#             <p>Lorem ipsum dolor sit amet, consect adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed.</p>#}
+{#           </div>#}
+{#         </div>#}
+      </div>
+    </div>
+  </section>
+  <!-- End Team -->
+
+ 
+{% endblock %}
