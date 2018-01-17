@@ -1,0 +1,313 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+th {
+	border: 1px solid black;
+}
+
+hr {
+	color: #D8DCDC;
+	height: 1px;
+}
+
+.main {
+	width: 100%;
+	border: 1px solid black;
+	margin: 2em auto;
+	align: center;
+}
+
+.box {
+	border: 1px solid #000000;
+}
+
+td {
+	margin: 1em auto;
+}
+
+tr {
+	  align: center;
+}
+u{
+  color:blue;
+}
+</style>
+</head>
+<body>
+	<table class="main" cellpadding="0"
+		style="border-spacing: 20px 10px; border: 1px solid #000000;">
+		<tr>
+			<td>
+				<table width="100%" cellpadding="0">
+					<tr width="100%">
+						<td width="100%">
+						<span style="display:block;font-size: 26px;">Hotelier Voucher</span>
+						<span style="display:block;font-size: 15px;">Sterling Suites Booking ID -<b>{{ booking.bookingId }} </b><br>Booking Date {{ booking.bookedOn.format('d/m/y') }}</span>
+						<hr>
+						</td>
+						
+					</tr>
+					
+							
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table width="100%">
+					<tr width="100%">
+					    <td width="100%">
+								<span style="display:block;font-size: 20px;">Dear Partner,</span>
+						 </td>
+						<td width="100%">
+							<span style="display:block;font-size: 15px; align:center;">
+{# 								<u>PrintBooking</u> <u>Confirmation</u>#}
+							</span>
+						
+						</td>
+						 
+								
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table width="100%">
+					<tr width="100%">
+				
+						 <td width="100%">
+								<span style="display:block;font-size:15px;">Sterling Suites has received a request for booking at your hotel as per the details below. The primary guest <b>{{ customer.name }}</b> will be carrying a copy of this e-voucher.</span>
+						 
+						
+								<span style="display:block;font-size:15px;line-height: 2.33;">For your reference, Sterling Suites Booking ID is <b>{{ booking.bookingId }}</b></span>
+						 
+						 
+								<span style="display:block;font-size:15px;line-height: 2.33;"><b>The amount payable to hotel for this booking is INR {{ booking.finalPrice }} as per the details below. Please email us at <u style="color:blue"> reservation@sterlingsuites.in</u> if there is any discrepancy in this payment amount.</b></span>
+						
+						  
+								<span style="display:block;font-size:15px;line-height: 2.33;">Kindly consider this e-voucher for booking confirmation with the following inclusions and services.</span>
+						
+						 
+								<span style="display:block;font-size:15px;"><b>Team Sterlingsuites.in</b></span>
+								<span style="display:block;font-size: 15px;text-align: right;;">All prices indicated below are in INR</span>
+						 </td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<table border="1" width="100%" cellspacing="0" cellpadding="10">
+				<thead>
+					<tr>
+						<th>BOOKING DETAILS</th>
+						<th>PAYMENT BREAKUP</th> 
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<td  style="text-align:center">
+						<table>
+							<tr>
+							<td>
+								<table><tr><td>Check In</td></tr>
+								<tr><td>{{ booking.chekIn.format('d/m/y') }}</td></tr>
+								<tr><td>12:00 PM</td></tr></table>
+								
+							</td>
+							<td>
+								<table>
+								<tr><td>Check Out</td></tr>
+								<tr><td>{{ booking.chekOut.format('d/m/y') }}</td></tr>
+								<tr><td>11:00 AM</td></tr>
+								</table>
+								
+							</td>
+							
+							</tr>
+						</table>
+						<hr>
+						<table>
+							<tr>
+							<td>
+								<table><tr><td>Room {{ booking.numRooms }}</td></tr>
+								<tr><td>{{ booking.numAdult }} Adult</td></tr>
+								</table>
+								
+							</td>
+							<td>
+								<table>
+								<tr><td>Executive Suite</td></tr>
+								<tr><td>(Breakfast)</td></tr>
+								</table>
+								
+							</td>
+							
+							</tr>
+						</table>
+						<hr>
+					</td>
+					<td>TARRIF
+					<table>
+					<tr>
+					<td><table>
+{# 					<tr><td><span>Hotel Sell Price</span><p>{{ booking.numRooms }} Room x 1 Night</p></td>#}
+					<tr><td><span>Hotel Sell Price</span><p>{{ booking.numRooms }} Room x  Night</p></td>
+					<td><span>{{ booking.finalPrice }}</span></td></tr>
+					<tr><td><span>Extra Adult / Child Charges</span></td><td>0.0</td></tr>
+{# 					<tr><td><span>Hotel Taxes</td><td>495.0</span></td></tr>#}
+					<tr><td><span>(A) Hotel Gross Charges</span></td><td>{{ booking.totalPrice }}</td></tr>
+{# 					<tr><td><span>MMT Commission</span></td><td>550.0</td></tr>#}
+					<tr><td><span>GST </span><p>(Including IGST or (SGST & CGST))</p></td><td>{{ booking.serviceTax }}</td></tr>
+					<tr><td><span>Special Discount</span></td><td>{{ booking.discount }}</td></tr>
+{# 					<tr><td><span>(B) MMT Commission</span><p>(Including GST)</p></td><td>649.0</td></tr>#}
+					</table></td>
+					<td>You Pay {{ booking.finalPrice }}
+					<table><tr><td>GST Regn. No.-29AACCC6463G2Z1</td></tr>
+                   <tr><td>PAN No.-AACCC6463G</td></tr>
+                   <tr><td>IN No. -U63040DL2000PTC105210</td></tr>
+                   <tr><td> SAC CODE: 996311</td></tr>
+                   
+                  <tr><td>Service Category - Reservation of hotel booking</td></tr></table>
+					</td>
+					
+					</tr>
+					</table>
+					</td>
+					
+				</tr>
+				
+				</tbody>	
+		</table>
+		<p><b>Booking Cancellation Policy:</b>Booking cancelled beyond 48 hrs from the date of confirmation will carry a 10% retention charge.Booking cancelled between a seven (7) to three (3) days from the date of arrival will carry a 50% retention charge.Booking cancelled in the last 24 hrs from the date of arrival will carry a 100% retention charge.A no-show will carry a 100% retention charge.</p>
+		</td>
+	</tr>
+
+		<tr>
+			<td>
+			<span style="display:block;font-size: 26px;color:blue;">Hotel Details</span>
+             <hr>
+				<table width="100%" >
+					<tr>
+						<td align="left">
+							<table width="100%">
+							  <tr>
+                                <td>							
+							<span style="display:block;font-size: 15px; text-align:right;"><u>Photo Gallery</u> <u>View Map</u></span>
+								</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table width="100%">
+					<tr width="100%">
+					   <span style="display:block;font-size: 15px;">
+						 <b>CITI STERLING FACILITIES MANAGEMENT PVT. LTD</b><br>
+                            Streling Heights, 'Penthouse Suite' 139,<br>
+                            Infantey Road, (Opp. The Hindu)<br>
+                            Bangalore-560 001 <br>
+                            Contact : +91 80 2286 8093 / 94 /95<br>
+                            Fax : +91 80 4123 9655<br>
+                            E-mail :<u> reservation@sterlingsuites.in</u><br>
+						    <b>Primary Guest :</b> {{ customer.name }}<br>
+                            <b>  E-mail :</b> <u>{{ customer.email }}</u><br>
+                             <b> Contact Number :</b> {{ customer.mobile }}<br>
+                             <b> Room Category :</b> Executive Suite<br>
+                             <b> Meal Plan :</b> Breakfast		
+					</tr>
+				</table>
+			</td>
+		</tr>
+        <tr>
+			<td width="100%">
+				<span style="display:block;font-size: 26px;color:blue;">Inclusions</span>
+					<hr>
+				<ol align="justify" style="list-style-type: square;">
+					<li>FREE Breakfast</li>
+                    <li>Accommodation</li>
+					
+				</ol>
+
+			</td>
+		</tr>
+		<tr>
+			<td width="100%">
+				<span style="display:block;font-size: 26px;color:blue;">Inclusions</span>
+				 <hr>
+				<ol align="justify" style="list-style-type: square;">
+					<li>If your contact details have changed, please notify us so that the same can be updated in our records.</li>
+                    <li>If the booking is cancelled or changed by guest at a later stage, you will be notified and this confirmation email & Sterling Suites Booking ID will be null and void.</li>
+					<li>Hotel has to issue invoice to customers for &apos;Hotel Gross Charges&apos; in compliance with applicable tax laws. The customer details including GST related info are mentioned below for this purpose.</li>
+					
+				</ol>
+
+			</td>
+		</tr>
+		<tr>
+			<td>
+			   <span style="display:block;font-size: 26px;color:blue;">Customer GST Information</span>
+			   <hr>
+				<table  width="100%">
+					<tr align="center">
+						<td>Company Name</td>
+						<td>Company Address</td> 
+						<td>GSTN Number</td>
+					</tr>
+					
+					<tr align="center">
+						<td><b>Shantharam Shetty</b></td>
+						<td><b>first floor, parvathi palace, opp bejay church hall, Mangalore 575004</b></td> 
+		                <td><b>29AKSPS4076J1Z7</b></td> 
+					</tr>
+					
+		</table>	
+		</td>
+	</tr>
+		    		<tr>
+			<td>
+			   <span style="display:block;font-size: 26px;color:blue;">SterlingSuites Contact Info</span>
+			   <hr>
+				<table  width="100%">
+					<tr>
+						<td><b>CITI STERLING FACILITIES MANAGEMENT PVT. LTD.,</b><br>
+						Streling Heights, 'Penthouse Suite' 139 <br>
+						Infantey Road, (Opp. The Hindu)<br>
+						Bangalore-560 001 <br>
+						karnataka, India</td>
+					     <td><br><b>Email:</b><u>reservation@sterlingsuites.in</u> <b><br>Contact number:</b> +91 80 2286 8093 / 94 /95 </td>
+					</tr>
+					 
+		</table>	
+		</td>
+	</tr>
+		<tr>
+			<td>
+				<p style="align=center;line-height:2.33">
+					As a privileged SterlingSuites partner and vendor, you can contact us easily during emergencies on above mentioned <b>exclusive phone numbers</b> . Please use these numbers in cases of customer booking discrepancy, facilitating guest check in at your hotel and other guest related issues.<br>
+                     Connect with us on <b>all 7 days</b> of the week between <b>10 am to 7 pm</b> for any assistance you require.<br>  
+					 We request you to kindly avoid calling the above numbers for business development queries. For these, please contact our Business Development Managers.</p> 
+					
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p style="border-top: 1px solid">
+					<b>Note:</b> Please do not reply to this email. It has been sent from an email account that is not monitored. To ensure that you receive communication related to your booking from Sterlingsuites.in, please add <u> +91 80 2286 8093 / 94 /95 reservation@sterlingsuites.in</u> to your contact list and address book.</p> 
+					
+			</td>
+		</tr>
+	</table>
+	
+
+</body>
+</html>

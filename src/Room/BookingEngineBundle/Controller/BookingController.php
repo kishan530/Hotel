@@ -1305,7 +1305,7 @@ public function paymentconfirmationAction(Request $request)
 		);
 		
 		$mailer = $this->renderView(
-				'RoomBookingEngineBundle:Mail:invoice.html.twig',array(
+				'RoomBookingEngineBundle:Mail:new_invoice.html.twig',array(
 						'booking' => $bookingobj,
 						'customer' => $customer,
 						'selectedRoom'=>$selectedRoom,
@@ -1320,7 +1320,7 @@ public function paymentconfirmationAction(Request $request)
 		$email=$customer->getEmail();
 		$mailService->mail($email,$subject,$mailer);
 		//$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer);
-		$mailService->mail('mmshivukumar@gmail.com',$adminSubject,$mailer);
+	//	$mailService->mail('mmshivukumar@gmail.com',$adminSubject,$mailer);
 		
 		
 		
@@ -1472,7 +1472,7 @@ public function adminpaymentSuccessAction(Request $request){
 		$mailService = $this->container->get( 'mail.services' );
 		$email=$customer->getEmail();
 		$mailService->mail($email,$subject,$mailer);
-		$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer);
+	//	$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer);
 	
 	
 	
