@@ -112,10 +112,97 @@ class SiteManagementController extends Controller
     			//'bookingIdDetails'=>$bookingIdDetails
     	));
     }
+    
+    
+    
+    public function contactAction(Request $request)
+    
+    {
+    
+    	$contact = new Contact();
+    
+    	$form   = $this->createContactForm($contact);
+    
+    	$form->handleRequest($request);
+    
+    	if ($form->isValid()) {
+    
+    		$em = $this->getDoctrine()->getManager();
+    
+    		$em->persist($contact);
+    
+    		$em->flush();
+    		$email = $contact->getEmail();
+    
+    		$body="<br>";
+    		$body.="<label>Name:</label>".$contact->getName()."<br>";
+    		$body.="<label>Email:</label>".$contact->getEmail()."<br>";
+    		$body.="<label>Contact Number:</label>".$contact->getEmail()."<br>";
+    		$body.="<label>Subject:</label>".$contact->getSubject()."<br>";
+    		$body.="<label>Message:</label>".$contact->getMessage()."<br>";
+    		$Mailer='<table>
+            <TR><TD>Dear Admin , bellow person has some query.Please do response to '.$contact->getName().' on the earliest. </TD></TR>
+            <tr style="background-color:#f2f2f2" width="100%">
+              <td valign="top" align="center" colspan="2">
+                <p style="margin:0 0 8px 0;font-size:14px;line-height:22px;text-align:left">
+                    <b style="padding:20px;">
+                       '.$body.'
+                    </b></p>
+    
+                <tr><td>Thank you</td></tr>
+                <tr><td>Best Regards, <br>
+    
+                        Sterling Suites Team <br><br></td></tr>
+              </td>
+            </tr>
+    
+              </table>';
+    
+    		$message="Dear ".$contact->getName()."<br>
+                            Greetings from Sterling Suites!<br>
+                            Your request has been lodged successfully. We will contact you through call/mail within next 48 working hours.<br><br>
+    
+    
+                            Best Regards,<br>
+                            Sterling Suites Team ";
+    		$subject = "Contact Us: Request";
+    		$adminSubject = "Contact Us: Request from ".$contact->getName();
+    		$mailService = $this->container->get( 'mail.services' );
+    		$mailService->mail($email,$subject,$message);
+    		//$mailService->mail('kishan.kish530@gmail.com',$adminSubject,$Mailer);
+    		$mailService->mail('info@sterlingsuites.in',$adminSubject,$Mailer);
+    		$mailService->mail('reservation@sterlingsuites.in',$adminSubject,$Mailer);
+    		return $this->redirect($this->generateUrl('room_site_management_contact_us'));
+    
+    
+    
+    		return $this->render('RoomSiteManagementBundle:Default:contact-us.html.twig', array(
+    
+    				'form'   => $form->createView(),
+    
+    		));
+    
+    	}
+    
+    	return $this->render('RoomSiteManagementBundle:Default:contact-us.html.twig', array(
+    
+    			'form'   => $form->createView(),
+    
+    	));
+    
+    }
+    
+    }
+    
+    
+   
+    
+    
     /**
      * 
      * @param Request $request
      */
+    /*
     public function contactAction(Request $request)
     {
     	$contact = new Contact();
@@ -134,4 +221,4 @@ class SiteManagementController extends Controller
     			'form'   => $form->createView(),
     	));
     }
-}
+}*/

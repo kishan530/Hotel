@@ -425,15 +425,15 @@ text-transform: capitalize;
 												<div class="col-sm-12 font-13 address">
 												{% set address = hotel.address %}
 													<h6 class="font-13">Address :</h6>
-													<p> {{ address.addressLine1 }}, {{ address.addressLine2 }}</p>
+													<p> {{ address.addressLine1 }}{#, {{ address.addressLine2 }} #}</p>
 													<p>{{ address.location }}, {{ address.city }}</p>
 												</div>
 											</div>
 											<div class="col-sm-12 padding-top">
 											<p class="room-type"> <strong>Room Type:</strong>{{ roomType }}</p>
 											<p class="room-type"> <strong>Inclusions:</strong> 
-											<span>-Hot Breakfast</span>
-											<span>-Wi-Fi Internet</span>
+											<li>Hot Breakfast</li>
+											<li>Wi-Fi Internet</li>
 											</p>
 											{#}
 											<div class="cancellation-policy">

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>Reservation At Hotel Sterlin</title>
+  </head>
+  <body>
+  <p>Thank you for choosing Sterling Suites !  Here is the status of your Reservation.</p>
+    <table style="width: 611px; background-color: ;" "="" border="1">
+      <tbody>
+        <tr align="center">
+          <td colspan="4" rowspan="1">
+            <h3>Reservation Status - Confirmed</h3>
+          </td>
+        </tr>
+        <tr>
+		<td align="center" colspan="4" rowspan="1">
+		<span align="center" style="font-weight: bold;width:100%">{{ selectedService.name }}</span>
+         </td>
+        </tr >
+		<tr>
+		<td colspan="4"rowspan="1">
+		<span style="font-weight: bold;">Guest Details </span>
+         </td>
+        </tr>
+        <tr>
+          <td>Guest Name&nbsp;&nbsp;&nbsp; </td>
+          <td style="width: 144.75px;"> {{ customer.name }}
+            </td>
+          <td style="width: 163.084px;">Email ID<br>
+          </td>
+          <td style="width: 159.367px;"> {{ customer.email }}          </td>
+        </tr>
+        <tr>
+          <td style="width: 140.433px;">Mobile Number<br>
+          </td>
+          <td> {{ customer.mobile }}<br>
+          </td>
+          <td> Address </td>
+          <td>{{ customer.address }}<br>
+          </td>
+        </tr>
+		<tr>
+		<td colspan="4"rowspan="1">
+		<span style="font-weight: bold;">Booking Details </span></address>
+         </td>
+        </tr>
+		<tr>
+          <td style="width: 140.433px;">Hotel Name:<br>
+          </td>
+          <td> {{ selectedService.name }}<br>
+          </td>
+          <td> Hotel Address </td>
+          <td> {{ address.addressLine1}} , {{ address.addressLine2}}, {{ address.location}} , {{ address.city}} - {{ address.pincode}}<br>
+          </td>
+        </tr>
+		<tr>
+          <td style="width: 140.433px;">Booked On<br>
+          </td>
+          <td>{{ booking.bookedOn.format('d/m/y') }}<br>
+          </td>
+          <td>  Number of Rooms </td>
+          <td>  {{ booking.numRooms }}<br>
+          {#}numRooms{#}
+          </td>
+        </tr>
+        <tr>
+          <td> Booking ID </td>
+          <td style="width: 144.75px;">{{ booking.bookingId }}
+            </td>
+          <td style="width: 163.084px;"> Room Type<br>
+          </td>
+          <td style="width: 159.367px;">{{ selectedRoom.roomType }}
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 140.433px;">Check In<br>
+          </td>
+          <td> {{ booking.chekIn.format('d/m/y') }}<br>
+          </td>
+          <td> Check out </td>
+          <td>{{ booking.chekOut.format('d/m/y') }}<br>
+          </td>
+        </tr>
+		 <tr>
+          <td style="width: 140.433px;">Number Of Adults<br>
+          </td>
+          <td>{{ booking.numAdult }}<br>
+          </td>
+          <td> Number Of kids </td>
+          <td>{{ booking.numChildren }}<br>
+          </td>
+        </tr>
+		
+		<tr>
+		<td style="padding-left: 325px;" colspan="4"rowspan="1">
+		<span style="font-weight: bold;">Billing Details:</span><br>
+		
+		Hotel Price: {{ booking.totalPrice }} <br>
+		GST: {{ booking.serviceTax }} <br>
+		Total Price: {{ booking.totalPrice+booking.serviceTax }} <br>
+		Special Discount (-): {{ booking.discount }} <br>
+		You Pay:{{ booking.finalPrice }}<br>
+		{% if booking.amountPaid == booking.finalPrice %}
+		Amount Paid : {{ booking.amountPaid }}
+		{% endif %}
+         </td>
+        </tr>
+		
+		
+		
+         
+        
+        
+         <tr>
+          <td colspan="4" rowspan="1">
+		  <strong style="text-decoration: underline;">Room Rate is inclusive of :</strong><br>
+            
+              <li>Complimentary Continental / Indian Breakfast.</li>
+              <li>Complimentary WIFI. </li>
+              <li>Inclusive Of  Taxes.</li>
+          </td>
+		 </tr>		 
+        
+        <tr>
+          <td colspan="4" rowspan="1">
+            <h4><span>Cancellation policy</span></h4>            
+            <ul>
+              <li>Booking cancelled beyond 48 hrs from the date of confirmation will carry a 10% retention charge</li>
+              <li>Booking cancelled between a seven (7) to three (3) days from the date of arrival will carry a 50% retention charge</li>
+			  <li>Booking cancelled in the last 24 hrs from the date of arrival will carry a 100% retention charge</li>
+			  <li>A no-show will carry a 100% retention charge</li>
+            </ul>
+            
+          </td>
+        </tr>
+		<tr>
+          <td colspan="4" rowspan="1">
+		  <p>You will soon receive an official welcome letter or call from us with additional information on the hotel you have booked</p>
+		   <br>
+            <br>
+            We look forward to welcoming you to at {{ selectedService.name }}<br>
+            <br>
+            <strong>With best regards,<br>
+              Yours sincerely,<br>
+            </strong><br>
+            <strong>Room Reservations.</strong><br>
+            <a href="mailto:reservation@sterlingsuites.in">reservation@sterlingsuites.in</a></td>
+        </tr>
+        <tr align="center">
+          <td colspan="4" rowspan="1">
+		 CITI STERLING FACILITIES MANAGEMENT PVT. LTD<br>
+	Streling Heights, 'Penthouse Suite' 139 <br>
+	Infantey Road, (Opp. The Hindu)<br>
+	         Bangalore-560 001 <br>
+	        Phone: +91 80 2286 8093 / 94 /95 <br>
+          Fax: +91 80 4123 9655
+            </td>
+        </tr>
+		<tr align="center">
+          <td colspan="4" rowspan="1">
+			<p>GSTIN : 29AACCC6463G2Z1  | PAN:AACCC6463G  | SAC CODE: 996311 </p>
+		  </td>
+		 </tr>
+        </tbody>
+    </table>
+    <p><br>
+    </p>
+  </body>
+</html>

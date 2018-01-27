@@ -1,7 +1,55 @@
 {% extends 'RoomBookingEngineBundle:Default:confirm.html.twig' %}
 
+{% block javascripts %}
+<script>
+$( document ).ready(function() {
+	$('#room_bookingenginebundle_customer_mobile').blur(function(){
+var mobile = $(this).val();
 
+var mobile_regex = /^[789]\d{9}$/;
+if (!mobile.match(mobile_regex)) {
+	$('#p6').text("* Please enter a valid mobile number *");
+	return false;
+	
+	
+}else{ 
+	$('#p6').text(" ");
+	return true;
+}
+		});
+	$('#room_bookingenginebundle_customer_email').blur(function(){
+		var email = $(this).val();
 
+		var email_regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if (!email.match(email_regex)) {
+			$('#p6').text("* Please enter a valid email *");
+			return false;
+			
+			
+		}else{ 
+			$('#p6').text(" ");
+			return true;
+		}
+				});
+	$('#room_bookingenginebundle_customer_name').blur(function(){
+		var name = $(this).val();
+
+		var name_regex = /^[a-zA-Z]+$/;
+		if (!name.match(name_regex)) {
+			$('#p6').text("* Please enter a valid name *");
+			return false;
+			
+			
+		}else{ 
+			$('#p6').text(" ");
+			return true;
+		}
+				});
+   
+});
+
+</script>
+{% endblock %}
  {% block form %}
                                          <div class="col-sm-12 box make-margin">
                                         	<h5 class="box-title">Your Information</h5>
@@ -13,12 +61,15 @@
          	            <div class="row booking-price-details">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                 {{ form_widget(form.name,{'attr':{'class':'make-margin','placeholder':'Name'}}) }}
+                                                 <p id="p6" style="color:red"></p>
                                             </div>
                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                {{ form_widget(form.email,{'attr':{'class':'make-margin','placeholder':'Email'}}) }}
+                                                <p id="p6" style="color:red"></p>
                                             </div>
                                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                            {{ form_widget(form.mobile,{'attr':{'class':'make-margin','placeholder':'10 Digit Mobile No'}}) }} 
+                                            {{ form_widget(form.mobile,{'attr':{'class':'make-margin','placeholder':'10 Digit Mobile No','maxlength':'10'}}) }} 
+                                             <p id="p6" style="color:red"></p>
                                             </div>
                                              <div class="row">
                                            {% if is_granted('ROLE_SUPER_ADMIN') %}
@@ -59,10 +110,10 @@
                                             <div class="make-margin"></div>
                                              
                                              <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="checkbox" required="required" name="cb" class="remove_margin">  {% trans %} I agree to  {% endtrans%} <a target="_blank" href="#">{% trans %} Terms of Service{% endtrans%}</a>
+                                                <input type="checkbox" required="required" name="cb" class="remove_margin">  {% trans %} I agree to  {% endtrans%} <a target="_blank" href="#">{% trans %} Terms & Services{% endtrans%}</a>
                                             </div>
                                              <div class="col-md-4 col-sm-4 col-xs-12">
-                                                <button type="submit" class="btn btn-primary btn-block btn-lg"> Continue</button>
+                                                <button type="submit" class="btn btn-primary btn-block btn-sm btn-continue" style="margin:0px;"> Continue</button>
                                             </div>
                                             
                                             {# <input type="text" class="form-control make-margin" placeholder="Country of Passport">  #}

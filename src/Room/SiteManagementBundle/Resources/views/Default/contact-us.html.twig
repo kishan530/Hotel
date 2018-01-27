@@ -1,11 +1,11 @@
 {% extends 'page.html.twig' %}
 
-{# {% block breadcrumbsTitle %}About Us{% endblock %}#}
+ {% block breadcrumbsTitle %}Contact Us{% endblock %}
 
-{# {% block breadcrumbsLinks %}#}
-{#             <li><a href="{{ path('room_booking_engine_homepage') }}">Home</a></li>#}
-{#             <li><a href="{{ path('room_site_management_about_us') }}">About Us</a></li>#}
-{# {% endblock %}#}
+ {% block breadcrumbsLinks %}
+             <li><a href="{{ path('room_booking_engine_homepage') }}">Home</a></li>
+             <li><a href="{{ path('room_site_management_contact_us') }}">Contact Us</a></li>
+ {% endblock %}
 
 {% block body %}
 
@@ -14,7 +14,7 @@
     <div class="contact-box">
      {{ form_start(form) }}
       <form action="#" class="contact-form default-form">
-        <div class="row">
+        <div class="row contact-placeholder">
           <div class="col-md-12">
             <div class="preamble col-md-12">
               <h3>GET IN TOUCH</h3>

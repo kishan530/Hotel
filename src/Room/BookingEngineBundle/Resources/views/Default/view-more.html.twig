@@ -5,7 +5,15 @@
 <link href="{{ asset('css/jquery.timepicker.css') }}" rel="stylesheet" media="screen">
 <link type="text/css" rel="stylesheet" href="{{ asset('css/lightGallery.min.css') }}" /> 
 <link type="text/css" rel="stylesheet" href="{{ asset('css/lightslider.css') }}" /> 
- 
+ <style>
+ .overview{
+ line-height: 20px;
+ }
+ .overview a,.overview a:hover, .overview a:active{
+ color:red;
+ fonnt-weight:bold;
+ }
+ </style>
 {% endblock %}
 {% block javascripts %} 
  <script src="{{ asset('js/lightgallery-all.min.js') }}"></script>
@@ -28,6 +36,43 @@ $(document).ready(function() {
             });
         }   
     });  
+
+
+    // Configure/customize these variables.
+    var showChar = 250;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "Show more >";
+    var lesstext = "< Show less";
+    
+
+    $('.more').each(function() {
+        var content = $(this).html();
+ 
+        if(content.length > showChar) {
+ 
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar, content.length - showChar);
+ 
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+ 
+            $(this).html(html);
+        }
+ 
+    });
+ 
+    $(".morelink").click(function(){
+        if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+        } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+    });
+    
   });
 </script>
 <script> 
@@ -168,7 +213,7 @@ $("button").click(function() {
               <div class="room-about">
                 <h5 class="room-title">About</h5>
                  <span class="room-title-border"></span>
-                <p>{{ hotel.overview }}</p>
+                <p class="more overview">{{ hotel.overview }}</p>
               </div>
               {#} <div class="room-about"></div> {#}
 
@@ -208,7 +253,7 @@ $("button").click(function() {
               
 {#             </div>#}
 		<div class="col-md-8 col-sm-12 mobileamenitiesview">
-            <div class="listing-room-content" style="padding-top: 20px;">
+            <div class="listing-room-content" style="padding-top:4px;">
               {#}<div class="row"> {#}
                 <div class="col-md-12">
                
@@ -231,17 +276,17 @@ $("button").click(function() {
                       
                     </div>
                     
-                    <div class="pull-right"   style="  margin-bottom: -30px;">
+                    <div class="pull-right"   style="  margin-bottom: -45px;">
                     
                       <span class="price priceday" >
                     
 
  {% if (hotelRoom.promotionStartDate<=today) and (today<=hotelRoom.promotionEndDate) %}  
-                      <small style="font-size: 45%;">Price for 1 night</small></br>
+                      <small style="font-size: 45%;">Price for 1 Night</small></br>
                         <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotelRoom.promotionPrice }}  <i class="fa fa-inr"></i><strike> {{ hotelRoom.price }}</strike></h5>
                       </span>
            {% else %}           
-                      <small style="font-size: 45%;">Price for 1 night</small></br>
+                      <small style="font-size: 45%;">Price for 1 Night</small></br>
                         <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotelRoom.price }}</h5>
                       </span>
              {% endif %}                                
@@ -292,7 +337,7 @@ $("button").click(function() {
               <div class="room-about">
                 <h5 class="room-title">Hotel Policies</h5>
                   <span class="room-title-border"></span>
-                <ul>
+                <ul style="margin-top:10px">
                 <li>The primary guest must be at least 18 years of age to check into this hotel(s).</li>
                  <li>As per Indian Government regulations, It is mandatory for all guests
 above 18 years of age to carry a valid photo identity card & address proof

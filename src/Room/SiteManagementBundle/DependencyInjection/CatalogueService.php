@@ -298,6 +298,12 @@ class CatalogueService
     	$price = 0;
     	$sequence = 0;
     	foreach($rooms as $room){
+    		$roomSequence = $room->getSequence();
+    		$tempArray[$roomSequence ] = $room;
+    	}
+    	ksort($tempArray);
+    	
+    	/*foreach($rooms as $room){
     		$tempArray[] = $room;
     	}
     	for($i = 0; $i < count($tempArray)-1; $i ++){
@@ -316,7 +322,7 @@ class CatalogueService
     		}
     		
     		
-    	}
+    	}*/
     	
     	$hotel->setHotelRooms($tempArray);
     	

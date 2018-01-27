@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 		<div class="row">
-			<h4 class="classic-title"><span>{% trans %}Create a new account{% endtrans %}</span></h4>
+			<h4 class="classic-title"><span>{% trans %}Create  new account{% endtrans %}</span></h4>
 		  	
 			  <div class="col-lg-12 col-sm-12 reg top-buffer3">
         
@@ -28,7 +28,7 @@
 						</div>
 						<div class="row form-group {% if form.plainPassword.second.vars.errors|length %}has-error{% endif %}">
 							<div class="row">
-								{{ form_widget(form.plainPassword.second,{ 'attr': {'placeholder': 'Re-enter Password','class':'registerdetail'}}) }}
+								{{ form_widget(form.plainPassword.second,{ 'attr': {'placeholder': 'Re-Enter Password','class':'registerdetail'}}) }}
 							</div>
 							<div class="row">
 								{{ form_errors(form.plainPassword.second) }}
@@ -37,7 +37,7 @@
 						
                         <div class="row form-group">
 							<div class="row">
-								<input type="checkbox" required="required" name="cb" class="remove_margin">  {% trans %} I agree to the Sterlingsuites {% endtrans%} <a target="_blank" href="#">{% trans %} Terms of Service{% endtrans%}</a>
+								<input type="checkbox" required="required" name="cb" class="remove_margin">  {% trans %} I agree to the Sterlingsuites {% endtrans%} <a target="_blank" href="#">{% trans %} Terms & Services{% endtrans%}</a>
 							</div>
 						</div>
 						<div class="row">

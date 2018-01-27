@@ -8071,6 +8071,7 @@ padding: 6px 12px;
 .amenitiesroom{
 	padding-top: 7px;
     margin-bottom: -14px;
+	font-size: 16px;
 }
 .amenities-border{
 	
@@ -8273,6 +8274,13 @@ display: none;
      text-align: center;  
 }
 
-
+.contact-placeholder ::placeholder{
+	color:#ffffff;
+}
+.booking-successfully p{
+	text-align: center;
+    margin-top: 20px;
+    font-size: 25px;
+}
 
 .
