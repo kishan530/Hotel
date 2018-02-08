@@ -62,6 +62,9 @@ class CatalogueService
     	$tempHotels = array();
     	foreach($hotels as $hotel){
     		$rooms = $hotel->getHotelRooms();
+			$propertyType = $hotel->getPropertyType();
+			
+				if($propertyType!='Service Apartments'){
     		//echo $location;
     		$minPrice = 0;
     		$minPromoPrice = 0;
@@ -149,6 +152,7 @@ class CatalogueService
     		{//$tempHotels[] = $hotel;
     		$tempHotels[] = $hotelDetail;
     		}
+			}
     	}
     	//var_dump($tempHotels);
     	//exit();
@@ -298,15 +302,11 @@ class CatalogueService
     	$price = 0;
     	$sequence = 0;
     	foreach($rooms as $room){
-    		$roomSequence = $room->getSequence();
-    		$tempArray[$roomSequence ] = $room;
+			$roomSequence = $room->getSequence();
+	    		$tempArray[$roomSequence ] = $room;
     	}
-    	ksort($tempArray);
-    	
-    	/*foreach($rooms as $room){
-    		$tempArray[] = $room;
-    	}
-    	for($i = 0; $i < count($tempArray)-1; $i ++){
+
+    	/*for($i = 0; $i < count($tempArray)-1; $i ++){
     		
     		$room1=$tempArray[$i];
     		$room2=$tempArray[$i+1];

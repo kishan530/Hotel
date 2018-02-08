@@ -9,11 +9,13 @@ use Room\BookingEngineBundle\Form\SearchType;
 use Room\BookingEngineBundle\Form\FilterType;
 use Room\BookingEngineBundle\Form\CustomerType;
 use Room\BookingEngineBundle\DTO\Search;
+use Room\BookingEngineBundle\DTO\Room;
 use Room\BookingEngineBundle\Entity\Customer;
 use Room\BookingEngineBundle\Entity\Booking;
 use Room\HotelBundle\Entity\Hotel;
 use Room\HotelBundle\Entity\HotelRoom;
 use Room\BookingEngineBundle\Entity\BookingPaymentEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 class BookingController extends Controller
 { 
 
@@ -47,7 +49,7 @@ class BookingController extends Controller
 	/**
 	 * 
 	 */
-	public function indexAction()
+	public function indexAction(Request $request)
 	{
 		//$mailService = $this->container->get( 'mail.services' );
 		//$mailService->mail('mmshivukumar@gmail.com','Just Trip:Booking Confirmation','this is test');
@@ -64,24 +66,95 @@ class BookingController extends Controller
 		$search = new Search();
 		$search->setNumAdult(1);
 		$search->setNumRooms(1);
+		$rooms = new ArrayCollection();
+				$room = new Room;
+					$room->setNumAdult(1);
+					$room->setNumChildren(0);
+					$rooms->add($room);
+						$session = $request->getSession();
+						//$rooms = $session->get('rooms');
+						//echo var_dump($rooms);
+						//exit();
+				    	$session->set('rooms',$rooms);
+						//$search->setRooms($rooms);
 		$form   = $this->createSearchForm($search);
 		return $this->render('RoomBookingEngineBundle:Default:index.html.twig', array(
                 'form'   => $form->createView(),
 				'serviceApartments' =>$serviceApartment,
-				'search'=>$search               
+				'search'=>$search  ,
+				'rooms'=>$rooms
             ));
 	}
 	/**
 	 * 
 	 */
 	public function addRoomAction(Request $request){
-		
+		$session = $request->getSession();
+			    	$rooms = $session->get('rooms');
+					$adults = (int) $request->get('adults');
+					$child = (int) $request->get('child');
+					//var_dump($child);die;
 		$room = new Room;
-		return $this->render('RoomBookingEngineBundle:Default:index.html.twig', array(
-				'form'   => $form->createView(),
-				'search'=>$search
-		));
+		$room->setNumAdult($adults);
+		$room->setNumChildren($child);
+		$rooms->add($room);
+				//return new Response('true');
+		return $this->render('RoomBookingEngineBundle:Default:add-more.html.twig', array(
+					'rooms'=>$rooms               
+            ));
 	}
+	
+	public function updateRommsAction(Request $request){
+				$session = $request->getSession();
+				$rooms = $session->get('rooms');
+				$adults = (int) $request->get('adults');
+				$child = (int) $request->get('child');
+				//var_dump($child);die;
+				//$room = new Room;
+				//$room->setNumAdult($adults);
+				//$room->setNumChildren($child);
+				//$rooms->add($room);
+				//return new Response('true');
+				return $this->render('RoomBookingEngineBundle:Default:add-more.html.twig', array(
+								'rooms'=>$rooms
+				));
+	}
+	
+	public function addAdultsAction(Request $request){
+				//var_dump($request);
+
+				$session = $request->getSession();
+			$rooms = $session->get('rooms');
+				$adults = (int) $request->get('adults');
+					$key = (int) $request->get('key');
+					$room = $rooms->get($key);
+					if($room){
+					$room->setNumAdult($adults);
+						return new Response('true');
+						}else{
+				
+								return new Response('false');
+							}
+			
+						}
+				
+						public function addChildsAction(Request $request){
+							//var_dump($request);
+					
+								$session = $request->getSession();
+								$rooms = $session->get('rooms');
+								$child = (int) $request->get('child');
+								$key = (int) $request->get('key');
+							$room = $rooms->get($key);
+								if($room){
+									$room->setNumChildren($child);
+										return new Response('true');
+								}else{
+							
+										return new Response('false');
+										}
+						
+									}
 	/**
 	 * 
 	 * @param Request $request
@@ -89,7 +162,9 @@ class BookingController extends Controller
     public function searchAction(Request $request)
     {
     	
-    	
+    	$session = $request->getSession();
+    	    	$rooms = $session->get('rooms');
+    	    	//var_dump($rooms);die;
     	$hotels = array();
     	$search = new Search();    	
     	$form   = $this->createSearchForm($search);
@@ -201,6 +276,7 @@ class BookingController extends Controller
     			'today'=>$today,    			
     			'search'=>$search,
     			'numRoom'=>$numRoom,
+    			'rooms'=>$rooms
          ));
             
     }
@@ -265,7 +341,7 @@ class BookingController extends Controller
     	if($search==null){
     		
     		$search = new Search();
-    		$search->setNumAdult(2);
+    		$search->setNumAdult(1);
     		$search->setNumRooms(1);
     		
     		$fromDate = new \DateTime();
@@ -306,7 +382,14 @@ class BookingController extends Controller
     	$hotel->setPrice($roomPrice*$numRoom);
     	$today = new \DateTime();
     	//$today = $today->format('d/m/Y');
-    	
+    	$totalmember = $search->getNumAdult()+$search->getNumChildren();
+    	    	$totalrooms = (int)($totalmember/3);
+    	    	if($totalmember<3){
+    		    		$remenrooms=0;
+    		    	}else{
+    			    		$remenrooms=$totalmember%3;
+    			    	}
+    			    	//var_dump($remenrooms);die;
     	    	
     	
     	$viewMore=0;
@@ -319,6 +402,9 @@ class BookingController extends Controller
     			'promotionPrice'=>$promotionPrice,
     			'promotionStartDate'=>$promotionStartDate,
     			'promotionEndDate'=>$promotionEndDate,
+    			'totalmember'=>$totalmember,
+       			'totalrooms'=>$totalrooms,
+      			'remenrooms'=>$remenrooms
     	));
     }
     
@@ -366,6 +452,19 @@ class BookingController extends Controller
     	//exit();
     	
     	$search = $session->get('search');
+    	$numAdult = $search->getNumAdult();
+    				$numChild = $search->getNumChildren();
+    
+    				$extraPrice = (floor($numAdult/2)+$numChild) * 750;
+    				$em = $this->getDoctrine()->getManager();
+    		    	$hotel = $em->getRepository('RoomHotelBundle:Hotel')->find($id);
+    		    	$catalogueService = $this->container->get( 'catalogue.service' );
+    		    	$selectedRoom = $catalogueService->getSelectedRoom($hotel,$room);
+    				$roomType = $selectedRoom->getRoomType();
+    				if($roomType=='2 BHK Service Apartment')
+    					$extraPrice = 0;
+    					if($roomType=='3 BHK Service Apartment')
+    						$extraPrice = 0;
     	//var_dump($search);
     	//exit();
     	
@@ -387,13 +486,15 @@ class BookingController extends Controller
     	if(($promotionStartDate<=$today) && ($today<=$promotionEndDate) )
     	{	
     	
-    	$newtotalprice = $rooomPromoprice*$numDay*$numRoom;
+    	//$rooomPromoprice = $rooomPromoprice+$extraPrice;
+		$newtotalprice = $rooomPromoprice*$numRoom;
     	}
     	else
     	{
-    		$newtotalprice = $price*$numDay*$numRoom;
+    		$newtotalprice = $price*$numRoom;
     	}
-    	
+    	$newtotalprice = $newtotalprice+$extraPrice;
+    			$newtotalprice = $newtotalprice*$numDay;
     	//$hotel->setPromotionPrice($rooomPromoprice*$numRoom);
     	//var_dump($newtotalprice);
     	//exit();
@@ -429,6 +530,7 @@ class BookingController extends Controller
     //me	$booking->setTotalPrice($price);
     
     	$booking->setTotalPrice($newtotalprice);
+    	$booking->setExtraPrice($extraPrice);
     	$booking->setServiceTax($serviceTax);
     	$booking->setDiscount(0);
     	$booking->setCouponApplyed(0);
@@ -984,6 +1086,13 @@ public function serviceDetailAction(Request $request,$url)
     	$viewMore=1;
     	    //	echo var_dump($hotel->getAddressLine1());
     	    //	exit();
+    	$totalmember = $search->getNumAdult()+$search->getNumChildren();
+    	    	$totalrooms = (int)($totalmember/3);
+        	if($totalmember<3){
+    			    		$remenrooms=0;
+    		    	}else{
+    			    		$remenrooms=$totalmember%3;
+    			    	}
     	return $this->render('RoomBookingEngineBundle:Default:view-more.html.twig', array(
     //			'form'   => $form->createView(),
     			'hotel'=> $hotel,
@@ -993,7 +1102,9 @@ public function serviceDetailAction(Request $request,$url)
     			'promotionPrice'=>$promotionPrice,
     			'promotionStartDate'=>$promotionStartDate,
     			'promotionEndDate'=>$promotionEndDate,
-    			
+    			'totalmember'=>$totalmember,
+       			'remenrooms'=>$remenrooms,
+       			'totalrooms'=>$totalrooms
     			
     	));
     }
@@ -1321,7 +1432,7 @@ public function paymentconfirmationAction(Request $request)
 		$mailService->mail($email,$subject,$mailer);
 		//$mailService->mail('mailwaseemsyed@gmail.com',$adminSubject,$mailer);
 	//	$mailService->mail('mmshivukumar@gmail.com',$adminSubject,$mailer);
-		
+		$mailService->mail('mmshivukumar@gmail.com',$adminSubject,$mailer);
 		
 		
 		

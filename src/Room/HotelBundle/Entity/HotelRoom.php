@@ -41,6 +41,24 @@ class HotelRoom
      * @ORM\Column(name="price", type="float")
      */
     private $price;
+    /**
+  	     * @var float
+   	     *
+   	     * @ORM\Column(name="rack_rate", type="float")
+   	     */
+   	    private $rackRate;
+  	    /**
+  	     * @var float
+  	     *
+   	     * @ORM\Column(name="weekly_price", type="float")
+ 	     */
+       private $weeklyPrice;
+  	    /**
+   	     * @var float
+   	     *
+  	     * @ORM\Column(name="monthly_price", type="float")
+      */
+     private $monthlyPrice;
     
     /**
      * @var string
@@ -435,6 +453,61 @@ class HotelRoom
 		$this->promotionPrice = $promotionPrice;
 		return $this;
 	}
+	
+	/**
+	 *
+	 * @return the float
+	 */
+	public function getRackRate() {
+		return $this->rackRate;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$rackRate
+	 */
+	public function setRackRate($rackRate) {
+		$this->rackRate = $rackRate;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the float
+	 */
+	public function getWeeklyPrice() {
+		return $this->weeklyPrice;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$weeklyPrice
+	 */
+	public function setWeeklyPrice($weeklyPrice) {
+		$this->weeklyPrice = $weeklyPrice;
+		return $this;
+	}
+	
+	/**
+	 *
+	 * @return the float
+	 */
+	public function getMonthlyPrice() {
+		return $this->monthlyPrice;
+	}
+	
+	/**
+	 *
+	 * @param
+	 *        	$monthlyPrice
+	 */
+	public function setMonthlyPrice($monthlyPrice) {
+		$this->monthlyPrice = $monthlyPrice;
+		return $this;
+	}
+	
 	
 	
 	

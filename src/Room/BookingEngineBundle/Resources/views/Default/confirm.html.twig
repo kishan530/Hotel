@@ -421,19 +421,19 @@ text-transform: capitalize;
 											</div>
 											</div>
 											<div class="col-sm-6">
-												<p class="pax-details " style="font-weight: bold;">{{ search.numAdult }} Adult in {{ search.numRooms }} Room </p>
+												<p class="pax-details " style="font-weight: bold;">{{ search.numAdult }} Adult, {{ search.numChildren }} Child in {{ search.numRooms }} Room  </p>
 												<div class="col-sm-12 font-13 address">
 												{% set address = hotel.address %}
 													<h6 class="font-13">Address :</h6>
-													<p> {{ address.addressLine1 }}{#, {{ address.addressLine2 }} #}</p>
+													<p> {{ address.addressLine1 }}, {{ address.addressLine2 }}</p>
 													<p>{{ address.location }}, {{ address.city }}</p>
 												</div>
 											</div>
 											<div class="col-sm-12 padding-top">
 											<p class="room-type"> <strong>Room Type:</strong>{{ roomType }}</p>
 											<p class="room-type"> <strong>Inclusions:</strong> 
-											<li>Hot Breakfast</li>
-											<li>Wi-Fi Internet</li>
+											<span>-Hot Breakfast</span>
+											<span>-Wi-Fi Internet</span>
 											</p>
 											{#}
 											<div class="cancellation-policy">
@@ -491,14 +491,18 @@ text-transform: capitalize;
                                                        
                                                         {% endif %}
                                                     </li>
+													<li>
+														 <span class="pull-left">Extra price </span>
+	                                                        <span class="pull-right">   <i class="fa fa-inr"></i> <em > {{ booking.extraPrice }}</em></span>
+	                                                    </li>
                                                     <li>
                                                     <span class="pull-left">Day Price </span>
                                                      {% if (promotionStartDate<=today) and (today<=promotionEndDate) %}
                                                    {#}  {% set promotionprice = rooomPromoprice * numRoom %}{#}
                                                    {{ numDay }}
-                                                    <span class="pull-right"> {{ numDay }} X   <i class="fa fa-inr"></i> <em > {{ rooomPromoprice * numRoom }}</em></span>
+                                                    <span class="pull-right"> {{ numDay }} X   <i class="fa fa-inr"></i> <em > {{ (rooomPromoprice * numRoom)+booking.extraPrice }}</em></span>
                                                     {% else %} 
-                                                    <span class="pull-right"> {{ numDay }} X   <i class="fa fa-inr"></i> <em > {{ price * numRoom}}</em></span>
+                                                    <span class="pull-right"> {{ numDay }} X   <i class="fa fa-inr"></i> <em > {{ (price * numRoom)+booking.extraPrice }}</em></span>
                                                     {% endif %}
                                                     </li>
                                                     <li>

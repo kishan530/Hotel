@@ -4,6 +4,18 @@ room_booking_engine_homepage:
 room_booking_engine_search:
     path:     /search
     defaults: { _controller: RoomBookingEngineBundle:Booking:search }
+room_booking_engine_add_room:
+    path:     /add-room
+    defaults: { _controller: RoomBookingEngineBundle:Booking:addRoom }
+room_booking_engine_add_adults:
+    path:     /add-adults
+    defaults: { _controller: RoomBookingEngineBundle:Booking:addAdults }
+room_booking_engine_add_childs:
+    path:     /add-child
+    defaults: { _controller: RoomBookingEngineBundle:Booking:addChilds }
+room_booking_engine_update_room:
+    path:     /update-room
+    defaults: { _controller: RoomBookingEngineBundle:Booking:updateRomms }
 room_booking_engine_filter:
     path:     /filter
     defaults: { _controller: RoomBookingEngineBundle:Booking:filter }

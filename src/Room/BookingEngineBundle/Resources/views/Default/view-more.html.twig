@@ -158,10 +158,10 @@ $("button").click(function() {
                <h4 class="widget-title">Help Me</h4>
                 <div class="widget-content">
                   <ul class="contact-list custom-list">
-                  	<li><i class="fa fa-phone"></i><span> +91 8892007790 </span></li>
+                  	
                     <li><i class="fa fa-phone"></i><span>+ 91 9900032872</span></li>
                     <li><i class="fa fa-phone"></i><span>+ 91 9900032873 </span></li>
-                    
+                    <li><i class="fa fa-phone"></i><span> +91 8892007790 </span></li>
                    
                     <li><i class="fa fa-envelope-o"></i><span>reservation@sterlingsuites.in</span></li>
                     <li><i class="fa fa-envelope-o"></i><span>sales@sterlingsuites.in</span></li>
@@ -253,7 +253,7 @@ $("button").click(function() {
               
 {#             </div>#}
 		<div class="col-md-8 col-sm-12 mobileamenitiesview">
-            <div class="listing-room-content" style="padding-top:4px;">
+            <div class="listing-room-content" style="padding-top:20px;">
               {#}<div class="row"> {#}
                 <div class="col-md-12">
                
@@ -276,23 +276,31 @@ $("button").click(function() {
                       
                     </div>
                     
-                    <div class="pull-right"   style="  margin-bottom: -45px;">
-                    
+                    <div class="pull-right"   style="  margin-bottom: -30px;">
+                    <div> 
                       <span class="price priceday" >
                     
 
  {% if (hotelRoom.promotionStartDate<=today) and (today<=hotelRoom.promotionEndDate) %}  
-                      <small style="font-size: 45%;">Price for 1 Night</small></br>
+                      <small style="font-size: 45%;">Price for 1 night</small></br>
                         <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotelRoom.promotionPrice }}  <i class="fa fa-inr"></i><strike> {{ hotelRoom.price }}</strike></h5>
                       </span>
            {% else %}           
-                      <small style="font-size: 45%;">Price for 1 Night</small></br>
+                      <small style="font-size: 45%;">Price for 1 night</small></br>
                         <h5 class="hotel-price" style="float: left;"> <i class="fa fa-inr"></i> {{ hotelRoom.price }}</h5>
                       </span>
-             {% endif %}                                
+             {% endif %} 
+             </div>
+             {% if hotel.propertyType=='Service Apartments' %}
+                         <div class="pull-right"><span class="btn " style="background-color:#F34F4F;color:#fff;"><i class="fa fa-phone"></i> To Book Call Us Now </span></div> 
+                         <div class="pull-right" style="margin-top: 10px;"><span> +91 9900032872 / 9900032873 / +91 8892007790 </span></div>   
+                         {% endif %}               
                     </div>
-                    
                     <div class="pull-right" >
+                    {% if hotel.propertyType=='Service Apartments' %}
+					
+								
+							{% else %}
                     {% if (hotelRoom.soldOut or hotel.numRooms<1) or (search.checkIn>=hotelRoom.blockStartDate and  search.checkIn<=hotelRoom.blockEndDate) or ( search.checkOut>=hotelRoom.blockStartDate and search.checkOut<=hotelRoom.blockEndDate) or ( search.checkIn<=hotelRoom.blockStartDate and search.checkOut>=hotelRoom.blockEndDate)  %}
                     		<label class="btn btn-book-now bookroom middle book-room-button" disabled>Sold Out</label>
                     {% else %}
@@ -300,6 +308,7 @@ $("button").click(function() {
                     <a class="btn btn-book-now bookroom middle book-room-button"  href="{{ path('room_booking_engine_confrim',{ 'id' : hotel.id,'room':hotelRoom.id }) }}">
                                                     Book now
                         </a>
+                      {% endif %}
                       {% endif %}
                     </div>
                     
@@ -319,9 +328,99 @@ $("button").click(function() {
             
             
             </div>
+             {% if  (hotelRoom.roomType == 'Executive Suite') or (hotelRoom.roomType == 'Single Suite Room') or (hotelRoom.roomType == 'Club Suite') or (hotelRoom.roomType == '1 BHK Service Apartment') %}
+            <div class="col-md-12" style="margin-top:35px">
+              {% if totalmember >= 3 %}
+              	<div class="col-md-12">  
+              	{% for i in 1..totalrooms %}            
+	              <table class="table col-md-3" border="1" style="margin: 5px;">
+	              	<tr>
+	              		<td>	              		
+	              			{% for i in 1..3 %}
+              					<i class="fa fa-user"></i>
+              				{% endfor %}
+              			</td>
+	              		<td>
+	              		{% set extraPrice=2 * 750 %}
+	              		{% set price = hotelRoom.price + extraPrice %}
+              				{{ price }}</td>
+	              	</tr>
+	              </table>
+	              {% endfor %}
+               {% if remenrooms >= 1 %}               		
+               		<table class="table col-md-3" border="1" style="margin: 5px;">
+	              		<tr>
+		              		<td>		              		
+								{% for i in 1..remenrooms %} 
+	              					<i class="fa fa-user"></i>
+	              				{% endfor %}
+	              			</td>
+		              		<td>
+		              		{% set extraPrice1=(remenrooms-1) * 750 %}
+	              		{% set price1 = hotelRoom.price + extraPrice1 %}
+	              				{{ price1}}</td>
+	              		</tr>
+	              </table>               		
+               {% endif %}
+              </div>
+              {% else  %}	
+              <div class="col-md-12">              
+	              <table class="table col-md-3" border="1">
+	              	<tr>
+	              		<td>{% for i in 1..totalmember %}<i class="fa fa-user"></i>{% endfor %}</td>
+	              		<td>{{ hotelRoom.price}}</td>
+	              	</tr>
+	              </table>
+	              
+              </div>
+              {% endif %}
+              </div>
+              {% else %}
+              <div class="col-md-12" style="margin-top:35px">
+              	<table class="table col-md-3" border="1" style="margin: 5px;">
+	              	<tr>
+	              		<td>	              		
+	              			{% for i in 1..totalmember %}
+              					<i class="fa fa-user"></i>
+              				{% endfor %}
+              			</td>
+	              		<td>
+	              		{% if  hotelRoom.roomType == '2 BHK Service Apartment'  %}
+	              		{% set members = totalmember - 2 %}
+	              			{% set extraPrice=members  * 750 %}
+	              			{% set price = hotelRoom.price + extraPrice %}
+              				{{ price }}
+              				{% elseif hotelRoom.roomType == '3 BHK Service Apartment' %}
+              				{% set members = totalmember - 3 %}
+              				{% set extraPrice=members * 750 %}
+	              			{% set price = hotelRoom.price + extraPrice %}
+              				{{ price }}
+	              		{% endif %}
+	              		
+	              		</td>
+	              	</tr>
+	              </table>
+              </div>
+               {% endif %}
             <div class="room-about"></div>
-			 <div class="col-md-12 col-sm-12 text-left amenitiesview">
+			 <div class="col-md-12 col-sm-12 text-left amenitiesview" style="margin-top: 30px;">
             	<p style="margin-left: -40px;">{{ hotelRoom.description}}</p>
+            	{% if hotelRoom.weeklyPrice %}
+                <table border="1" class="table" style="width:60%">
+	                    <tr>
+	                    <th>Rack Rate</th>
+	                    <th>Weekly Price</th>
+	                    <th>Monthly Price</th>
+	                    <th>To avail this offer</th>
+	                    </tr>
+	                    <tr>
+	                    	<td><i class="fa fa-inr"></i> {{ hotelRoom.rackRate}}</td>
+	                        <td><i class="fa fa-inr"></i> {{ hotelRoom.weeklyPrice}}</td>
+	                        <td><i class="fa fa-inr"></i> {{ hotelRoom.monthlyPrice}}</td>
+	                        <td><p><i class="fa fa-phone" ></i>+91 9900032873    </p></td>
+	                    </tr>
+	                </table>
+	                {% endif %}
             </div>
             </div>
         
